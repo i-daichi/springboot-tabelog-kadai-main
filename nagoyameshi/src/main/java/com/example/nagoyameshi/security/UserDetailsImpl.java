@@ -23,6 +23,8 @@ public class UserDetailsImpl implements UserDetails {
 	// ハッシュ化済みのパスワードを返す
 	@Override
 	public String getPassword() {
+		System.out.println(user.getEmail());
+		System.out.println(user.getPassword());
 		return user.getPassword();
 	}
 

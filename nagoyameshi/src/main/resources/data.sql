@@ -56,18 +56,22 @@ INSERT IGNORE INTO roles (id, name) VALUES (3, 'ROLE_PAY');
 INSERT IGNORE INTO roles (id, name) VALUES (4, 'ROLE‗ADMIN_PAY');
 
 -- usersテーブル
-INSERT IGNORE INTO users (id, name, furigana, postal_code, address, phone_number, email, password, role_id, enabled) VALUES (1, '佐々木 太郎', 'ササキ タロウ', '101-0022', '東京都千代田区神田練塀町300番地', '090-1234-5678', 'taro.samurai@example.com', 'password', 1, true);
-INSERT IGNORE INTO users (id, name, furigana, postal_code, address, phone_number, email, password, role_id, enabled) VALUES (2, '佐々木 花子', 'ササキ ハナコ', '101-0022', '東京都千代田区神田練塀町300番地', '090-1234-5678', 'hanako.samurai@example.com', 'password', 2, true);
-INSERT IGNORE INTO users (id, name, furigana, postal_code, address, phone_number, email, password, role_id, enabled) VALUES (3, '佐々木 義勝', 'ササキ ヨシカツ', '638-0644', '奈良県五條市西吉野町湯川X-XX-XX', '090-1234-5678', 'yoshikatsu.samurai@example.com', 'password', 1, false);
-INSERT IGNORE INTO users (id, name, furigana, postal_code, address, phone_number, email, password, role_id, enabled) VALUES (4, '田中 幸美', 'タナカ サチミ', '342-0006', '埼玉県吉川市南広島X-XX-XX', '090-1234-5678', 'sachimi.samurai@example.com', 'password', 1, false);
-INSERT IGNORE INTO users (id, name, furigana, postal_code, address, phone_number, email, password, role_id, enabled) VALUES (5, '田中 雅', 'タナカ ミヤビ', '527-0209', '滋賀県東近江市佐目町X-XX-XX', '090-1234-5678', 'miyabi.samurai@example.com', 'password', 1, false);
-INSERT IGNORE INTO users (id, name, furigana, postal_code, address, phone_number, email, password, role_id, enabled) VALUES (6, '田中 正保', 'タナカ マサヤス', '989-1203', '宮城県柴田郡大河原町旭町X-XX-XX', '090-1234-5678', 'masayasu.samurai@example.com', 'password', 1, false);
-INSERT IGNORE INTO users (id, name, furigana, postal_code, address, phone_number, email, password, role_id, enabled) VALUES (7, '田中 真由美', 'タナカ マユミ', '951-8015', '新潟県新潟市松岡町X-XX-XX', '090-1234-5678', 'mayumi.samurai@example.com', 'password', 1, false);
-INSERT IGNORE INTO users (id, name, furigana, postal_code, address, phone_number, email, password, role_id, enabled) VALUES (8, '佐藤 安民', 'サトウ ヤスタミ', '241-0033', '神奈川県横浜市旭区今川町X-XX-XX', '090-1234-5678', 'yasutami.samurai@example.com', 'password', 1, false);
-INSERT IGNORE INTO users (id, name, furigana, postal_code, address, phone_number, email, password, role_id, enabled) VALUES (9, '佐藤 章緒', 'サトウ アキオ', '739-2103', '広島県東広島市高屋町宮領X-XX-XX', '090-1234-5678', 'akio.samurai@example.com', 'password', 1, false);
-INSERT IGNORE INTO users (id, name, furigana, postal_code, address, phone_number, email, password, role_id, enabled) VALUES (10, '佐藤 祐子', 'サトウ ユウコ', '601-0761', '京都府南丹市美山町高野X-XX-XX', '090-1234-5678', 'yuko.samurai@example.com', 'password', 1, false);
-INSERT IGNORE INTO users (id, name, furigana, postal_code, address, phone_number, email, password, role_id, enabled) VALUES (11, '佐藤 秋美', 'サトウ アキミ', '606-8235', '京都府京都市左京区田中西春菜町X-XX-XX', '090-1234-5678', 'akimi.samurai@example.com', 'password', 1, false);
-INSERT IGNORE INTO users (id, name, furigana, postal_code, address, phone_number, email, password, role_id, enabled) VALUES (12, '佐藤 信平', 'サトウ シンペイ', '673-1324', '兵庫県加東市新定X-XX-XX', '090-1234-5678', 'shinpei.samurai@example.com', 'password', 1, false);
+INSERT INTO `users` (`id`, `name`, `furigana`, `postal_code`, `address`, `phone_number`, `email`, `password`, `role_id`, `enabled`, `created_at`, `updated_at`) VALUES
+	(1, '佐々木 太郎', 'ササキ タロウ', '101-0022', '東京都千代田区神田練塀町300番地', '090-1234-5678', 'taro.samurai@example.com', 'password', 1, 1, '2024-11-01 13:55:02', '2024-11-01 13:55:02'),
+	(2, '佐々木 花子', 'ササキ ハナコ', '101-0022', '東京都千代田区神田練塀町300番地', '090-1234-5678', 'hanako.samurai@example.com', 'password', 2, 1, '2024-11-01 13:55:02', '2024-11-01 13:55:02'),
+	(3, '佐々木 義勝', 'ササキ ヨシカツ', '638-0644', '奈良県五條市西吉野町湯川X-XX-XX', '090-1234-5678', 'yoshikatsu.samurai@example.com', 'password', 1, 0, '2024-11-01 13:55:02', '2024-11-01 13:55:02'),
+	(4, '田中 幸美', 'タナカ サチミ', '342-0006', '埼玉県吉川市南広島X-XX-XX', '090-1234-5678', 'sachimi.samurai@example.com', 'password', 1, 0, '2024-11-01 13:55:02', '2024-11-01 13:55:02'),
+	(5, '田中 雅', 'タナカ ミヤビ', '527-0209', '滋賀県東近江市佐目町X-XX-XX', '090-1234-5678', 'miyabi.samurai@example.com', 'password', 1, 0, '2024-11-01 13:55:02', '2024-11-01 13:55:02'),
+	(6, '田中 正保', 'タナカ マサヤス', '989-1203', '宮城県柴田郡大河原町旭町X-XX-XX', '090-1234-5678', 'masayasu.samurai@example.com', 'password', 1, 0, '2024-11-01 13:55:02', '2024-11-01 13:55:02'),
+	(7, '田中 真由美', 'タナカ マユミ', '951-8015', '新潟県新潟市松岡町X-XX-XX', '090-1234-5678', 'mayumi.samurai@example.com', 'password', 1, 0, '2024-11-01 13:55:02', '2024-11-01 13:55:02'),
+	(8, '佐藤 安民', 'サトウ ヤスタミ', '241-0033', '神奈川県横浜市旭区今川町X-XX-XX', '090-1234-5678', 'yasutami.samurai@example.com', 'password', 1, 0, '2024-11-01 13:55:02', '2024-11-01 13:55:02'),
+	(9, '佐藤 章緒', 'サトウ アキオ', '739-2103', '広島県東広島市高屋町宮領X-XX-XX', '090-1234-5678', 'akio.samurai@example.com', 'password', 1, 0, '2024-11-01 13:55:02', '2024-11-01 13:55:02'),
+	(10, '佐藤 祐子', 'サトウ ユウコ', '601-0761', '京都府南丹市美山町高野X-XX-XX', '090-1234-5678', 'yuko.samurai@example.com', 'password', 1, 0, '2024-11-01 13:55:02', '2024-11-01 13:55:02'),
+	(11, '佐藤 秋美', 'サトウ アキミ', '606-8235', '京都府京都市左京区田中西春菜町X-XX-XX', '090-1234-5678', 'akimi.samurai@example.com', 'password', 1, 0, '2024-11-01 13:55:02', '2024-11-01 13:55:02'),
+	(12, '佐藤 信平', 'サトウ シンペイ', '673-1324', '兵庫県加東市新定X-XX-XX', '090-1234-5678', 'shinpei.samurai@example.com', 'password', 1, 0, '2024-11-01 13:55:02', '2024-11-01 13:55:02'),
+	(13, 'テスト太郎', 'テストタロウ', '333-0834', '埼玉県川口市本前川', '09000000000', 'test@test.com', '$2a$10$ZmK3oycbEO9MN/LgPdURK.uRI646.E8xoCnRHEABkLHh/5mIgInC.', 2, 1, '2024-11-04 13:21:01', '2024-11-05 13:07:30'),
+	(14, '太郎テスト', 'タロウテスト', '3330834', '埼玉県川口市本前川', '09000000000', 'test@test.taro.com', '$2a$10$rnMVpey/kuV1JLyOyML6I.RqQmanstytkPV6Z8LF0NNQTu1gctUKy', 1, 1, '2024-11-05 13:02:42', '2024-11-05 13:22:59'),
+	(15, '加金太郎', 'カキンタロウ', '100-0001', '東京都千代田区1-1', '07012345678', 'kakin@kakin.com', '$2a$10$WNd7YM6ZudaDCTc1Ms9W8OGMAf1OcK.8vvy0bwYLXziObSOUKCjea', 3, 1, '2024-11-05 13:22:03', '2024-11-05 13:22:59');
 
 -- reservationsテーブル
 INSERT IGNORE INTO reservations (id, restaurant_id, user_id, number_of_people, reservation_date) VALUES (1, 1, 1, 2, '2024-01-01');
