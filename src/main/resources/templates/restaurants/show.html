@@ -25,9 +25,7 @@
 								<li class="breadcrumb-item active" aria-current="page">店舗詳細</li>
 							</ol>
 						</nav>
-
-						<!-- お気に入りセクション -->
-						<div sec:authorize="isAuthenticated()">
+						<div sec:authorize="hasRole('ROLE_PAY')">
 							<div th:if="${isFavorite}">
 								<a href="#"
 									onclick="event.preventDefault(); document.getElementById('favorite-form').submit();">&#9829;
