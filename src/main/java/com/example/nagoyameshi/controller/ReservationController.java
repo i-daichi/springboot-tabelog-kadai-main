@@ -112,7 +112,7 @@ public class ReservationController {
 			redirectAttributes.addFlashAttribute("reservationInputForm", reservationInputForm);
 			model.addAttribute("errorMessage", "予約内容に不備があります。");
 			RestaurantHelper helper = new RestaurantHelper(reviewService, favoriteService);
-			helper.AddRestaurantDetails(model, restaurant, user);
+			helper.AddRestaurantDetails(model, restaurant, user, reservationInputForm);
 			return "restaurants/show";
 		}
 

@@ -26,7 +26,8 @@ public class RestaurantHelper {
     public void AddRestaurantDetails(
             Model model,
             Restaurant restaurant,
-            User user) {
+            User user,
+            ReservationInputForm reservationInputForm) {
         boolean hasUserAlreadyReviewed = false;
         boolean isFavorite = false;
         Favorite favorite = null;
@@ -43,7 +44,7 @@ public class RestaurantHelper {
         long totalReviewCount = reviewService.countByRestaurant(restaurant);
 
         model.addAttribute("restaurant", restaurant);
-        model.addAttribute("reservationInputForm", new ReservationInputForm());
+        model.addAttribute("reservationInputForm", reservationInputForm);
         model.addAttribute("hasUserAlreadyReviewed", hasUserAlreadyReviewed);
         model.addAttribute("newReviews", newReviews);
         model.addAttribute("totalReviewCount", totalReviewCount);

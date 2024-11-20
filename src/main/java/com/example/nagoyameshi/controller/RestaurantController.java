@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.nagoyameshi.entity.Restaurant;
 import com.example.nagoyameshi.entity.User;
+import com.example.nagoyameshi.form.ReservationInputForm;
 import com.example.nagoyameshi.helper.RestaurantHelper;
 import com.example.nagoyameshi.repository.RestaurantRepository;
 import com.example.nagoyameshi.security.UserDetailsImpl;
@@ -95,7 +96,7 @@ public class RestaurantController {
 		}
 
 		RestaurantHelper helper = new RestaurantHelper(reviewService, favoriteService);
-		helper.AddRestaurantDetails(model, restaurant, user);
+		helper.AddRestaurantDetails(model, restaurant, user, new ReservationInputForm());
 
 		return "restaurants/show";
 	}
