@@ -1,5 +1,7 @@
 package com.example.nagoyameshi.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,5 +47,15 @@ public class ReviewService {
 
 	public boolean hasUserAlreadyReviewed(Restaurant restaurant, User user) {
 		return reviewRepository.findByRestaurantAndUser(restaurant, user) != null;
+	}
+
+	//投稿されたレビューを投稿された順に並べて、最新の6件のレビューを取得する。
+	public List<Review> findTop6ByRestaurantOrderByCreatedAtDesc(Restaurant restaurant) {
+		return reviewRepository.findTop6ByRestaurantOrderByCreatedAtDesc(restaurant);
+	}
+
+	//指定された店舗とユーザーに関連するレビューを取得
+	public long countByRestaurant(Restaurant restaurant) {
+		return reviewRepository.countByRestaurant(restaurant);
 	}
 }

@@ -1,7 +1,5 @@
 package com.example.nagoyameshi.controller;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -14,13 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.nagoyameshi.entity.Favorite;
 import com.example.nagoyameshi.entity.Restaurant;
-import com.example.nagoyameshi.entity.Review;
 import com.example.nagoyameshi.entity.User;
-import com.example.nagoyameshi.form.ReservationInputForm;
+import com.example.nagoyameshi.helper.RestaurantHelper;
 import com.example.nagoyameshi.repository.RestaurantRepository;
-import com.example.nagoyameshi.repository.ReviewRepository;
 import com.example.nagoyameshi.security.UserDetailsImpl;
 import com.example.nagoyameshi.service.FavoriteService;
 import com.example.nagoyameshi.service.ReviewService;
@@ -29,17 +24,14 @@ import com.example.nagoyameshi.service.ReviewService;
 @RequestMapping("/restaurants")
 public class RestaurantController {
 	private final RestaurantRepository restaurantRepository;
-	private final ReviewRepository reviewRepository;
 	private final ReviewService reviewService;
 	private final FavoriteService favoriteService;
 
 	public RestaurantController(
 			RestaurantRepository restaurantRepository,
-			ReviewRepository reviewRepository,
 			ReviewService reviewService,
 			FavoriteService favoriteService) {
 		this.restaurantRepository = restaurantRepository;
-		this.reviewRepository = reviewRepository;
 		this.reviewService = reviewService;
 		this.favoriteService = favoriteService;
 	}
@@ -94,31 +86,16 @@ public class RestaurantController {
 	@GetMapping("/{id}")
 	public String show(@PathVariable Integer id, Model model,
 			@AuthenticationPrincipal UserDetailsImpl userDetailsImpl) {
-		Restaurant restaurant = restaurantRepository.getReferenceById(id);
 
-		boolean hasUserAlreadyReviewed = false;
-		boolean isFavorite = false;
-		Favorite favorite = new Favorite();
+		Restaurant restaurant = restaurantRepository.getReferenceById(id);
+		User user = null;
 
 		if (userDetailsImpl != null) {
-			User user = userDetailsImpl.getUser();
-			hasUserAlreadyReviewed = reviewService.hasUserAlreadyReviewed(restaurant, user);
-			isFavorite = favoriteService.isFavorite(restaurant, user);
-			if (isFavorite) {
-				favorite = favoriteService.getFavorite(restaurant, user);
-			}
+			user = userDetailsImpl.getUser();
 		}
 
-		List<Review> newReviews = reviewRepository.findTop6ByRestaurantOrderByCreatedAtDesc(restaurant);
-		long totalReviewCount = reviewRepository.countByRestaurant(restaurant);
-
-		model.addAttribute("restaurant", restaurant);
-		model.addAttribute("reservationInputForm", new ReservationInputForm());
-		model.addAttribute("hasUserAlreadyReviewed", hasUserAlreadyReviewed);
-		model.addAttribute("newReviews", newReviews);
-		model.addAttribute("totalReviewCount", totalReviewCount);
-		model.addAttribute("isFavorite", isFavorite);
-		model.addAttribute("favorite", favorite);
+		RestaurantHelper helper = new RestaurantHelper(reviewService, favoriteService);
+		helper.AddRestaurantDetails(model, restaurant, user);
 
 		return "restaurants/show";
 	}
