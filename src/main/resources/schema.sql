@@ -81,10 +81,19 @@ CREATE TABLE IF NOT EXISTS reviews (
      FOREIGN KEY (user_id) REFERENCES users (id)  
  );
 
-CREATE TABLE  IF NOT EXISTS `categories` (
-	`id` INT NOT NULL AUTO_INCREMENT,
-	`name` VARCHAR(255) NOT NULL,
-	PRIMARY KEY (`id`) USING BTREE
+CREATE TABLE IF NOT EXISTS `genre` (
+  `id` int NOT NULL,
+  `name` varchar(50) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE IF NOT EXISTS `categories` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `genre_id` int NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `FK_categories_genre` (`genre_id`),
+  CONSTRAINT `FK_categories_genre` FOREIGN KEY (`genre_id`) REFERENCES `genre` (`id`)
 );
 
 CREATE TABLE IF NOT EXISTS `restaurant_categories` (

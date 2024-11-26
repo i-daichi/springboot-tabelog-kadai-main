@@ -120,29 +120,29 @@ INSERT IGNORE INTO reviews (id, restaurant_id, user_id, score, content) VALUES (
  INSERT IGNORE INTO favorites (id, restaurant_id, user_id) VALUES (12, 12, 1);
 
 ---categoriesテーブル
-INSERT IGNORE INTO `categories` (`id`, `name`)
-VALUES
-  (1, 'スイーツ'),
-  (2, '韓国料理'),
-  (3, '和食'),
-  (4, 'うどん'),
-  (5, 'タイ料理'),
-  (6, 'パン'),
-  (7, 'フランス料理'),
-  (8, '焼き鳥'),
-  (9, '揚げ物'),
-  (10, 'お好み焼き'),
-  (11, 'ラーメン'),
-  (12, '鍋料理'),
-  (13, '焼肉'),
-  (14, 'ステーキ'),
-  (15, 'カレー'),
-  (16, 'ハンバーグ'),
-  (17, '喫茶店'),
-  (18, '寿司'),
-  (19, 'たこ焼き'),
-  (20, '中華料理'),
-  (21, '海鮮料理');
+INSERT IGNORE INTO `categories` (`id`, `name`, `genre_id`) VALUES
+	(1, 'スイーツ', 6),
+	(2, '韓国料理', 2),
+	(3, '和食', 1),
+	(4, 'うどん', 2),
+	(5, 'タイ料理', 5),
+	(6, 'パン', 7),
+	(7, 'フランス料理', 4),
+	(8, '焼き鳥', 3),
+	(9, '揚げ物', 3),
+	(10, 'お好み焼き', 3),
+	(11, 'ラーメン', 2),
+	(12, '鍋料理', 1),
+	(13, '焼肉', 3),
+	(14, 'ステーキ', 3),
+	(15, 'カレー', 3),
+	(16, 'ハンバーグ', 3),
+	(17, '喫茶店', 5),
+	(18, '寿司', 1),
+	(19, 'たこ焼き', 3),
+	(20, '中華料理', 4),
+	(21, '海鮮料理', 1),
+	(22, '郷土料理', 1);
 
 ----restaurant_category
 INSERT IGNORE INTO restaurant_categories (id, restaurant_id, category_id) VALUES
