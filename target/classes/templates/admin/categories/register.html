@@ -36,7 +36,22 @@
                                     <input type="text" class="form-control" th:field="*{name}" autofocus>
                                 </div>
                             </div>
-
+                            <div>
+                                <div class="col-md-4">
+                                    <label for="genre" class="col-form-label text-md-left fw-bold">ジャンル</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div th:if="${#fields.hasErrors('name')}" class="text-danger small mb-2"
+                                        th:errors="*{name}"></div>
+                                    <select id="genre" th:field="*{genre}">
+                                        <option value="" th:text="'選択してください'">選択してください</option>
+                                        <!-- ジャンルリストをループして選択肢を表示 -->
+                                        <option th:each="genre : ${genres}" th:value="${genre.id}"
+                                            th:text="${genre.name}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="form-group d-flex justify-content-center my-4">
                                 <button type="submit" class="btn text-white shadow-sm w-50 nagoyameshi-btn">登録</button>
                             </div>
