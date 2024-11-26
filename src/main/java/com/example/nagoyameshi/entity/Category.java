@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -22,6 +24,13 @@ public class Category {
 
     @Column(name = "name", columnDefinition = "VARCHAR")
     private String name;
+
+    @Column(name = "genre_id", insertable = false, updatable = false)
+    private Integer genre_Id;
+
+    @ManyToOne
+    @JoinColumn(name = "genre_id")
+    private Genre genre;
 
     public Category(Integer id, String name) {
         this.id = id;
