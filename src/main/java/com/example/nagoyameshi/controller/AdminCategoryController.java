@@ -22,6 +22,7 @@ import com.example.nagoyameshi.form.CategoryEditForm;
 import com.example.nagoyameshi.form.CategoryRegisterForm;
 import com.example.nagoyameshi.repository.CategoryRepository;
 import com.example.nagoyameshi.service.CategoryService;
+import com.example.nagoyameshi.service.GenreService;
 
 @Controller
 @RequestMapping("/admin/categories")
@@ -29,10 +30,13 @@ public class AdminCategoryController {
 
     private final CategoryRepository categoryRepository;
     private final CategoryService categoryService;
+    private final GenreService genreService;
 
-    public AdminCategoryController(CategoryRepository categoryRepository, CategoryService categoryService) {
+    public AdminCategoryController(CategoryRepository categoryRepository, CategoryService categoryService,
+            GenreService genreService) {
         this.categoryRepository = categoryRepository;
         this.categoryService = categoryService;
+        this.genreService = genreService;
     }
 
     // カテゴリ一覧を表示
@@ -58,6 +62,7 @@ public class AdminCategoryController {
     @GetMapping("/register")
     public String register(Model model) {
         model.addAttribute("categoryRegisterForm", new CategoryRegisterForm());
+        model.addAttribute("genres", genreService.getAllGenres()); // ジャンルリストを渡す
         return "admin/categories/register";
     }
 
