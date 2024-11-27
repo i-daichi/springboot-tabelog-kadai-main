@@ -59,7 +59,6 @@ public class CategoryService {
         categoryRepository.deleteById(id);
     }
 
-    // カテゴリの削除
     public void create(CategoryRegisterForm categoryRegisterForm) {
         categoryRepository.save(new Category(categoryRegisterForm));
     }

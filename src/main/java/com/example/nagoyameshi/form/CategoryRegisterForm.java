@@ -10,7 +10,17 @@ public class CategoryRegisterForm {
     @NotBlank(message = "カテゴリ名を入力してください。")
     private String name;
     @NotBlank(message = "ジャンルを選択してください")
+    private Integer genreId;
+
     private Genre genre;
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
 
     public String getName() {
         return name;
@@ -20,11 +30,11 @@ public class CategoryRegisterForm {
         this.name = name;
     }
 
-    public Genre getGenre() {
-        return genre;
+    public Integer getGenreId() {
+        return genreId;
     }
 
-    public void setGenre(Genre genre) {
-        this.genre = genre;
+    public void setGenreId(Integer genreId) {
+        this.genreId = genreId;
     }
 }

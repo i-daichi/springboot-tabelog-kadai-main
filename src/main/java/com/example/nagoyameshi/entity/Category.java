@@ -47,6 +47,8 @@ public class Category {
 
     public Category(CategoryRegisterForm registerForm) {
         name = registerForm.getName();
+        genre_Id = registerForm.getGenreId();
+        genre = registerForm.getGenre();
     }
 
     public Integer getId() {

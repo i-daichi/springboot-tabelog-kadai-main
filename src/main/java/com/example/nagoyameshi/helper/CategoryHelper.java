@@ -1,0 +1,29 @@
+package com.example.nagoyameshi.helper;
+
+import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
+
+import com.example.nagoyameshi.form.CategoryRegisterForm;
+import com.example.nagoyameshi.service.CategoryService;
+import com.example.nagoyameshi.service.GenreService;
+
+@Component
+public class CategoryHelper {
+    private final CategoryService categoryService;
+    private final GenreService genreService;
+
+    public CategoryHelper(CategoryService categoryService, GenreService genreService) {
+        this.categoryService = categoryService;
+        this.genreService = genreService;
+    }
+
+    public void AddCategoryDetails(Model model) {
+        model.addAttribute("categoryRegisterForm", new CategoryRegisterForm());
+        model.addAttribute("genres", genreService.getAllGenres());
+    }
+
+    public void SalvageCategoryDetails(Model model, CategoryRegisterForm categoryRegisterForm) {
+        model.addAttribute("categoryRegisterForm", categoryRegisterForm);
+        model.addAttribute("genres", genreService.getAllGenres());
+    }
+}
