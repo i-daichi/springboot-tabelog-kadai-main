@@ -26,7 +26,7 @@ public class Category {
     private String name;
 
     @Column(name = "genre_id", insertable = false, updatable = false)
-    private Integer genre_Id;
+    private Integer genreId;
 
     @ManyToOne
     @JoinColumn(name = "genre_id")
@@ -43,11 +43,12 @@ public class Category {
     public Category(CategoryEditForm editForm) {
         id = editForm.getId();
         name = editForm.getName();
+        genreId = editForm.getGenre().getId();
     }
 
     public Category(CategoryRegisterForm registerForm) {
         name = registerForm.getName();
-        genre_Id = registerForm.getGenre().getId();
+        genreId = registerForm.getGenre().getId();
         genre = registerForm.getGenre();
     }
 
@@ -65,5 +66,21 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setGenreId(Integer genreId) {
+        this.genreId = genreId;
+    }
+
+    public Integer getGenreId() {
+        return genreId;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    public Genre getGenre() {
+        return genre;
     }
 }

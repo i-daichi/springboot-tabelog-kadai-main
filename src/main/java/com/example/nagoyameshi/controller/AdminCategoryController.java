@@ -90,10 +90,14 @@ public class AdminCategoryController {
     // カテゴリ編集フォーム表示
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable Integer id, Model model) {
-        Category category = categoryRepository.getReferenceById(id);
-        CategoryEditForm categoryEditForm = new CategoryEditForm(category.getId(), category.getName());
+        Category category = categoryService.getCategoryById(id).get();
+        CategoryEditForm categoryEditForm = new CategoryEditForm(
+                category.getId(),
+                category.getName(),
+                genreService.getGenreById(category.getGenreId()).get());
 
-        model.addAttribute("categoryEditForm", categoryEditForm);
+        CategoryHelper helper = new CategoryHelper(categoryService, genreService);
+        helper.AddCategoryDetails(model, categoryEditForm);
 
         return "admin/categories/edit";
     }
@@ -120,7 +124,7 @@ public class AdminCategoryController {
     // カテゴリ削除処理
     @PostMapping("/{id}/delete")
     public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
-        categoryRepository.deleteById(id);
+        categoryService.deleteCategory(id);
         redirectAttributes.addFlashAttribute("successMessage", "カテゴリを削除しました。");
 
         return "redirect:/admin/categories";

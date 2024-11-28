@@ -3,6 +3,7 @@ package com.example.nagoyameshi.helper;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
+import com.example.nagoyameshi.form.CategoryEditForm;
 import com.example.nagoyameshi.form.CategoryRegisterForm;
 import com.example.nagoyameshi.service.CategoryService;
 import com.example.nagoyameshi.service.GenreService;
@@ -24,6 +25,11 @@ public class CategoryHelper {
 
     public void SalvageCategoryDetails(Model model, CategoryRegisterForm categoryRegisterForm) {
         model.addAttribute("categoryRegisterForm", categoryRegisterForm);
+        model.addAttribute("genres", genreService.getAllGenres());
+    }
+
+    public void AddCategoryDetails(Model model, CategoryEditForm categoryEditForm) {
+        model.addAttribute("categoryEditForm", categoryEditForm);
         model.addAttribute("genres", genreService.getAllGenres());
     }
 }
