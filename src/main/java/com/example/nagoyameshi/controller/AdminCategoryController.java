@@ -1,7 +1,5 @@
 package com.example.nagoyameshi.controller;
 
-import java.util.Optional;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.nagoyameshi.entity.Category;
-import com.example.nagoyameshi.entity.Genre;
 import com.example.nagoyameshi.form.CategoryEditForm;
 import com.example.nagoyameshi.form.CategoryRegisterForm;
 import com.example.nagoyameshi.helper.CategoryHelper;
@@ -78,15 +75,12 @@ public class AdminCategoryController {
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes) {
 
-        Optional<Genre> selectedGenre = genreService.getGenreById(categoryRegisterForm.getGenreId());
-
-        if (bindingResult.hasErrors() || selectedGenre.isEmpty()) {
+        if (bindingResult.hasErrors()) {
             CategoryHelper helper = new CategoryHelper(categoryService, genreService);
             helper.SalvageCategoryDetails(model, categoryRegisterForm);
             return "admin/categories/register";
         }
 
-        categoryRegisterForm.setGenre(selectedGenre.get());
         categoryService.create(categoryRegisterForm);
         redirectAttributes.addFlashAttribute("successMessage", "カテゴリを登録しました。");
 

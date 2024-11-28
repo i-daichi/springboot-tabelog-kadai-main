@@ -3,15 +3,14 @@ package com.example.nagoyameshi.form;
 import com.example.nagoyameshi.entity.Genre;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 public class CategoryRegisterForm {
     @NotBlank(message = "カテゴリ名を入力してください。")
     private String name;
-    @NotBlank(message = "ジャンルを選択してください")
-    private Integer genreId;
-
+    @NotNull(message = "ジャンルを選択してください")
     private Genre genre;
 
     public void setGenre(Genre genre) {
@@ -28,13 +27,5 @@ public class CategoryRegisterForm {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getGenreId() {
-        return genreId;
-    }
-
-    public void setGenreId(Integer genreId) {
-        this.genreId = genreId;
     }
 }
