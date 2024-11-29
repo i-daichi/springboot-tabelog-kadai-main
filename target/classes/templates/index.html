@@ -73,8 +73,8 @@
 									<th th:text="${entry.key}"></th> <!-- ジャンル名 -->
 									<td class="me-2">
 										<a th:each="category : ${entry.value}"
-											th:href="@{'/restaurants?category=' + ${category}}" th:text="${category}"
-											class="me-2"></a>
+											th:href="@{'/restaurants?category=' + ${category}}"
+											th:text="${category}"></a>
 									</td>
 								</tr>
 							</tbody>
