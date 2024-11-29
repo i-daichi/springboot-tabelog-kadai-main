@@ -1,11 +1,15 @@
 package com.example.nagoyameshi.service;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.nagoyameshi.entity.Category;
 import com.example.nagoyameshi.entity.Genre;
 import com.example.nagoyameshi.repository.GenreRepository;
 
@@ -47,5 +51,19 @@ public class GenreService {
     // ジャンルを削除
     public void deleteGenre(Integer id) {
         genreRepository.deleteById(id);
+    }
+
+    public Map<String, List<String>> getGenreCategoryMap() {
+        List<Genre> genres = genreRepository.findAllWithCategories();
+        Map<String, List<String>> genreCategoryMap = new LinkedHashMap<>();
+
+        for (Genre genre : genres) {
+            List<String> categoryNames = genre.getCategories()
+                    .stream()
+                    .map(Category::getName)
+                    .collect(Collectors.toList());
+            genreCategoryMap.put(genre.getName(), categoryNames);
+        }
+        return genreCategoryMap;
     }
 }

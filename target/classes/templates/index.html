@@ -67,11 +67,11 @@
 				<div class="row justify-content-center">
 					<div class="col-xl-5 col-lg-6 col-md-8">
 						<h2 class="text-center mb-3">カテゴリから探す</h2>
-						<table>
+						<table class="table">
 							<tbody>
 								<tr th:each="entry : ${genreCategoryMap}">
 									<th th:text="${entry.key}"></th> <!-- ジャンル名 -->
-									<td>
+									<td class="me-2">
 										<a th:each="category : ${entry.value}"
 											th:href="@{'/restaurants?category=' + ${category}}" th:text="${category}"
 											class="me-2"></a>
