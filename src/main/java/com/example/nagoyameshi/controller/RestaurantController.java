@@ -1,5 +1,7 @@
 package com.example.nagoyameshi.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.nagoyameshi.dto.GenreCategoryDto;
 import com.example.nagoyameshi.entity.Restaurant;
 import com.example.nagoyameshi.entity.User;
 import com.example.nagoyameshi.form.ReservationInputForm;
@@ -19,6 +22,7 @@ import com.example.nagoyameshi.helper.RestaurantHelper;
 import com.example.nagoyameshi.repository.RestaurantRepository;
 import com.example.nagoyameshi.security.UserDetailsImpl;
 import com.example.nagoyameshi.service.FavoriteService;
+import com.example.nagoyameshi.service.GenreService;
 import com.example.nagoyameshi.service.ReviewService;
 
 @Controller
@@ -27,14 +31,17 @@ public class RestaurantController {
 	private final RestaurantRepository restaurantRepository;
 	private final ReviewService reviewService;
 	private final FavoriteService favoriteService;
+	private final GenreService genreService;
 
 	public RestaurantController(
 			RestaurantRepository restaurantRepository,
 			ReviewService reviewService,
-			FavoriteService favoriteService) {
+			FavoriteService favoriteService,
+			GenreService genreService) {
 		this.restaurantRepository = restaurantRepository;
 		this.reviewService = reviewService;
 		this.favoriteService = favoriteService;
+		this.genreService = genreService;
 	}
 
 	@GetMapping
@@ -75,6 +82,8 @@ public class RestaurantController {
 			}
 		}
 
+		List<GenreCategoryDto> dropdownList = genreService.getGenreCategoryDropdownList();
+		model.addAttribute("dropdownList", dropdownList);
 		model.addAttribute("restaurantPage", restaurantPage);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("category", category);

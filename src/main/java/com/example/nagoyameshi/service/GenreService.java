@@ -1,5 +1,6 @@
 package com.example.nagoyameshi.service;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.nagoyameshi.dto.GenreCategoryDto;
 import com.example.nagoyameshi.entity.Category;
 import com.example.nagoyameshi.entity.Genre;
 import com.example.nagoyameshi.repository.GenreRepository;
@@ -65,5 +67,18 @@ public class GenreService {
             genreCategoryMap.put(genre.getName(), categoryNames);
         }
         return genreCategoryMap;
+    }
+
+    public List<GenreCategoryDto> getGenreCategoryDropdownList() {
+        List<Genre> genres = genreRepository.findAllWithCategories();
+        List<GenreCategoryDto> dropdownList = new ArrayList<>();
+
+        for (Genre genre : genres) {
+            for (Category category : genre.getCategories()) {
+                dropdownList.add(new GenreCategoryDto(genre.getName(), category.getName()));
+            }
+        }
+
+        return dropdownList;
     }
 }

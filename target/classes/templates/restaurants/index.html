@@ -33,56 +33,25 @@
 							</div>
 						</form>
 
-						<div class="card mb-3">
+						<div class="card-body">
 							<div class="card-header">
 								カテゴリから探す
 							</div>
 							<div class="card-body">
 								<form method="get" th:action="@{/restaurants}" class="w-100">
 									<div class="form-group mb-3">
-										<select class="form-control form-select" name="category">
+										<select name="category" class="form-control form-select">
 											<option value="" hidden>選択してください</option>
-											<optgroup label="和食">
-												<option value="和食" th:selected="${category == '和食'}">和食</option>
-												<option value="寿司" th:selected="${category == '寿司'}">寿司</option>
-												<option value="たこ焼き" th:selected="${category == 'たこ焼き'}">たこ焼き</option>
-												<option value="お好み焼き" th:selected="${category == 'お好み焼き'}">お好み焼き
-												</option>
-												<option value="鍋料理" th:selected="${category == '鍋料理'}">鍋料理</option>
-											</optgroup>
-											<optgroup label="麵料理">
-												<option value="ラーメン" th:selected="${category == 'ラーメン'}">ラーメン</option>
-												<option value="うどん" th:selected="${category == 'うどん'}">うどん</option>
-											</optgroup>
-											<optgroup label="肉料理">
-												<option value="揚げ物" th:selected="${category == '揚げ物'}">揚げ物</option>
-												<option value="焼肉" th:selected="${category == '焼肉'}">焼肉</option>
-												<option value="ハンバーグ" th:selected="${category == 'ハンバーグ'}">ハンバーグ
-												</option>
-												<option value="焼き鳥" th:selected="${category == '焼き鳥'}">焼き鳥</option>
-												<option value="ステーキ" th:selected="${category == 'ステーキ'}">ステーキ</option>
-											</optgroup>
-											<optgroup label="外国料理">
-												<option value="フランス料理" th:selected="${category == 'フランス料理'}">フランス料理
-												</option>
-												<option value="タイ料理" th:selected="${category == 'タイ料理'}">タイ料理</option>
-												<option value="中華料理" th:selected="${category == '中華料理'}">中華料理</option>
-												<option value="カレー" th:selected="${category == 'カレー'}">カレー</option>
-											</optgroup>
-											<optgroup label="喫茶店">
-												<option value="喫茶店" th:selected="${category == '喫茶店'}">喫茶店</option>
-											</optgroup>
-											<optgroup label="スイーツ">
-												<option value="スイーツ" th:selected="${category == 'スイーツ'}">スイーツ</option>
-											</optgroup>
-											<optgroup label="パン">
-												<option value="パン" th:selected="${category == 'パン'}">パン</option>
-											</optgroup>
+											<option th:each="item : ${dropdownList}" th:value="${item.categoryName}"
+												th:text="${item.genreName} + ' - ' + ${item.categoryName}"
+												th:selected="${item.categoryName == category}">
+												ジャンル - カテゴリ名
+											</option>
 										</select>
-									</div>
-									<div class="form-group">
-										<button type="submit"
-											class="btn text-white shadow-sm w-100 nagoyameshi-btn">検索</button>
+										<div class="form-group">
+											<button type="submit"
+												class="btn text-white shadow-sm w-100 nagoyameshi-btn">検索</button>
+										</div>
 									</div>
 								</form>
 							</div>
