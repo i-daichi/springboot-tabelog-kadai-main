@@ -1,19 +1,21 @@
-CREATE TABLE IF NOT EXISTS restaurants
-(
-   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-   name VARCHAR (50) NOT NULL,
-   image_name VARCHAR (255),
-   description VARCHAR (255) NOT NULL,
-   price INT NOT NULL,
-   seats INT NOT NULL,
-   postal_code VARCHAR (50) NOT NULL,
-   address VARCHAR (255) NOT NULL,
-   phone_number VARCHAR (50) NOT NULL,
-   category VARCHAR (50) NOT NULL,
-   regular_holiday VARCHAR (50) NOT NULL,
-   business_hours VARCHAR (50) NOT NULL,
-   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+CREATE TABLE IF NOT EXISTS `restaurants` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `image_name` varchar(255) DEFAULT NULL,
+  `description` varchar(255) NOT NULL,
+  `price` int NOT NULL,
+  `seats` int NOT NULL,
+  `postal_code` varchar(50) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `phone_number` varchar(50) NOT NULL,
+  `category` varchar(50) NOT NULL,
+  `regular_holiday` varchar(50) NOT NULL,
+  `business_hours` varchar(50) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `opening_time` time DEFAULT NULL,
+  `closing_time` time DEFAULT NULL,
+  PRIMARY KEY (`id`)
 );
 CREATE TABLE IF NOT EXISTS roles
 (
