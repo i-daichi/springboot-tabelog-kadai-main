@@ -2,6 +2,8 @@ package com.example.nagoyameshi.form;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.nagoyameshi.valueObject.HourMinute;
+
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -32,6 +34,12 @@ public class RestaurantRegisterForm {
 
 	@NotBlank(message = "営業時間を入力してください。")
 	private String businessHours;
+
+	@NotNull(message = "開店時間を入力してください。")
+	private HourMinute openingTime;
+
+	@NotNull(message = "閉店時間を入力してください。")
+	private HourMinute closingeHour;
 
 	@NotBlank(message = "定休日を入力してください。")
 	private String regularHoliday;

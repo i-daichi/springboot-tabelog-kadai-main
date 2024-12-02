@@ -41,7 +41,7 @@ public class RestaurantService {
 		restaurant.setPostalCode(restaurantRegisterForm.getPostalCode());
 		restaurant.setAddress(restaurantRegisterForm.getAddress());
 		restaurant.setPhoneNumber(restaurantRegisterForm.getPhoneNumber());
-		restaurant.setBusinessHours(restaurantRegisterForm.getBusinessHours());
+		restaurant.setBusinessHours();
 		restaurant.setRegularHoliday(restaurantRegisterForm.getRegularHoliday());
 		restaurant.setSeats(restaurantRegisterForm.getSeats());
 		restaurant.setCategory(restaurantRegisterForm.getCategory());
