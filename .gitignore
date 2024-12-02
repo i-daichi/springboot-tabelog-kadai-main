@@ -35,3 +35,13 @@ bin
 *.log
 *.swp
 *.bak
+
+/target/
+/logs/
+*.log
+.classpath
+.project
+.settings/
+.idea/
+*.iml
+*.class

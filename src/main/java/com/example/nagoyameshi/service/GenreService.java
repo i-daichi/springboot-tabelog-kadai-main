@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.nagoyameshi.dto.GenreCategoryDto;
+import com.example.nagoyameshi.dto.GenreCategoryDTO;
 import com.example.nagoyameshi.entity.Category;
 import com.example.nagoyameshi.entity.Genre;
 import com.example.nagoyameshi.repository.GenreRepository;
@@ -69,13 +69,13 @@ public class GenreService {
         return genreCategoryMap;
     }
 
-    public List<GenreCategoryDto> getGenreCategoryDropdownList() {
+    public List<GenreCategoryDTO> getGenreCategoryDropdownList() {
         List<Genre> genres = genreRepository.findAllWithCategories();
-        List<GenreCategoryDto> dropdownList = new ArrayList<>();
+        List<GenreCategoryDTO> dropdownList = new ArrayList<>();
 
         for (Genre genre : genres) {
             for (Category category : genre.getCategories()) {
-                dropdownList.add(new GenreCategoryDto(genre.getName(), category.getName()));
+                dropdownList.add(new GenreCategoryDTO(genre.getName(), category.getName()));
             }
         }
 

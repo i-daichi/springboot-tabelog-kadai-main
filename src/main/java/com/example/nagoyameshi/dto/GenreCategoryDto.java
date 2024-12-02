@@ -1,10 +1,10 @@
 package com.example.nagoyameshi.dto;
 
-public class GenreCategoryDto {
+public class GenreCategoryDTO {
     private String genreName;
     private String categoryName;
 
-    public GenreCategoryDto(String genreName, String categoryName) {
+    public GenreCategoryDTO(String genreName, String categoryName) {
         this.genreName = genreName;
         this.categoryName = categoryName;
     }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.nagoyameshi.dto.GenreCategoryDto;
+import com.example.nagoyameshi.dto.GenreCategoryDTO;
 import com.example.nagoyameshi.entity.Restaurant;
 import com.example.nagoyameshi.entity.User;
 import com.example.nagoyameshi.form.ReservationInputForm;
@@ -82,7 +82,7 @@ public class RestaurantController {
 			}
 		}
 
-		List<GenreCategoryDto> dropdownList = genreService.getGenreCategoryDropdownList();
+		List<GenreCategoryDTO> dropdownList = genreService.getGenreCategoryDropdownList();
 		model.addAttribute("dropdownList", dropdownList);
 		model.addAttribute("restaurantPage", restaurantPage);
 		model.addAttribute("keyword", keyword);

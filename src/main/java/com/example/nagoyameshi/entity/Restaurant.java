@@ -64,5 +64,4 @@ public class Restaurant {
 
 	@Column(name = "closing_time")
 	private LocalTime closingTime;
-
 }
