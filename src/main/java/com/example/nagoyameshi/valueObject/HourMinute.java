@@ -11,6 +11,12 @@ public class HourMinute {
         this.minute = minute;
     }
 
+    // LocalTime を受け取るコンストラクタ
+    public HourMinute(LocalTime localTime) {
+        this.hour = String.format("%02d", localTime.getHour()); // 時を 2 桁で保存
+        this.minute = String.format("%02d", localTime.getMinute()); // 分を 2 桁で保存
+    }
+
     public String getHour() {
         return hour;
     }
