@@ -3,6 +3,7 @@ package com.example.nagoyameshi.dto;
 import java.sql.Timestamp;
 import java.time.LocalTime;
 
+import com.example.nagoyameshi.entity.Restaurant;
 import com.example.nagoyameshi.valueObject.HourMinute;
 
 public class RestaurantDTO {
@@ -43,6 +44,25 @@ public class RestaurantDTO {
         this.updatedAt = updatedAt;
         this.openingTime = new HourMinute(openingTime);
         this.closingTime = new HourMinute(closingTime);
+    }
+
+    public RestaurantDTO(Restaurant restaurant) {
+        this.id = restaurant.getId();
+        this.name = restaurant.getName();
+        this.imageName = restaurant.getImageName();
+        this.description = restaurant.getDescription();
+        this.price = restaurant.getId();
+        this.seats = restaurant.getId();
+        this.postalCode = restaurant.getPostalCode();
+        this.address = restaurant.getAddress();
+        this.phoneNumber = restaurant.getPhoneNumber();
+        this.category = restaurant.getCategory();
+        this.regularHoliday = restaurant.getRegularHoliday();
+        this.businessHours = restaurant.getBusinessHours();
+        this.createdAt = restaurant.getCreatedAt();
+        this.updatedAt = restaurant.getUpdatedAt();
+        this.openingTime = new HourMinute(restaurant.getOpeningTime());
+        this.closingTime = new HourMinute(restaurant.getClosingTime());
     }
 
     public Integer getId() {

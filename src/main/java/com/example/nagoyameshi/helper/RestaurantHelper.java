@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
+import com.example.nagoyameshi.dto.RestaurantDTO;
 import com.example.nagoyameshi.entity.Favorite;
 import com.example.nagoyameshi.entity.Restaurant;
 import com.example.nagoyameshi.entity.Review;
@@ -43,7 +44,7 @@ public class RestaurantHelper {
         List<Review> newReviews = reviewService.findTop6ByRestaurantOrderByCreatedAtDesc(restaurant);
         long totalReviewCount = reviewService.countByRestaurant(restaurant);
 
-        model.addAttribute("restaurant", restaurant);
+        model.addAttribute("restaurant", new RestaurantDTO(restaurant));
         model.addAttribute("reservationInputForm", reservationInputForm);
         model.addAttribute("hasUserAlreadyReviewed", hasUserAlreadyReviewed);
         model.addAttribute("newReviews", newReviews);
