@@ -1,6 +1,7 @@
 package com.example.nagoyameshi.entity;
 
 import java.sql.Timestamp;
+import java.time.LocalTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -57,5 +58,11 @@ public class Restaurant {
 
 	@Column(name = "updated_at", insertable = false, updatable = false)
 	private Timestamp updatedAt;
+
+	@Column(name = "opening_time")
+	private LocalTime openingTime;
+
+	@Column(name = "closing_time")
+	private LocalTime closingTime;
 
 }
