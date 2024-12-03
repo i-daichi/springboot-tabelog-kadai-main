@@ -68,61 +68,16 @@
 					<div class="col-xl-5 col-lg-6 col-md-8">
 
 						<h2 class="text-center mb-3">カテゴリから探す</h2>
-
 						<table class="table">
 							<tbody>
-								<tr>
-									<th>和食</th>
+								<tr th:each="entry : ${genreCategoryMap.entrySet()}">
+									<!-- ジャンル名 -->
+									<th th:text="${entry.key}"></th>
 									<td>
-										<a th:href="@{/restaurants?category=和食}">和食</a>
-										<a th:href="@{/restaurants?category=寿司}" class="me-2">寿司</a>
-										<a th:href="@{/restaurants?category=たこ焼き}" class="me-2">たこ焼き</a>
-										<a th:href="@{/restaurants?category=お好み焼き}" class="me-2">お好み焼き</a>
-										<a th:href="@{/restaurants?category=鍋料理}" class="me-2">鍋料理</a>
-									</td>
-								</tr>
-								<tr>
-									<th>麵料理</th>
-									<td>
-										<a th:href="@{/restaurants?category=ラーメン}" class="me-2">ラーメン</a>
-										<a th:href="@{/restaurants?category=うどん}">うどん</a>
-									</td>
-								</tr>
-								<tr>
-									<th>肉料理</th>
-									<td>
-										<a th:href="@{/restaurants?category=揚げ物}" class="me-2">揚げ物</a>
-										<a th:href="@{/restaurants?category=焼肉}" class="me-2">焼肉</a>
-										<a th:href="@{/restaurants?category=ハンバーグ}" class="me-2">ハンバーグ</a>
-										<a th:href="@{/restaurants?category=焼き鳥}" class="me-2">焼き鳥</a>
-										<a th:href="@{/restaurants?category=ステーキ}" class="me-2">ステーキ</a>
-									</td>
-								</tr>
-								<tr>
-									<th>外国料理</th>
-									<td>
-										<a th:href="@{/restaurants?category=フランス料理}" class="me-2">フランス料理</a>
-										<a th:href="@{/restaurants?category=タイ料理}" class="me-2">タイ料理</a>
-										<a th:href="@{/restaurants?category=中華料理}" class="me-2">中華料理</a>
-										<a th:href="@{/restaurants?category=タイ料理}" class="me-2">タイ料理</a>
-									</td>
-								</tr>
-								<tr>
-									<th>喫茶店</th>
-									<td>
-										<a th:href="@{/restaurants?category=喫茶店}" class="me-2">喫茶店</a>
-									</td>
-								</tr>
-								<tr>
-									<th>スイーツ</th>
-									<td>
-										<a th:href="@{/restaurants?category=スイーツ}" class="me-2">スイーツ</a>
-									</td>
-								</tr>
-								<tr>
-									<th>パン</th>
-									<td>
-										<a th:href="@{/restaurants?category=パン}" class="me-2">パン</a>
+										<!-- カテゴリ一覧 -->
+										<a th:each="subCategory : ${entry.value}"
+											th:href="@{/restaurants(category=${subCategory})}" th:text="${subCategory}"
+											class="me-2"></a>
 									</td>
 								</tr>
 							</tbody>

@@ -119,7 +119,7 @@ INSERT IGNORE INTO reviews (id, restaurant_id, user_id, score, content) VALUES (
  INSERT IGNORE INTO favorites (id, restaurant_id, user_id) VALUES (11, 11, 1);
  INSERT IGNORE INTO favorites (id, restaurant_id, user_id) VALUES (12, 12, 1);
 
-INSERT INTO `genre` (`id`, `name`) VALUES
+INSERT IGNORE INTO `genre` (`id`, `name`) VALUES
 	(1, '和食'),
 	(2, '麵料理'),
 	(3, '肉料理'),
