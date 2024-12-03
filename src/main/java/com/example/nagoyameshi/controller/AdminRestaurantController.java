@@ -1,6 +1,7 @@
 package com.example.nagoyameshi.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -20,10 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.nagoyameshi.entity.Category;
 import com.example.nagoyameshi.entity.Restaurant;
 import com.example.nagoyameshi.form.RestaurantEditForm;
 import com.example.nagoyameshi.form.RestaurantRegisterForm;
 import com.example.nagoyameshi.repository.RestaurantRepository;
+import com.example.nagoyameshi.service.CategoryService;
 import com.example.nagoyameshi.service.RestaurantService;
 
 @Controller
@@ -31,10 +34,15 @@ import com.example.nagoyameshi.service.RestaurantService;
 public class AdminRestaurantController {
 	private final RestaurantRepository restaurantRepository;
 	private final RestaurantService restaurantService;
+	private final CategoryService categoryService;
 
-	public AdminRestaurantController(RestaurantRepository restaurantRepository, RestaurantService restaurantService) {
+	public AdminRestaurantController(
+		RestaurantRepository restaurantRepository,
+		RestaurantService restaurantService,
+		CategoryService categoryService) {
 		this.restaurantRepository = restaurantRepository;
 		this.restaurantService = restaurantService;
+		this.categoryService = categoryService;
 	}
 
 	@GetMapping
@@ -102,6 +110,10 @@ public class AdminRestaurantController {
 				.map(m -> String.format("%02d", m)) // "00", "15", "30", "45" の形式にフォーマット
 				.collect(Collectors.toList())
 		);
+
+		 // カテゴリリストを取得してモデルに追加
+		 List<Category> allCategories = categoryService.getAllCategories();
+		 model.addAttribute("categories", allCategories);  // ビューに渡すカテゴリリスト
 
 		return "admin/restaurants/edit";
 	}
