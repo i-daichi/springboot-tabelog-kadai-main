@@ -1,6 +1,7 @@
 package com.example.nagoyameshi.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.nagoyameshi.dto.GenreCategoryDTO;
 import com.example.nagoyameshi.entity.Restaurant;
 import com.example.nagoyameshi.entity.User;
 import com.example.nagoyameshi.form.ReservationInputForm;
@@ -81,9 +81,8 @@ public class RestaurantController {
 				restaurantPage = restaurantRepository.findAllByOrderByCreatedAtDesc(pageable);
 			}
 		}
-
-		List<GenreCategoryDTO> dropdownList = genreService.getGenreCategoryDropdownList();
-		model.addAttribute("dropdownList", dropdownList);
+		Map<String, List<String>> genreCategoryMap = genreService.getGenreCategoryMap();
+		model.addAttribute("genreCategoryMap", genreCategoryMap);
 		model.addAttribute("restaurantPage", restaurantPage);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("category", category);
