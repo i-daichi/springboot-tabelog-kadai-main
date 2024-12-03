@@ -43,10 +43,10 @@ public class RestaurantEditForm {
 	private String businessHours;
 
 	@NotNull(message = "開店時間を入力してください。")
-	private HourMinute openingTime;
+	private HourMinute openTime;
 
 	@NotNull(message = "閉店時間を入力してください。")
-	private HourMinute closingeHour;
+	private HourMinute closeTime;
 
 	@NotBlank(message = "定休日を入力してください。")
 	private String regularHoliday;
@@ -65,8 +65,8 @@ public class RestaurantEditForm {
 		this.postalCode = restaurant.getPostalCode();
 		this.address = restaurant.getAddress();
 		this.phoneNumber = restaurant.getPhoneNumber();
-		this.openingTime = new HourMinute(restaurant.getOpeningTime());
-		this.closingeHour = new HourMinute(restaurant.getClosingTime());
+		this.openTime = new HourMinute(restaurant.getOpeningTime());
+		this.closeTime = new HourMinute(restaurant.getClosingTime());
 		this.regularHoliday = restaurant.getRegularHoliday();
 		this.seats = restaurant.getSeats();
 		this.category = restaurant.getCategory();

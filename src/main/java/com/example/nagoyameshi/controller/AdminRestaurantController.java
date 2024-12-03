@@ -1,5 +1,9 @@
 package com.example.nagoyameshi.controller;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -87,6 +91,17 @@ public class AdminRestaurantController {
 
 		model.addAttribute("imageName", imageName);
 		model.addAttribute("restaurantEditForm", restaurantEditForm);
+		model.addAttribute("hours",
+		IntStream.range(0, 24)
+				.mapToObj(i -> String.format("%02d", i)) // "00"～"23" の形式にフォーマット
+				.collect(Collectors.toList())
+		);
+		model.addAttribute("minutes",
+			Arrays.asList(0, 15, 30, 45)
+				.stream()
+				.map(m -> String.format("%02d", m)) // "00", "15", "30", "45" の形式にフォーマット
+				.collect(Collectors.toList())
+		);
 
 		return "admin/restaurants/edit";
 	}
