@@ -43,12 +43,12 @@
 										<select class="form-control form-select" name="category">
 											<option value="" hidden>選択してください</option>
 											<!-- genreCategoryMap をループ -->
-											<th:block th:each="entry : ${genreCategoryMap}">
+											<th:block th:each="genre_category : ${genreCategoryMap}">
 												<!-- ジャンル名を optgroup ラベルに設定 -->
-												<optgroup th:label="${entry.key}">
+												<optgroup th:label="${genre_category.key}">
 													<!-- カテゴリリストをループ -->
-													<option th:each="category : ${entry.value}" th:value="${category}"
-														th:selected="${category == param.category}"
+													<option th:each="category : ${genre_category.value}" th:value="${category}"
+														th:selected="${category == selectedCategory}"
 														th:text="${category}">
 													</option>
 												</optgroup>

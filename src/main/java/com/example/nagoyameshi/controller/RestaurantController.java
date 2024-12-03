@@ -85,7 +85,7 @@ public class RestaurantController {
 		model.addAttribute("genreCategoryMap", genreCategoryMap);
 		model.addAttribute("restaurantPage", restaurantPage);
 		model.addAttribute("keyword", keyword);
-		model.addAttribute("category", category);
+		model.addAttribute("selectedCategory", category);
 		model.addAttribute("price", price);
 		model.addAttribute("order", order);
 
