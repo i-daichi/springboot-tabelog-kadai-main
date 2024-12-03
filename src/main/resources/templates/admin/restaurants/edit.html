@@ -118,59 +118,113 @@
 
 							<div class="form-group row mb-3">
 								<div class="col-md-4">
-									<label for="businessHours" class="col-form-label text-md-left fw-bold">営業時間</label>
+									<label for="openTime" class="col-form-label text-md-left fw-bold">開店時間</label>
 								</div>
 								<div class="col-md-8">
-									<div th:if="${#fields.hasErrors('businessHours')}" class="text-danger small mb-2"
-										th:errors="*{businessHours}"></div>
-									<input type="text" class="form-control" th:field="*{businessHours}">
+									<div th:if="${#fields.hasErrors('openTime')}" class="text-danger small mb-2"
+										th:errors="*{openTime}"></div>
+									<!-- 開店時間 - 時間のドロップダウン -->
+									<select th:field="*{openTime.hour}" class="form-control">
+										<option
+											th:each="h : ${T(java.util.stream.IntStream).range(0, 24).boxed().toArray()}"
+											th:value="${h}" th:text="${h}"></option>
+									</select>
+									<!-- 開店時間 - 分のドロップダウン -->
+									<select th:field="*{openTime.minute}" class="form-control mt-2">
+										<option
+											th:each="m : ${T(java.util.stream.IntStream).range(0, 60).boxed().toArray()}"
+											th:value="${m}" th:text="${m}"></option>
+									</select>
 								</div>
 							</div>
 
 							<div class="form-group row mb-3">
 								<div class="col-md-4">
-									<label for="regularHoliday" class="col-form-label text-md-left fw-bold">定休日</label>
+									<label for="openTime" class="col-form-label text-md-left fw-bold">開店時間</label>
 								</div>
 								<div class="col-md-8">
-									<div th:if="${#fields.hasErrors('regularHoliday')}" class="text-danger small mb-2"
-										th:errors="*{regularHoliday}"></div>
-									<input type="text" class="form-control" th:field="*{regularHoliday}">
+									<div th:if="${#fields.hasErrors('openTime')}" class="text-danger small mb-2"
+										th:errors="*{openTime}"></div>
+									<!-- 開店時間 - 時間のドロップダウン -->
+									<select th:field="*{openTime.hour}" class="form-control">
+										<option
+											th:each="h : ${T(java.util.stream.IntStream).range(0, 24).boxed().toArray()}"
+											th:value="${h}" th:text="${h}"></option>
+									</select>
+									<!-- 開店時間 - 分のドロップダウン（15分単位） -->
+									<select th:field="*{openTime.minute}" class="form-control mt-2">
+										<option th:each="m : ${T(java.util.Arrays).asList(0, 15, 30, 45)}"
+											th:value="${m}" th:text="${m}"></option>
+									</select>
 								</div>
 							</div>
 
 							<div class="form-group row mb-3">
 								<div class="col-md-4">
-									<label for="seats" class="col-form-label text-md-left fw-bold">座席数</label>
+									<label for="closeTime" class="col-form-label text-md-left fw-bold">閉店時間</label>
 								</div>
 								<div class="col-md-8">
-									<div th:if="${#fields.hasErrors('seats')}" class="text-danger small mb-2"
-										th:errors="*{seats}"></div>
-									<input type="text" class="form-control" th:field="*{seats}">
+									<div th:if="${#fields.hasErrors('closeTime')}" class="text-danger small mb-2"
+										th:errors="*{closeTime}"></div>
+									<!-- 閉店時間 - 時間のドロップダウン -->
+									<select th:field="*{closeTime.hour}" class="form-control">
+										<option
+											th:each="h : ${T(java.util.stream.IntStream).range(0, 24).boxed().toArray()}"
+											th:value="${h}" th:text="${h}"></option>
+									</select>
+									<!-- 閉店時間 - 分のドロップダウン（15分単位） -->
+									<select th:field="*{closeTime.minute}" class="form-control mt-2">
+										<option th:each="m : ${T(java.util.Arrays).asList(0, 15, 30, 45)}"
+											th:value="${m}" th:text="${m}"></option>
+									</select>
 								</div>
 							</div>
 
-							<div class="form-group row mb-3">
-								<div class="col-md-4">
-									<label for="category" class="col-form-label text-md-left fw-bold">カテゴリ</label>
-								</div>
-								<div class="col-md-8">
-									<div th:if="${#fields.hasErrors('category')}" class="text-danger small mb-2"
-										th:errors="*{category}"></div>
-									<input type="text" class="form-control" th:field="*{category}">
-								</div>
-							</div>
-
-							<div class="form-group d-flex justify-content-center my-4">
-								<button type="submit" class="btn text-white shadow-sm w-50 nagoyameshi-btn">更新</button>
-							</div>
-						</form>
 					</div>
+					<div class="form-group row mb-3">
+						<div class="col-md-4">
+							<label for="regularHoliday" class="col-form-label text-md-left fw-bold">定休日</label>
+						</div>
+						<div class="col-md-8">
+							<div th:if="${#fields.hasErrors('regularHoliday')}" class="text-danger small mb-2"
+								th:errors="*{regularHoliday}"></div>
+							<input type="text" class="form-control" th:field="*{regularHoliday}">
+						</div>
+					</div>
+
+					<div class="form-group row mb-3">
+						<div class="col-md-4">
+							<label for="seats" class="col-form-label text-md-left fw-bold">座席数</label>
+						</div>
+						<div class="col-md-8">
+							<div th:if="${#fields.hasErrors('seats')}" class="text-danger small mb-2"
+								th:errors="*{seats}"></div>
+							<input type="text" class="form-control" th:field="*{seats}">
+						</div>
+					</div>
+
+					<div class="form-group row mb-3">
+						<div class="col-md-4">
+							<label for="category" class="col-form-label text-md-left fw-bold">カテゴリ</label>
+						</div>
+						<div class="col-md-8">
+							<div th:if="${#fields.hasErrors('category')}" class="text-danger small mb-2"
+								th:errors="*{category}"></div>
+							<input type="text" class="form-control" th:field="*{category}">
+						</div>
+					</div>
+
+					<div class="form-group d-flex justify-content-center my-4">
+						<button type="submit" class="btn text-white shadow-sm w-50 nagoyameshi-btn">更新</button>
+					</div>
+					</form>
 				</div>
 			</div>
-		</main>
+	</div>
+	</main>
 
-		<!-- フッター -->
-		<div th:replace="~{fragment :: footer}"></div>
+	<!-- フッター -->
+	<div th:replace="~{fragment :: footer}"></div>
 	</div>
 
 	<div th:replace="~{fragment :: scripts}"></div>
