@@ -2,6 +2,7 @@ package com.example.nagoyameshi.form;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.nagoyameshi.entity.Restaurant;
 import com.example.nagoyameshi.valueObject.HourMinute;
 
 import jakarta.validation.constraints.Min;
@@ -56,25 +57,18 @@ public class RestaurantEditForm {
 	@NotBlank(message = "カテゴリを入力してください。")
 	private String category;
 
-	public RestaurantEditForm(@NotNull Integer id, @NotBlank(message = "店舗名を入力してください。") String name,
-			MultipartFile imageFile, @NotBlank(message = "説明を入力してください。") String description,
-			@NotNull(message = "価格帯を入力してください。") @Min(value = 100, message = "価格帯は100円以上に設定してください。") Integer price,
-			@NotBlank(message = "郵便番号を入力してください。") String postalCode, @NotBlank(message = "住所を入力してください。") String address,
-			@NotBlank(message = "電話番号を入力してください。") String phoneNumber,
-			@NotBlank(message = "営業時間を入力してください。") String businessHours,
-			@NotBlank(message = "定休日を入力してください。") String regularHoliday,
-			@NotNull(message = "座席数を入力してください。") Integer seats, @NotBlank(message = "カテゴリを入力してください。") String category) {
-		this.id = id;
-		this.name = name;
-		this.imageFile = imageFile;
-		this.description = description;
-		this.price = price;
-		this.postalCode = postalCode;
-		this.address = address;
-		this.phoneNumber = phoneNumber;
-		this.businessHours = businessHours;
-		this.regularHoliday = regularHoliday;
-		this.seats = seats;
-		this.category = category;
+	public RestaurantEditForm(Restaurant restaurant){
+		this.id = restaurant.getId();
+		this.name = restaurant.getName();
+		this.description = restaurant.getDescription();
+		this.price = restaurant.getPrice();
+		this.postalCode = restaurant.getPostalCode();
+		this.address = restaurant.getAddress();
+		this.phoneNumber = restaurant.getPhoneNumber();
+		this.openingTime = new HourMinute(restaurant.getOpeningTime());
+		this.closingeHour = new HourMinute(restaurant.getClosingTime());
+		this.regularHoliday = restaurant.getRegularHoliday();
+		this.seats = restaurant.getSeats();
+		this.category = restaurant.getCategory();
 	}
 }
