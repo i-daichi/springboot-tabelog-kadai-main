@@ -71,7 +71,6 @@ public class RestaurantService {
 		restaurant.setBusinessHours(restaurantEditForm.getBusinessHours());
 		restaurant.setRegularHoliday(restaurantEditForm.getRegularHoliday());
 		restaurant.setSeats(restaurantEditForm.getSeats());
-		restaurant.setCategory(restaurantEditForm.getCategory());
 
 		restaurantRepository.save(restaurant);
 	}
