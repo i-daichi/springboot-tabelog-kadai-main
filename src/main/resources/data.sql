@@ -39,7 +39,8 @@ INSERT IGNORE INTO `restaurants`
     (37, 'フレンチダイニング ラルゴ', 'restaurant07.jpg', '高級感漂うフレンチレストラン。旬の食材を使ったコース料理が評判。特別な日のディナーにぴったりな一軒。', 6000, 15, '111-1146', '愛知県名古屋市中村区名駅3-12-7', '052-789-0123', 'フランス料理、洋食', '月曜日', '17:00～23:00', '2024-11-18 13:59:30', '2024-12-02 13:22:07', '17:00:00', '23:00:00'),
     (38, 'ビストロ 風雅', 'restaurant08.jpg', 'おしゃれなビストロ風の店内で、ワインに合う料理を提供。肉料理やパスタがメインのカジュアルなレストラン。', 3500, 35, '111-1147', '愛知県名古屋市中区栄4-18-9', '052-890-1234', '洋食、フランス料理', '火曜日', '12:00～22:00', '2024-11-18 13:59:30', '2024-12-02 13:22:07', '12:00:00', '22:00:00'),
     (39, 'ピッツェリア・マリーナ', 'restaurant09.jpg', 'ナポリピッツァの本場の味を提供。石窯で焼くピザは外はカリっと、中はモチモチ。サイドメニューやデザートも充実。', 2500, 30, '111-1148', '愛知県名古屋市東区東桜3-16-4', '052-901-2345', 'イタリア料理、ピザ', '水曜日', '11:30～22:30', '2024-11-18 13:59:30', '2024-12-02 13:22:07', '11:30:00', '22:30:00'),
-    (40, '鶴見屋 鮨処', 'restaurant10.jpg', '名古屋市内で最も人気の寿司店。職人が握る新鮮な寿司は格別。豊富な種類の日本酒とともに楽しむことができる。', 5000, 20, '111-1149', '愛知県名古屋市西区名駅南1-3-5', '052-123-6789', '寿司、和食', '木曜日', '11:00～22:00', '2024-11-18 13:59:30', '2024-12-02 13:22:07', '11:00:00', '22:00:00');
+    (40, '鶴見屋 鮨処', 'restaurant10.jpg', '名古屋市内で最も人気の寿司店。職人が握る新鮮な寿司は格別。豊富な種類の日本酒とともに楽しむことができる。', 5000, 20, '111-1149', '愛知県名古屋市西区名駅南1-3-5', '052-123-6789', '寿司、和食', '木曜日', '11:00～22:00', '2024-11-18 13:59:30', '2024-12-02 13:22:07', '11:00:00', '22:00:00'),
+	(41, 'ラーメン一番', 'restaurant10.jpg', 'こだわりのスープと自家製麺が自慢のラーメン店。特に辛味噌ラーメンが人気で、深夜まで営業しており、仕事帰りのお客さんにも好評。', 1200, 15, '234-5678', '愛知県名古屋市中村区名駅1-4-2', '052-234-5678', 'ラーメン、和食', '毎月15日', '11:00～23:00', '2024-11-20 14:01:00', '2024-12-02 13:45:23', '11:00:00', '23:00:00');
 -- rolesテーブル
 INSERT IGNORE INTO roles (id, name) VALUES (1, 'ROLE_GENERAL');
 INSERT IGNORE INTO roles (id, name) VALUES (2, 'ROLE_ADMIN');
@@ -212,4 +213,91 @@ INSERT IGNORE INTO restaurant_categories (id, restaurant_id, category_id) VALUES
 (67, 35, 5), -- スイーツ工房 フルール -> カフェ (カテゴリID: 5)
 (68, 36, 1), -- 味の匠 まるしん -> 和食 (カテゴリID: 1)
 (69, 36, 5), -- 味の匠 まるしん -> 定食 (カテゴリID: 5)
-(70, 37, 4); -- フレンチダイニング ラルゴ -> フランス料理 (カテゴリID: 4
+(70, 37, 4), -- フレンチダイニング ラルゴ -> フランス料理 (カテゴリID: 4
+(71, 41, 2), -- ラーメン一番 -> ラーメン (カテゴリID: 2)
+(72, 41, 1); -- ラーメン一番 -> 和食 (カテゴリID: 1)
+
+
+INSERT IGNORE INTO `weekdays` (`id`, `name`) VALUES
+(1, '月曜日'),
+(2, '火曜日'),
+(3, '水曜日'),
+(4, '木曜日'),
+(5, '金曜日'),
+(6, '土曜日'),
+(7, '日曜日');
+
+INSERT IGNORE INTO `holiday_types` (`id`, `type_name`) VALUES
+(1, '日付指定'),
+(2, '毎週'),
+(3, '第1週'),
+(4, '第2週'),
+(5, '第3週');
+
+-- 毎週のいずれかの曜日一日が休みの店舗
+-- "なごやそば名駅東口店"：火曜日 → 毎週火曜日
+INSERT IGNORE INTO restaurant_holidays (restaurant_id, holiday_type, weekday, holiday_date)
+VALUES
+(1, 2, 2, NULL);  -- 毎週火曜日
+
+-- "麵処名古屋"：水曜日 → 毎週水曜日
+INSERT IGNORE  INTO restaurant_holidays (restaurant_id, holiday_type, weekday, holiday_date)
+VALUES
+(7, 2, 3, NULL);  -- 毎週水曜日
+
+-- 毎週の複数の曜日が休みの店舗
+-- "味噌ラーメン MEI"：金曜日、土曜日 → 毎週金曜日、毎週土曜日
+INSERT IGNORE INTO restaurant_holidays (restaurant_id, holiday_type, weekday, holiday_date)
+VALUES
+(4, 2, 5, NULL),  -- 毎週金曜日
+(4, 2, 6, NULL);  -- 毎週土曜日
+
+-- 第一週のいずれかの曜日一日が休みのデータ
+-- "餃子館"：火曜日 → 第1週火曜日
+INSERT IGNORE INTO restaurant_holidays (restaurant_id, holiday_type, weekday, holiday_date)
+VALUES
+(15, 3, 2, NULL);  -- 第1週火曜日
+
+-- "うどん屋大西"：水曜日 → 第1週水曜日
+INSERT IGNORE  INTO restaurant_holidays (restaurant_id, holiday_type, weekday, holiday_date)
+VALUES
+(11, 3, 3, NULL);  -- 第1週水曜日
+
+-- 第一週の複数の曜日が休みのデータ
+-- "やきとり屋MURATA"：水曜日、金曜日 → 第1週水曜日、第1週金曜日
+INSERT IGNORE  INTO restaurant_holidays (restaurant_id, holiday_type, weekday, holiday_date)
+VALUES
+(22, 3, 3, NULL),  -- 第1週水曜日
+(22, 3, 5, NULL);  -- 第1週金曜日
+
+-- 複数の週でいずれかの曜日一日が休みの店舗
+-- "うどん工房 さくら"：第1週火曜日、第2週水曜日
+INSERT IGNORE  INTO restaurant_holidays (restaurant_id, holiday_type, weekday, holiday_date)
+VALUES
+(33, 3, 2, NULL),  -- 第1週火曜日
+(33, 4, 3, NULL);  -- 第2週水曜日
+
+-- "スイーツ工房 フルール"：第2週木曜日、第3週金曜日
+INSERT IGNORE  INTO restaurant_holidays (restaurant_id, holiday_type, weekday, holiday_date)
+VALUES
+(35, 4, 4, NULL),  -- 第2週木曜日
+(35, 5, 5, NULL);  -- 第3週金曜日
+
+-- 複数の週で複数の曜日が休みの店舗
+-- "東海割烹"：第1週月曜日、第2週木曜日、第3週水曜日
+INSERT  IGNORE INTO restaurant_holidays (restaurant_id, holiday_type, weekday, holiday_date)
+VALUES
+(8, 3, 1, NULL),  -- 第1週月曜日
+(8, 4, 4, NULL),  -- 第2週木曜日
+(8, 5, 3, NULL);  -- 第3週水曜日
+
+-- "ラーメン道場 風神"：第1週月曜日、第3週火曜日、第2週金曜日
+INSERT IGNORE INTO restaurant_holidays (restaurant_id, holiday_type, weekday, holiday_date)
+VALUES
+(32, 3, 1, NULL),  -- 第1週月曜日
+(32, 5, 2, NULL),  -- 第3週火曜日
+(32, 4, 5, NULL);  -- 第2週金曜日
+
+INSERT IGNORE INTO restaurant_holidays (restaurant_id, holiday_type, weekday, holiday_date)
+VALUES
+(41, 1, NULL, '15');
