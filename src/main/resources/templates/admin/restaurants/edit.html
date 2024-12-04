@@ -181,7 +181,7 @@
 								<div class="col-md-8">
 									<div th:if="${#fields.hasErrors('category')}" class="text-danger small mb-2" th:errors="*{category}"></div>
 									<!-- 複数選択可能なドロップダウンメニュー -->
-									<select th:field="*{category}">
+									<select th:field="*{category}" multiple  class="form-control">
 										<option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
 									</select>
 								</div>
