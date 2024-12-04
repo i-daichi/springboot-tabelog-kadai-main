@@ -2,12 +2,16 @@ package com.example.nagoyameshi.entity;
 
 import java.sql.Timestamp;
 import java.time.LocalTime;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -46,6 +50,14 @@ public class Restaurant {
 
 	@Column(name = "category")
 	private String category;
+
+	@ManyToMany
+    @JoinTable(
+        name = "restaurant_categories",
+        joinColumns = @JoinColumn(name = "restaurant_id"),
+        inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private List<Category> categories;
 
 	@Column(name = "regular_holiday")
 	private String regularHoliday;
