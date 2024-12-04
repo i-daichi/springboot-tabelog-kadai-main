@@ -51,8 +51,8 @@ public class RestaurantDTO {
         this.name = restaurant.getName();
         this.imageName = restaurant.getImageName();
         this.description = restaurant.getDescription();
-        this.price = restaurant.getId();
-        this.seats = restaurant.getId();
+        this.price = restaurant.getPrice();
+        this.seats = restaurant.getSeats();
         this.postalCode = restaurant.getPostalCode();
         this.address = restaurant.getAddress();
         this.phoneNumber = restaurant.getPhoneNumber();
