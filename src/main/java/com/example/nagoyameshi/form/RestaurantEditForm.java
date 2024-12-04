@@ -1,7 +1,11 @@
 package com.example.nagoyameshi.form;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.nagoyameshi.entity.Category;
 import com.example.nagoyameshi.entity.Restaurant;
 import com.example.nagoyameshi.valueObject.HourMinute;
 
@@ -54,8 +58,8 @@ public class RestaurantEditForm {
 	@NotNull(message = "座席数を入力してください。")
 	private Integer seats;
 
-	@NotBlank(message = "カテゴリを入力してください。")
-	private String category;
+	@NotNull(message = "カテゴリを入力してください。")
+	private List<Integer> categoryIdList;
 
 	public RestaurantEditForm(Restaurant restaurant){
 		this.id = restaurant.getId();
@@ -69,6 +73,8 @@ public class RestaurantEditForm {
 		this.closeTime = new HourMinute(restaurant.getClosingTime());
 		this.regularHoliday = restaurant.getRegularHoliday();
 		this.seats = restaurant.getSeats();
-		this.category = restaurant.getCategory();
+		this.categoryIdList = restaurant.getCategories().stream()
+										.map(Category::getId)
+										.collect(Collectors.toList());
 	}
 }

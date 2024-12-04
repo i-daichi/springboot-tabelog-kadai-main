@@ -179,10 +179,14 @@
 									<label for="category" class="col-form-label text-md-left fw-bold">カテゴリ</label>
 								</div>
 								<div class="col-md-8">
-									<div th:if="${#fields.hasErrors('category')}" class="text-danger small mb-2" th:errors="*{category}"></div>
+									<div th:if="${#fields.hasErrors('categoryIdList')}" class="text-danger small mb-2" th:errors="*{categoryIdList}"></div>
 									<!-- 複数選択可能なドロップダウンメニュー -->
-									<select th:field="*{category}" multiple  class="form-control">
-										<option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+									<select id="categories" th:field="*{categoryIdList}" multiple>
+										<option th:each="category : ${categories}"
+												th:value="${category.id}"
+												th:text="${category.name}"
+												th:selected="${#lists.contains(restaurantEditForm.categoryIdList, category.id)}">
+										</option>
 									</select>
 								</div>
 							</div>
