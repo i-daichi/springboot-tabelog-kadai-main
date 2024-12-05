@@ -25,9 +25,13 @@ import com.example.nagoyameshi.entity.Category;
 import com.example.nagoyameshi.entity.Restaurant;
 import com.example.nagoyameshi.form.RestaurantEditForm;
 import com.example.nagoyameshi.form.RestaurantRegisterForm;
+import com.example.nagoyameshi.helper.AdminRestaurantHelper;
 import com.example.nagoyameshi.repository.RestaurantRepository;
 import com.example.nagoyameshi.service.CategoryService;
+import com.example.nagoyameshi.service.HolidayTypeService;
+import com.example.nagoyameshi.service.RestaurantHolidayService;
 import com.example.nagoyameshi.service.RestaurantService;
+import com.example.nagoyameshi.service.WeekdayService;
 
 @Controller
 @RequestMapping("/admin/restaurants")
@@ -35,14 +39,19 @@ public class AdminRestaurantController {
 	private final RestaurantRepository restaurantRepository;
 	private final RestaurantService restaurantService;
 	private final CategoryService categoryService;
+	private final HolidayTypeService holidayTypeService;
+    private final WeekdayService weekdayService;
+    private final RestaurantHolidayService restaurantHolidayService;
 
-	public AdminRestaurantController(
-		RestaurantRepository restaurantRepository,
-		RestaurantService restaurantService,
-		CategoryService categoryService) {
+	public AdminRestaurantController(RestaurantRepository restaurantRepository, RestaurantService restaurantService,
+			CategoryService categoryService, HolidayTypeService holidayTypeService, WeekdayService weekdayService,
+			RestaurantHolidayService restaurantHolidayService) {
 		this.restaurantRepository = restaurantRepository;
 		this.restaurantService = restaurantService;
 		this.categoryService = categoryService;
+		this.holidayTypeService = holidayTypeService;
+		this.weekdayService = weekdayService;
+		this.restaurantHolidayService = restaurantHolidayService;
 	}
 
 	@GetMapping
@@ -94,26 +103,10 @@ public class AdminRestaurantController {
 	@GetMapping("/{id}/edit")
 	public String edit(@PathVariable Integer id, Model model) {
 		Restaurant restaurant = restaurantRepository.getReferenceById(id);
-		String imageName = restaurant.getImageName();
 		RestaurantEditForm restaurantEditForm = new RestaurantEditForm(restaurant);
 
-		model.addAttribute("imageName", imageName);
-		model.addAttribute("restaurantEditForm", restaurantEditForm);
-		model.addAttribute("hours",
-			IntStream.range(0, 24)
-				.mapToObj(i -> String.format("%02d", i)) // "00"～"23" の形式にフォーマット
-				.collect(Collectors.toList())
-		);
-		model.addAttribute("minutes",
-			Arrays.asList(0, 15, 30, 45)
-				.stream()
-				.map(m -> String.format("%02d", m)) // "00", "15", "30", "45" の形式にフォーマット
-				.collect(Collectors.toList())
-		);
-
-		 // カテゴリリストを取得してモデルに追加
-		 List<Category> allCategories = categoryService.getAllCategories();
-		 model.addAttribute("categories", allCategories);  // ビューに渡すカテゴリリスト
+		var helper = new AdminRestaurantHelper(categoryService,holidayTypeService,weekdayService,restaurantHolidayService);
+		helper.prepareEditPage(id, model, restaurantEditForm);
 
 		return "admin/restaurants/edit";
 	}
