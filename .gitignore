@@ -48,3 +48,4 @@ bin
 src/main/resources/application-development.properties
 src/main/resources/application-local.properties
 src/main/resources/application.properties
+*.properties
