@@ -37,7 +37,7 @@ public class AdminRestaurantHelper {
         this.restaurantHolidayService = restaurantHolidayService;
     }
 
-    public void populateEditFormModel(Integer restaurantId, Model model, RestaurantEditForm restaurantEditForm) {
+    public void prepareEditPage(Integer restaurantId, Model model, RestaurantEditForm restaurantEditForm) {
         // 定休日取得
         List<RestaurantHoliday> restaurantHolidays = restaurantHolidayService.findByRestaurantId(restaurantId);
         restaurantEditForm.setHolidays(restaurantHolidays);
