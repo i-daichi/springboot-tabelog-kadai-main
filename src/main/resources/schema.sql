@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS restaurant_holidays (
     restaurant_id INT NOT NULL,
     holiday_type INT NOT NULL,
     weekday INT,  -- ここで曜日の情報を格納するカラムを追加
-    holiday_date DATE,
+    holiday_date VARCHAR(2),
     FOREIGN KEY (restaurant_id) REFERENCES restaurants(id),
     FOREIGN KEY (holiday_type) REFERENCES holiday_types(id)
 );
