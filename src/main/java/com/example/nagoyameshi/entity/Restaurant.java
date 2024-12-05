@@ -2,8 +2,10 @@ package com.example.nagoyameshi.entity;
 
 import java.sql.Timestamp;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -62,6 +65,9 @@ public class Restaurant {
 	@Column(name = "regular_holiday")
 	private String regularHoliday;
 
+	@OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RestaurantHoliday> holidays = new ArrayList<>();
+
 	@Column(name = "business_hours")
 	private String businessHours;
 
@@ -76,4 +82,21 @@ public class Restaurant {
 
 	@Column(name = "closing_time")
 	private LocalTime closingTime;
+
+	// コンストラクタ、ゲッター、セッター
+    public List<RestaurantHoliday> getHolidays() {
+        return holidays;
+    }
+
+    public void setHolidays(List<RestaurantHoliday> holidays) {
+        this.holidays = holidays;
+    }
+
+    public void addHoliday(RestaurantHoliday holiday) {
+        holidays.add(holiday);
+    }
+
+    public void removeHoliday(RestaurantHoliday holiday) {
+        holidays.remove(holiday);
+    }
 }
