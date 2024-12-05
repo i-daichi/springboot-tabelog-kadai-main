@@ -9,7 +9,7 @@ import jakarta.persistence.ManyToOne;
 public class RestaurantHoliday {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     private Restaurant restaurant;
