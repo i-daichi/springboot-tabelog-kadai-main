@@ -100,7 +100,7 @@ public class AdminRestaurantController {
 		model.addAttribute("imageName", imageName);
 		model.addAttribute("restaurantEditForm", restaurantEditForm);
 		model.addAttribute("hours",
-		IntStream.range(0, 24)
+			IntStream.range(0, 24)
 				.mapToObj(i -> String.format("%02d", i)) // "00"～"23" の形式にフォーマット
 				.collect(Collectors.toList())
 		);
