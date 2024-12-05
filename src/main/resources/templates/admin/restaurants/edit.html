@@ -181,16 +181,49 @@
 
 								<div class="form-group row mb-3">
 									<div class="col-md-4">
-										<label for="regularHoliday"
-											class="col-form-label text-md-left fw-bold">定休日</label>
+										<label for="regularHoliday" class="col-form-label text-md-left fw-bold">定休日</label>
 									</div>
 									<div class="col-md-8">
 										<div th:if="${#fields.hasErrors('regularHoliday')}"
-											class="text-danger small mb-2"
-											th:errors="*{regularHoliday}"></div>
-										<input type="text" class="form-control" th:field="*{regularHoliday}">
+											class="text-danger small mb-2" th:errors="*{regularHoliday}"></div>
+
+										<!-- 定休日タイプの選択 -->
+										<select id="holidayType" class="form-control" th:field="*{regularHoliday.type}">
+											<option value="date">日付指定</option>
+											<option value="weekly">毎週</option>
+											<option value="monthly">第1週</option>
+										</select>
+
+										<!-- 日付指定の場合 -->
+										<div th:if="${restaurantEditForm.regularHoliday.type == 'date'}">
+											<input type="date" class="form-control" th:field="*{regularHoliday.date}">
+										</div>
+
+										<!-- 毎週の場合 -->
+										<div th:if="${restaurantEditForm.regularHoliday.type == 'weekly'}">
+											<select class="form-control" th:field="*{regularHoliday.weekday}">
+												<option value="sunday">日曜日</option>
+												<option value="monday">月曜日</option>
+												<option value="tuesday">火曜日</option>
+												<option value="wednesday">水曜日</option>
+												<option value="thursday">木曜日</option>
+												<option value="friday">金曜日</option>
+												<option value="saturday">土曜日</option>
+											</select>
+										</div>
+
+										<!-- 第1週の場合 -->
+										<div th:if="${restaurantEditForm.regularHoliday.type == 'monthly'}">
+											<select class="form-control" th:field="*{regularHoliday.weekOfMonth}">
+												<option value="1">第1週</option>
+												<option value="2">第2週</option>
+												<option value="3">第3週</option>
+												<option value="4">第4週</option>
+											</select>
+										</div>
 									</div>
 								</div>
+
 
 								<div class="form-group row mb-3">
 									<div class="col-md-4">
