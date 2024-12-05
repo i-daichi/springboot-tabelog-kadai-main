@@ -62,7 +62,7 @@ public class AdminCategoryController {
     // カテゴリ登録フォーム表示
     @GetMapping("/register")
     public String register(Model model) {
-        CategoryHelper helper = new CategoryHelper(categoryService, genreService);
+        CategoryHelper helper = new CategoryHelper(genreService);
         helper.AddCategoryDetails(model);
         return "admin/categories/register";
     }
@@ -76,7 +76,7 @@ public class AdminCategoryController {
             RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
-            CategoryHelper helper = new CategoryHelper(categoryService, genreService);
+            CategoryHelper helper = new CategoryHelper(genreService);
             helper.SalvageCategoryDetails(model, categoryRegisterForm);
             return "admin/categories/register";
         }
@@ -96,7 +96,7 @@ public class AdminCategoryController {
                 category.getName(),
                 genreService.getGenreById(category.getGenreId()).get());
 
-        CategoryHelper helper = new CategoryHelper(categoryService, genreService);
+        CategoryHelper helper = new CategoryHelper(genreService);
         helper.AddCategoryDetails(model, categoryEditForm);
 
         return "admin/categories/edit";
