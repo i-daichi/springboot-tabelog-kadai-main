@@ -40,8 +40,8 @@ public class AdminRestaurantController {
 	private final RestaurantService restaurantService;
 	private final CategoryService categoryService;
 	private final HolidayTypeService holidayTypeService;
-    private final WeekdayService weekdayService;
-    private final RestaurantHolidayService restaurantHolidayService;
+	private final WeekdayService weekdayService;
+	private final RestaurantHolidayService restaurantHolidayService;
 
 	public AdminRestaurantController(RestaurantRepository restaurantRepository, RestaurantService restaurantService,
 			CategoryService categoryService, HolidayTypeService holidayTypeService, WeekdayService weekdayService,
@@ -103,10 +103,19 @@ public class AdminRestaurantController {
 	@GetMapping("/{id}/edit")
 	public String edit(@PathVariable Integer id, Model model) {
 		Restaurant restaurant = restaurantRepository.getReferenceById(id);
-		RestaurantEditForm restaurantEditForm = new RestaurantEditForm(restaurant);
+		var restaurantEditForm = new RestaurantEditForm(restaurant);
 
-		var helper = new AdminRestaurantHelper(categoryService,holidayTypeService,weekdayService,restaurantHolidayService);
+		var helper = new AdminRestaurantHelper(
+			categoryService,
+			holidayTypeService,
+			weekdayService,
+			restaurantHolidayService
+		);
 		helper.prepareEditPage(id, model, restaurantEditForm);
+		helper.addCategoryData(model);
+		helper.addHolidayData(model);
+		helper.addTimeData(model);
+		helper.addMinuteIntervals(model);
 
 		return "admin/restaurants/edit";
 	}

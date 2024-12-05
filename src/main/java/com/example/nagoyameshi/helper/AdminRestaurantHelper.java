@@ -42,28 +42,34 @@ public class AdminRestaurantHelper {
         List<RestaurantHoliday> restaurantHolidays = restaurantHolidayService.findByRestaurantId(restaurantId);
         restaurantEditForm.setHolidays(restaurantHolidays);
 
-        // マスタデータ取得
-        List<HolidayType> holidayTypes = holidayTypeService.findAll();
-        List<Weekday> weekdays = weekdayService.findAll();
-
         // 必要なデータをモデルに追加
         model.addAttribute("restaurantEditForm", restaurantEditForm);
-        model.addAttribute("categories", categoryService.getAllCategories()); // カテゴリリスト
-        model.addAttribute("holidayTypes", holidayTypes); // 定休日の種別リスト
-        model.addAttribute("weekdays", weekdays); // 曜日マスタリスト
         model.addAttribute("restaurantHolidays", restaurantHolidays); // 設定済みの定休日
+    }
 
-        // 時間データ
-        model.addAttribute("hours",
-            IntStream.range(0, 24)
-                .mapToObj(i -> String.format("%02d", i))
-                .collect(Collectors.toList())
-        );
+    public void addHolidayData(Model model) {
+        model.addAttribute("holidayTypes", holidayTypeService.findAll()); // 定休日の種別リスト
+        model.addAttribute("weekdays", weekdayService.findAll()); // 曜日マスタリスト
+    }
+
+    public void addMinuteIntervals(Model model) {
         model.addAttribute("minutes",
             Arrays.asList(0, 15, 30, 45)
                 .stream()
                 .map(m -> String.format("%02d", m))
                 .collect(Collectors.toList())
         );
+    }
+
+    public void addTimeData(Model model) {
+        model.addAttribute("hours",
+            IntStream.range(0, 24)
+                .mapToObj(i -> String.format("%02d", i))
+                .collect(Collectors.toList())
+        );
+    }
+
+    public void addCategoryData(Model model) {
+        model.addAttribute("categories", categoryService.getAllCategories()); // カテゴリリスト
     }
 }
