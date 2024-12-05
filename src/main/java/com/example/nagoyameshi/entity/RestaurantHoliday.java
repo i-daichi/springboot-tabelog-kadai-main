@@ -21,6 +21,6 @@ public class RestaurantHoliday {
     private Weekday weekday;
 
     @Column(nullable = true)
-    private Integer holidayDate; // 例: 毎月15日の場合、"15"
+    private Integer dayOfMonth; // 例: 毎月15日の場合、"15"
 
 }
