@@ -36,11 +36,11 @@ CREATE TABLE IF NOT EXISTS `restaurants` (
 CREATE TABLE IF NOT EXISTS restaurant_holidays (
     id INT AUTO_INCREMENT PRIMARY KEY,
     restaurant_id INT NOT NULL,
-    holiday_type INT NOT NULL,
-    weekday INT,  -- ここで曜日の情報を格納するカラムを追加
+    holiday_type_id INT NOT NULL,
+    weekday_id INT,  -- ここで曜日の情報を格納するカラムを追加
     day_Of_Month INT,
     FOREIGN KEY (restaurant_id) REFERENCES restaurants(id),
-    FOREIGN KEY (holiday_type) REFERENCES holiday_types(id)
+    FOREIGN KEY (holiday_type_id) REFERENCES holiday_types(id)
 );
 
 CREATE TABLE IF NOT EXISTS users (
