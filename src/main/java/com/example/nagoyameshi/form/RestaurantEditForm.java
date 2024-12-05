@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.nagoyameshi.entity.Category;
 import com.example.nagoyameshi.entity.Restaurant;
+import com.example.nagoyameshi.entity.RestaurantHoliday;
 import com.example.nagoyameshi.valueObject.HourMinute;
 
 import jakarta.validation.constraints.Min;
@@ -60,6 +61,8 @@ public class RestaurantEditForm {
 
 	@NotNull(message = "カテゴリを入力してください。")
 	private List<Integer> categoryIdList;
+
+	private List<RestaurantHoliday> holidays; // 定休日リスト
 
 	public RestaurantEditForm(Restaurant restaurant){
 		this.id = restaurant.getId();
