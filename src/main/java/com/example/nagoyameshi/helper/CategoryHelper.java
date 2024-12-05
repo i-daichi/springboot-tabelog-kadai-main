@@ -5,16 +5,13 @@ import org.springframework.ui.Model;
 
 import com.example.nagoyameshi.form.CategoryEditForm;
 import com.example.nagoyameshi.form.CategoryRegisterForm;
-import com.example.nagoyameshi.service.CategoryService;
 import com.example.nagoyameshi.service.GenreService;
 
 @Component
 public class CategoryHelper {
-    private final CategoryService categoryService;
     private final GenreService genreService;
 
-    public CategoryHelper(CategoryService categoryService, GenreService genreService) {
-        this.categoryService = categoryService;
+    public CategoryHelper(GenreService genreService) {
         this.genreService = genreService;
     }
 
