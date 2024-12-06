@@ -21,7 +21,6 @@ public class RestaurantHolidayDto {
         this.dayOfMonth = holiday.getDayOfMonth();
     }
 
-    // フォームからエンティティに変換するためのメソッド
     public RestaurantHoliday toRestaurantHoliday(Restaurant restaurant) {
         RestaurantHoliday holiday = new RestaurantHoliday();
         holiday.setRestaurant(restaurant);

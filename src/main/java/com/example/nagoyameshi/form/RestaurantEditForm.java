@@ -8,10 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.nagoyameshi.dto.RestaurantHolidayDto;
 import com.example.nagoyameshi.entity.Category;
 import com.example.nagoyameshi.entity.Restaurant;
-import com.example.nagoyameshi.entity.RestaurantHoliday;
 import com.example.nagoyameshi.valueObject.HourMinute;
-import com.exmple.nagoyameshi.enumtype.RestaurantHolidayType;
-
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
