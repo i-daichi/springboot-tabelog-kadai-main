@@ -40,7 +40,6 @@ public class AdminRestaurantHelper {
     public void prepareEditPage(Integer restaurantId, Model model, RestaurantEditForm restaurantEditForm) {
         // 定休日取得
         List<RestaurantHoliday> restaurantHolidays = restaurantHolidayService.findByRestaurantId(restaurantId);
-        restaurantEditForm.setHolidays(restaurantHolidays);
 
         // 必要なデータをモデルに追加
         model.addAttribute("restaurantEditForm", restaurantEditForm);

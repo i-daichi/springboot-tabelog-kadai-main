@@ -1,5 +1,8 @@
 package com.example.nagoyameshi.entity;
 
+import com.exmple.nagoyameshi.enumtype.RestaurantHolidayType;
+import com.exmple.nagoyameshi.enumtype.WeekdayType;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,4 +21,9 @@ public class HolidayType {
 
     @Column(nullable = false, unique = true)
     private String typeName;
+
+    public HolidayType(RestaurantHolidayType type) {
+        this.id = type.getId();
+        this.typeName = type.getName();
+    }
 }

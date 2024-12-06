@@ -1,5 +1,7 @@
 package com.example.nagoyameshi.entity;
 
+import com.exmple.nagoyameshi.enumtype.WeekdayType;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,4 +20,9 @@ public class Weekday {
 
     @Column(nullable = false, unique = true)
     private String name;
+
+    public Weekday(WeekdayType type) {
+        this.id = type.getId();
+        this.name = type.name();
+    }
 }

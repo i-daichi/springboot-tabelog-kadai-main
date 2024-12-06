@@ -1,5 +1,7 @@
 package com.exmple.nagoyameshi.enumtype;
 
+import com.example.nagoyameshi.entity.Weekday;
+
 public enum WeekdayType {
     MONDAY(1, "月曜日"),
     TUESDAY(2, "火曜日"),
@@ -32,5 +34,9 @@ public enum WeekdayType {
             }
         }
         return null;
+    }
+
+    public Weekday getWeekday(){
+        return new Weekday(this);
     }
 }
