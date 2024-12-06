@@ -4,8 +4,6 @@ import com.example.nagoyameshi.entity.HolidayType;
 import com.example.nagoyameshi.entity.Restaurant;
 import com.example.nagoyameshi.entity.RestaurantHoliday;
 import com.example.nagoyameshi.entity.Weekday;
-import com.exmple.nagoyameshi.enumtype.RestaurantHolidayType;
-import com.exmple.nagoyameshi.enumtype.WeekdayType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

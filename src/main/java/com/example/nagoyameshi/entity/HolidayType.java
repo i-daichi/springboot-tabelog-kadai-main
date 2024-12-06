@@ -1,7 +1,6 @@
 package com.example.nagoyameshi.entity;
 
 import com.exmple.nagoyameshi.enumtype.RestaurantHolidayType;
-import com.exmple.nagoyameshi.enumtype.WeekdayType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
