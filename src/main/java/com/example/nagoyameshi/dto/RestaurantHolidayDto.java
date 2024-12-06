@@ -13,16 +13,22 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class RestaurantHolidayDto {
-    private RestaurantHolidayType holidayType; // Enum型
-    private WeekdayType weekdayType; // weekdayのID
+    private HolidayType holidayType;
+    private Weekday weekday;
     private Integer dayOfMonth; // 例: 毎月15日の場合、"15"
+
+    public RestaurantHolidayDto(RestaurantHoliday holiday){
+        this.holidayType = holiday.getHolidayType();
+        this.weekday = holiday.getWeekday();
+        this.dayOfMonth = holiday.getDayOfMonth();
+    }
 
     // フォームからエンティティに変換するためのメソッド
     public RestaurantHoliday toRestaurantHoliday(Restaurant restaurant) {
         RestaurantHoliday holiday = new RestaurantHoliday();
         holiday.setRestaurant(restaurant);
-        holiday.setHolidayType(new HolidayType(holidayType));
-        holiday.setWeekday(new Weekday(weekdayType));
+        holiday.setHolidayType(holidayType);
+        holiday.setWeekday(weekday);
         holiday.setDayOfMonth(this.dayOfMonth);
         return holiday;
     }
