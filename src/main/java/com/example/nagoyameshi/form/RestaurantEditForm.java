@@ -52,9 +52,6 @@ public class RestaurantEditForm {
 	@NotNull(message = "閉店時間を入力してください。")
 	private HourMinute closeTime;
 
-	@NotBlank(message = "定休日を入力してください。")
-	private String regularHoliday;
-
 	@NotNull(message = "座席数を入力してください。")
 	private Integer seats;
 
@@ -73,7 +70,6 @@ public class RestaurantEditForm {
 		this.phoneNumber = restaurant.getPhoneNumber();
 		this.openTime = new HourMinute(restaurant.getOpeningTime());
 		this.closeTime = new HourMinute(restaurant.getClosingTime());
-		this.regularHoliday = restaurant.getRegularHoliday();
 		this.seats = restaurant.getSeats();
 		this.categoryIdList = restaurant.getCategories().stream()
 										.map(Category::getId)

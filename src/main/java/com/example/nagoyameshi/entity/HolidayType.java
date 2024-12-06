@@ -20,9 +20,4 @@ public class HolidayType {
 
     @Column(nullable = false, unique = true)
     private String typeName;
-
-    public HolidayType(RestaurantHolidayType type) {
-        this.id = type.getId();
-        this.typeName = type.getName();
-    }
 }

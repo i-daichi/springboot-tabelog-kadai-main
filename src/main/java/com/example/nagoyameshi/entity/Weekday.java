@@ -20,9 +20,4 @@ public class Weekday {
 
     @Column(nullable = false, unique = true)
     private String name;
-
-    public Weekday(WeekdayType type) {
-        this.id = type.getId();
-        this.name = type.name();
-    }
 }
