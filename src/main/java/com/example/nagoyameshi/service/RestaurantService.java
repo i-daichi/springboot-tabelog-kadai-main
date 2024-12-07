@@ -53,17 +53,7 @@ public class RestaurantService {
 			hashedImageName = generateNewFileName(imageName);
 			Path filePath = Path.of("src/main/resources/static/storage/" + hashedImageName);
 			copyImageFile(imageFile, filePath);
-			restaurant.setImageName(hashedImageName);
 		}
-
-		restaurant.setName(restaurantEditForm.getName());
-		restaurant.setDescription(restaurantEditForm.getDescription());
-		restaurant.setPrice(restaurantEditForm.getPrice());
-		restaurant.setPostalCode(restaurantEditForm.getPostalCode());
-		restaurant.setAddress(restaurantEditForm.getAddress());
-		restaurant.setPhoneNumber(restaurantEditForm.getPhoneNumber());
-		restaurant.setBusinessHours(restaurantEditForm.getBusinessHours());
-		restaurant.setSeats(restaurantEditForm.getSeats());
 
 		restaurantRepository.save(new Restaurant(restaurantEditForm,hashedImageName));
 	}
