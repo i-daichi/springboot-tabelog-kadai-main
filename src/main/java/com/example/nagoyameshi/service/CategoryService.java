@@ -2,14 +2,17 @@ package com.example.nagoyameshi.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.nagoyameshi.entity.Category;
+import com.example.nagoyameshi.entity.RestaurantHoliday;
 import com.example.nagoyameshi.form.CategoryEditForm;
 import com.example.nagoyameshi.form.CategoryRegisterForm;
+import com.example.nagoyameshi.form.RestaurantEditForm;
 import com.example.nagoyameshi.repository.CategoryRepository;
 
 @Service
@@ -66,8 +69,5 @@ public class CategoryService {
     // カテゴリの削除
     public void update(CategoryEditForm categoryEditForm) {
         categoryRepository.save(new Category(categoryEditForm));
-    }
-
-    public void update(List<Integer> categoryIdList) {
     }
 }

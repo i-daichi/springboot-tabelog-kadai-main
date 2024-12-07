@@ -31,6 +31,11 @@ public class RestaurantCategory {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    public RestaurantCategory(Integer restaurantId,Integer categoryId){
+        this.restaurantId=restaurantId;
+        this.categoryId=categoryId;
+    }
+
     public void setCategory(Category category) {
         this.category = category;
     }

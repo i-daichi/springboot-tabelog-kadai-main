@@ -10,4 +10,6 @@ public interface RestaurantCategoryRepository extends JpaRepository<RestaurantCa
 
     // レストランIDとカテゴリIDでレストランカテゴリのデータを取得
     RestaurantCategory findByRestaurantIdAndCategoryId(int restaurantId, int categoryId);
+
+    void deleteByRestaurantId(Integer id);
 }

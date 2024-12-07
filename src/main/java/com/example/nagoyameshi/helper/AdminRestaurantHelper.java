@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
 import com.example.nagoyameshi.entity.RestaurantHoliday;
-import com.example.nagoyameshi.entity.Weekday;
 import com.example.nagoyameshi.form.RestaurantEditForm;
 import com.example.nagoyameshi.service.CategoryService;
 import com.example.nagoyameshi.service.RestaurantHolidayService;

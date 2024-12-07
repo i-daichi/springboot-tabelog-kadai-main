@@ -29,4 +29,13 @@ public class RestaurantHoliday {
     @ManyToOne(optional = true)
     @JoinColumn(name = "weekday_id")
     private Weekday weekday;
+
+    public RestaurantHoliday(){
+
+    }
+
+    public RestaurantHoliday(Integer restaurant_id, Integer weekday_id) {
+        this.restaurant_id = restaurant_id;
+        this.weekday_id = weekday_id;
+    }
 }
