@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.UUID;
 
+import org.hibernate.query.sqm.mutation.internal.temptable.RestrictedDeleteExecutionDelegate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,29 +25,19 @@ public class RestaurantService {
 
 	@Transactional
 	public void create(RestaurantRegisterForm restaurantRegisterForm) {
-		Restaurant restaurant = new Restaurant();
 		MultipartFile imageFile = restaurantRegisterForm.getImageFile();
 
+		String hashedImageName = "";
+		String imageName="";
+
 		if (!imageFile.isEmpty()) {
-			String imageName = imageFile.getOriginalFilename();
-			String hashedImageName = generateNewFileName(imageName);
+			imageName = imageFile.getOriginalFilename();
+			hashedImageName = generateNewFileName(imageName);
 			Path filePath = Path.of("src/main/resources/static/storage/" + hashedImageName);
 			copyImageFile(imageFile, filePath);
-			restaurant.setImageName(hashedImageName);
 		}
 
-		restaurant.setName(restaurantRegisterForm.getName());
-		restaurant.setDescription(restaurantRegisterForm.getDescription());
-		restaurant.setPrice(restaurantRegisterForm.getPrice());
-		restaurant.setPostalCode(restaurantRegisterForm.getPostalCode());
-		restaurant.setAddress(restaurantRegisterForm.getAddress());
-		restaurant.setPhoneNumber(restaurantRegisterForm.getPhoneNumber());
-		restaurant.setBusinessHours(restaurantRegisterForm.getBusinessHours());
-		restaurant.setRegularHoliday(restaurantRegisterForm.getRegularHoliday());
-		restaurant.setSeats(restaurantRegisterForm.getSeats());
-		restaurant.setCategory(restaurantRegisterForm.getCategory());
-
-		restaurantRepository.save(restaurant);
+		restaurantRepository.save(new Restaurant(restaurantRegisterForm));
 	}
 
 	@Transactional
@@ -54,9 +45,12 @@ public class RestaurantService {
 		Restaurant restaurant = restaurantRepository.getReferenceById(restaurantEditForm.getId());
 		MultipartFile imageFile = restaurantEditForm.getImageFile();
 
+		String hashedImageName = "";
+		String imageName="";
+
 		if (!imageFile.isEmpty()) {
-			String imageName = imageFile.getOriginalFilename();
-			String hashedImageName = generateNewFileName(imageName);
+			imageName = imageFile.getOriginalFilename();
+			hashedImageName = generateNewFileName(imageName);
 			Path filePath = Path.of("src/main/resources/static/storage/" + hashedImageName);
 			copyImageFile(imageFile, filePath);
 			restaurant.setImageName(hashedImageName);
@@ -71,7 +65,7 @@ public class RestaurantService {
 		restaurant.setBusinessHours(restaurantEditForm.getBusinessHours());
 		restaurant.setSeats(restaurantEditForm.getSeats());
 
-		restaurantRepository.save(restaurant);
+		restaurantRepository.save(new Restaurant(restaurantEditForm,hashedImageName));
 	}
 
 	// UUIDを使って生成したファイル名を返す

@@ -5,6 +5,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.nagoyameshi.form.RestaurantEditForm;
+import com.example.nagoyameshi.form.RestaurantRegisterForm;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -82,6 +85,33 @@ public class Restaurant {
 
 	@Column(name = "closing_time")
 	private LocalTime closingTime;
+
+	public Restaurant() {
+	}
+
+	public Restaurant(RestaurantRegisterForm form) {
+		this.name = form.getName();
+		this.description = form.getDescription();
+		this.price = form.getPrice();
+		this.seats = form.getSeats();
+		this.postalCode = form.getPostalCode();
+		this.address = form.getAddress();
+		this.phoneNumber = form.getPhoneNumber();
+	}
+
+	public Restaurant(RestaurantEditForm form,String hashedImageName) {
+		this.id = form.getId();
+		this.name = form.getName();
+		this.imageName = hashedImageName;
+		this.description = form.getDescription();
+		this.price = form.getPrice();
+		this.seats = form.getSeats();
+		this.postalCode = form.getPostalCode();
+		this.address = form.getAddress();
+		this.phoneNumber = form.getPhoneNumber();
+		this.openingTime = form.getOpenTime().toLocalTime();
+		this.closingTime = form.getCloseTime().toLocalTime();
+	}
 
 	// コンストラクタ、ゲッター、セッター
     public List<RestaurantHoliday> getHolidays() {
