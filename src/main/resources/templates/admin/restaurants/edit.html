@@ -178,60 +178,6 @@
 										</select>
 									</div>
 								</div>
-
-								<div class="form-group row mb-3">
-									<div class="col-md-4">
-										<label for="holidayForms" class="col-form-label text-md-left fw-bold">定休日</label>
-									</div>
-									<div class="col-md-8">
-										<div th:if="${restaurantEditForm.holidayForms.empty}">
-											<!-- 空フォームを1つ表示 -->
-											<div class="holiday-type-form">
-												<div class="form-group mb-2">
-													<label for="holidayType" class="col-form-label fw-bold">定休日タイプ</label>
-													<select class="form-control" name="holidayForms[0].holidayType">
-														<option value="" disabled selected>定休日タイプを選択</option>
-														<option th:each="type : ${holidayTypes}" th:value="${type.id}" th:text="${type.typeName}">
-														</option>
-													</select>
-												</div>
-												<!-- 曜日選択フォーム（空フォーム） -->
-												<div class="form-group mb-2">
-													<label for="weekday" class="col-form-label fw-bold">曜日を選択</label>
-													<select class="form-control" name="holidayForms[0].weekday">
-														<option value="" disabled selected>曜日を選択</option>
-														<option th:each="day : ${weekdays}" th:value="${day.id}" th:text="${day.name}">
-														</option>
-													</select>
-												</div>
-											</div>
-										</div>
-										<div th:if="${not restaurantEditForm.holidayForms.empty}" th:each="holidayForm, iterStat : ${restaurantEditForm.holidayForms}">
-											<!-- 登録済み情報の復元フォーム -->
-											<div class="holiday-type-form">
-												<div class="form-group mb-2">
-													<label for="holidayType" class="col-form-label fw-bold">定休日タイプ</label>
-													<select class="form-control" th:field="*{holidayForms[__${iterStat.index}__].holidayType}">
-														<option value="" disabled selected>定休日タイプを選択</option>
-														<option th:each="type : ${holidayTypes}" th:value="${type.id}" th:text="${type.typeName}">
-														</option>
-													</select>
-												</div>
-
-												<!-- 曜日選択フォーム -->
-												<div th:if="${holidayForm.holidayType.id == 2}" class="form-group mb-2">
-													<label for="weekday" class="col-form-label fw-bold">曜日を選択</label>
-													<select class="form-control" th:field="*{holidayForms[__${iterStat.index}__].weekday}">
-														<option value="" disabled selected>曜日を選択</option>
-														<option th:each="day : ${weekdays}" th:value="${day.id}" th:text="${day.name}">
-														</option>
-													</select>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
 								<div class="form-group row mb-3">
 									<div class="col-md-4">
 										<label for="seats"

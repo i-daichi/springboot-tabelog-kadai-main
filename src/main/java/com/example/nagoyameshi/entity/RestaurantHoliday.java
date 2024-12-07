@@ -29,7 +29,4 @@ public class RestaurantHoliday {
     @ManyToOne(optional = true)
     @JoinColumn(name = "weekday_id")
     private Weekday weekday;
-
-    @Column(nullable = true)
-    private Integer dayOfMonth; // 例: 毎月15日の場合、"15"
 }

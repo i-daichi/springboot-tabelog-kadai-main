@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `restaurants` (
    PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `restaurant_holidays` (
+CREATE TABLE IF NOT EXISTS `restaurant_holidays` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `restaurant_id` INT NOT NULL,  -- レストランのID（外部キー）
     `weekday_id` INT NOT NULL,     -- 曜日のID（外部キー）
