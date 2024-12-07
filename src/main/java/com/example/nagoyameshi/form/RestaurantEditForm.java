@@ -61,6 +61,10 @@ public class RestaurantEditForm {
 
 	private List<Integer> holidayIdList;
 
+	public RestaurantEditForm(){
+
+	}
+
 	public RestaurantEditForm(Restaurant restaurant) {
 		this.id = restaurant.getId();
 		this.name = restaurant.getName();
