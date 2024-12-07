@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.nagoyameshi.dto.RestaurantHolidayDto;
 import com.example.nagoyameshi.entity.Category;
 import com.example.nagoyameshi.entity.Restaurant;
+import com.example.nagoyameshi.entity.RestaurantHoliday;
 import com.example.nagoyameshi.valueObject.HourMinute;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -58,9 +59,9 @@ public class RestaurantEditForm {
 	@NotNull(message = "カテゴリを入力してください。")
 	private List<Integer> categoryIdList;
 
-	private List<RestaurantHolidayDto> holidayForms; // フォーム側で入力された定休日情報
+	private List<Integer> holidayIdList;
 
-	public RestaurantEditForm(Restaurant restaurant){
+	public RestaurantEditForm(Restaurant restaurant) {
 		this.id = restaurant.getId();
 		this.name = restaurant.getName();
 		this.description = restaurant.getDescription();
@@ -72,11 +73,10 @@ public class RestaurantEditForm {
 		this.closeTime = new HourMinute(restaurant.getClosingTime());
 		this.seats = restaurant.getSeats();
 		this.categoryIdList = restaurant.getCategories().stream()
-										.map(Category::getId)
-										.collect(Collectors.toList());
-
-		this.holidayForms = restaurant.getHolidays().stream()
-			.map(holiday -> new RestaurantHolidayDto(holiday))
-			.collect(Collectors.toList());
+				.map(Category::getId)
+				.collect(Collectors.toList());
+		this.holidayIdList = restaurant.getHolidays().stream()
+				.map(RestaurantHoliday::getWeekday_id)
+				.collect(Collectors.toList());
 	}
 }

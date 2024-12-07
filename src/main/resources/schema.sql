@@ -33,7 +33,8 @@ CREATE TABLE IF NOT EXISTS `restaurant_holidays` (
     `restaurant_id` INT NOT NULL,  -- レストランのID（外部キー）
     `weekday_id` INT NOT NULL,     -- 曜日のID（外部キー）
     FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`),
-    FOREIGN KEY (`weekday_id`) REFERENCES `weekdays` (`id`)
+    FOREIGN KEY (`weekday_id`) REFERENCES `weekdays` (`id`),
+    CONSTRAINT `unique_restaurant_weekday` UNIQUE (`restaurant_id`, `weekday_id`)  -- 同じ曜日の重複挿入を防ぐ
 );
 
 CREATE TABLE IF NOT EXISTS restaurant_holidays (

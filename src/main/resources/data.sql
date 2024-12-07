@@ -228,18 +228,18 @@ INSERT IGNORE INTO `weekdays` (`id`, `name`) VALUES
 
 -- 1, なごやそば名駅東口店（なし）→ 挿入なし
 -- 2, NAGOYA Bird（火曜日）→ 火曜日
-INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
-(2, 2);
+INSERT IGNORE INTO `restaurant_holidays` (`id`,`restaurant_id`, `weekday_id`) VALUES
+(1,2, 2);
 -- 3, らーめん愛知 名古屋北店（木曜日）→ 木曜日
-INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
-(3, 4);
+INSERT IGNORE INTO `restaurant_holidays` (`id`,`restaurant_id`, `weekday_id`) VALUES
+(2,3, 4);
 -- 4, 味噌ラーメン MEI（金曜日、土曜日）→ 金曜日、土曜日
-INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
-(4, 5), (4, 6);
+INSERT IGNORE INTO `restaurant_holidays` (`id`,`restaurant_id`, `weekday_id`) VALUES
+(3,4, 5), (4,4, 6);
 -- 5, 尾張三郎（なし）→ 挿入なし
 -- 6, 家系ラーメン 鈴木屋（月曜日）→ 月曜日
-INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
-(6, 1);
+INSERT IGNORE INTO `restaurant_holidays` (`id`,`restaurant_id`, `weekday_id`) VALUES
+(5,6, 1);
 -- 7, 麵処名古屋（なし）→ 挿入なし
 -- 8, 割烹東海（なし）→ 挿入なし
 -- 9, 天ぷら山田（なし）→ 挿入なし
@@ -249,66 +249,66 @@ INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
 -- 13, うどん 吾郎（なし）→ 挿入なし
 -- 14, 愛カレー名古屋本店（なし）→ 挿入なし
 -- 15, 餃子館（火曜日、木曜日）→ 火曜日、木曜日
-INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
-(15, 2), (15, 4);
+INSERT IGNORE INTO `restaurant_holidays` (`id`,`restaurant_id`, `weekday_id`) VALUES
+(6,15, 2), (7,15, 4);
 -- 16, 四川料理 心（なし）→ 挿入なし
 -- 17, 中川（なし）→ 挿入なし
 -- 18, EastRoad（木曜日、金曜日）→ 木曜日、金曜日
-INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
-(18, 4), (18, 5);
+INSERT IGNORE INTO `restaurant_holidays` (`id`,`restaurant_id`, `weekday_id`) VALUES
+(8,18, 4), (9,18, 5);
 -- 19, キリマンジャロ（月曜日）→ 月曜日
-INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
-(19, 1);
+INSERT IGNORE INTO `restaurant_holidays` (`id`,`restaurant_id`, `weekday_id`) VALUES
+(10,19, 1);
 -- 20, パフェ工房西田（なし）→ 挿入なし
 -- 21, ガトーナゴヤ（水曜日）→ 水曜日
-INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
-(21, 3);
+INSERT IGNORE INTO `restaurant_holidays` (`id`,`restaurant_id`, `weekday_id`) VALUES
+(11,21, 3);
 -- 22, やきとり屋MURATA（水曜日、金曜日）→ 水曜日、金曜日
-INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
-(22, 3), (22, 5);
+INSERT IGNORE INTO `restaurant_holidays` (`id`,`restaurant_id`, `weekday_id`) VALUES
+(12,22, 3), (13,22, 5);
 -- 23, キムチ一番 名城店（金曜日）→ 金曜日
-INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
-(23, 5);
+INSERT IGNORE INTO `restaurant_holidays` (`id`,`restaurant_id`, `weekday_id`) VALUES
+(14,23, 5);
 -- 24, プリズム（月曜日、金曜日）→ 月曜日、金曜日
-INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
-(24, 1), (24, 5);
+INSERT IGNORE INTO `restaurant_holidays` (`id`,`restaurant_id`, `weekday_id`) VALUES
+(15,24, 1), (16,24, 5);
 -- 26, 山椒（なし）→ 挿入なし
 -- 27, むらびと（なし）→ 挿入なし
 -- 28, 海鮮 なぎさの風（なし）→ 挿入なし
 -- 29, 塩名人（なし）→ 挿入なし
 -- 30, キング（水曜日）→ 水曜日
-INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
-(30, 3);
+INSERT IGNORE INTO `restaurant_holidays` (`id`,`restaurant_id`, `weekday_id`) VALUES
+(17,30, 3);
 -- 31, 海の幸 魚福（水曜日）→ 水曜日
-INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
-(31, 3);
+INSERT IGNORE INTO `restaurant_holidays` (`id`,`restaurant_id`, `weekday_id`) VALUES
+(18,31, 3);
 -- 32, ラーメン道場 風神（月曜日）→ 月曜日
-INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
-(32, 1);
+INSERT IGNORE INTO `restaurant_holidays` (`id`,`restaurant_id`, `weekday_id`) VALUES
+(19,32, 1);
 -- 33, うどん工房 さくら（火曜日）→ 火曜日
-INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
-(33, 2);
+INSERT IGNORE INTO `restaurant_holidays` (`id`,`restaurant_id`, `weekday_id`) VALUES
+(20,33, 2);
 -- 34, 焼肉やすらぎ（水曜日）→ 水曜日
-INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
-(34, 3);
+INSERT IGNORE INTO `restaurant_holidays` (`id`,`restaurant_id`, `weekday_id`) VALUES
+(21,34, 3);
 -- 35, スイーツ工房 フルール（木曜日）→ 木曜日
-INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
-(35, 4);
+INSERT IGNORE INTO `restaurant_holidays` (`id`,`restaurant_id`, `weekday_id`) VALUES
+(22,35, 4);
 -- 36, 味の匠 まるしん（日曜日）→ 日曜日
-INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
-(36, 7);
+INSERT IGNORE INTO `restaurant_holidays` (`id`,`restaurant_id`, `weekday_id`) VALUES
+(23,36, 7);
 -- 37, フレンチダイニング ラルゴ（月曜日）→ 月曜日
-INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
-(37, 1);
+INSERT IGNORE INTO `restaurant_holidays` (`id`,`restaurant_id`, `weekday_id`) VALUES
+(24,37, 1);
 -- 38, ビストロ 風雅（火曜日）→ 火曜日
-INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
-(38, 2);
+INSERT IGNORE INTO `restaurant_holidays` (`id`,`restaurant_id`, `weekday_id`) VALUES
+(25,38, 2);
 -- 39, ピッツェリア・マリーナ（水曜日）→ 水曜日
-INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
-(39, 3);
+INSERT IGNORE INTO `restaurant_holidays` (`id`,`restaurant_id`, `weekday_id`) VALUES
+(26,39, 3);
 -- 40, 鶴見屋 鮨処（木曜日）→ 木曜日
-INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
-(40, 4);
+INSERT IGNORE INTO `restaurant_holidays` (`id`,`restaurant_id`, `weekday_id`) VALUES
+(27,40, 4);
 -- 41, ラーメン一番（金曜日）→ 金曜日
-INSERT IGNORE INTO `restaurant_holidays` (`restaurant_id`, `weekday_id`) VALUES
-(41, 5);
+INSERT IGNORE INTO `restaurant_holidays` (`id`,`restaurant_id`, `weekday_id`) VALUES
+(28,41, 5);
