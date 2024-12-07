@@ -24,12 +24,6 @@ public class RestaurantHoliday {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    @Column(name = "holiday_type_id", insertable = false, updatable = false)
-    private Integer holidey_type_id;
-    @ManyToOne
-    @JoinColumn(name = "holiday_type_id")
-    private HolidayType holidayType;
-
     @Column(name = "weekday_id", insertable = false, updatable = false)
     private Integer weekday_id;
     @ManyToOne(optional = true)

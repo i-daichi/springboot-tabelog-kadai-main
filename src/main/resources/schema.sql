@@ -3,11 +3,6 @@ CREATE TABLE IF NOT EXISTS `weekdays` (
    `name` VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS `holiday_types` (
-   `id` INT AUTO_INCREMENT PRIMARY KEY,
-   `type_name` VARCHAR(255) NOT NULL
-);
-
 CREATE TABLE IF NOT EXISTS roles (
    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
    name VARCHAR (50) NOT NULL
@@ -31,6 +26,14 @@ CREATE TABLE IF NOT EXISTS `restaurants` (
    `opening_time` time DEFAULT NULL,
    `closing_time` time DEFAULT NULL,
    PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `restaurant_holidays` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `restaurant_id` INT NOT NULL,  -- レストランのID（外部キー）
+    `weekday_id` INT NOT NULL,     -- 曜日のID（外部キー）
+    FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`),
+    FOREIGN KEY (`weekday_id`) REFERENCES `weekdays` (`id`)
 );
 
 CREATE TABLE IF NOT EXISTS restaurant_holidays (

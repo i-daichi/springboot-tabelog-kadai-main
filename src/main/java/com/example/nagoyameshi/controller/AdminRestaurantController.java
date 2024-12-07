@@ -28,7 +28,6 @@ import com.example.nagoyameshi.form.RestaurantRegisterForm;
 import com.example.nagoyameshi.helper.AdminRestaurantHelper;
 import com.example.nagoyameshi.repository.RestaurantRepository;
 import com.example.nagoyameshi.service.CategoryService;
-import com.example.nagoyameshi.service.HolidayTypeService;
 import com.example.nagoyameshi.service.RestaurantHolidayService;
 import com.example.nagoyameshi.service.RestaurantService;
 import com.example.nagoyameshi.service.WeekdayService;
@@ -39,17 +38,15 @@ public class AdminRestaurantController {
 	private final RestaurantRepository restaurantRepository;
 	private final RestaurantService restaurantService;
 	private final CategoryService categoryService;
-	private final HolidayTypeService holidayTypeService;
 	private final WeekdayService weekdayService;
 	private final RestaurantHolidayService restaurantHolidayService;
 
 	public AdminRestaurantController(RestaurantRepository restaurantRepository, RestaurantService restaurantService,
-			CategoryService categoryService, HolidayTypeService holidayTypeService, WeekdayService weekdayService,
+			CategoryService categoryService,  WeekdayService weekdayService,
 			RestaurantHolidayService restaurantHolidayService) {
 		this.restaurantRepository = restaurantRepository;
 		this.restaurantService = restaurantService;
 		this.categoryService = categoryService;
-		this.holidayTypeService = holidayTypeService;
 		this.weekdayService = weekdayService;
 		this.restaurantHolidayService = restaurantHolidayService;
 	}
@@ -107,7 +104,6 @@ public class AdminRestaurantController {
 
 		var helper = new AdminRestaurantHelper(
 			categoryService,
-			holidayTypeService,
 			weekdayService,
 			restaurantHolidayService
 		);

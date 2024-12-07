@@ -217,7 +217,6 @@ INSERT IGNORE INTO restaurant_categories (id, restaurant_id, category_id) VALUES
 (71, 41, 2), -- ラーメン一番 -> ラーメン (カテゴリID: 2)
 (72, 41, 1); -- ラーメン一番 -> 和食 (カテゴリID: 1)
 
-
 INSERT IGNORE INTO `weekdays` (`id`, `name`) VALUES
 (1, '月曜日'),
 (2, '火曜日'),
@@ -226,78 +225,3 @@ INSERT IGNORE INTO `weekdays` (`id`, `name`) VALUES
 (5, '金曜日'),
 (6, '土曜日'),
 (7, '日曜日');
-
-INSERT IGNORE INTO `holiday_types` (`id`, `type_name`) VALUES
-(1, '日付指定'),
-(2, '毎週'),
-(3, '第1週'),
-(4, '第2週'),
-(5, '第3週');
-
--- 毎週のいずれかの曜日一日が休みの店舗
--- "なごやそば名駅東口店"：火曜日 → 毎週火曜日
-INSERT IGNORE INTO restaurant_holidays (restaurant_id, holiday_type_id, weekday_id, day_Of_Month)
-VALUES
-(1, 2, 2, NULL);  -- 毎週火曜日
-
--- "麵処名古屋"：水曜日 → 毎週水曜日
-INSERT IGNORE  INTO restaurant_holidays (restaurant_id, holiday_type_id, weekday_id, day_Of_Month)
-VALUES
-(7, 2, 3, NULL);  -- 毎週水曜日
-
--- 毎週の複数の曜日が休みの店舗
--- "味噌ラーメン MEI"：金曜日、土曜日 → 毎週金曜日、毎週土曜日
-INSERT IGNORE INTO restaurant_holidays (restaurant_id, holiday_type_id, weekday_id, day_Of_Month)
-VALUES
-(4, 2, 5, NULL),  -- 毎週金曜日
-(4, 2, 6, NULL);  -- 毎週土曜日
-
--- 第一週のいずれかの曜日一日が休みのデータ
--- "餃子館"：火曜日 → 第1週火曜日
-INSERT IGNORE INTO restaurant_holidays (restaurant_id, holiday_type_id, weekday_id, day_Of_Month)
-VALUES
-(15, 3, 2, NULL);  -- 第1週火曜日
-
--- "うどん屋大西"：水曜日 → 第1週水曜日
-INSERT IGNORE  INTO restaurant_holidays (restaurant_id, holiday_type_id, weekday_id, day_Of_Month)
-VALUES
-(11, 3, 3, NULL);  -- 第1週水曜日
-
--- 第一週の複数の曜日が休みのデータ
--- "やきとり屋MURATA"：水曜日、金曜日 → 第1週水曜日、第1週金曜日
-INSERT IGNORE  INTO restaurant_holidays (restaurant_id, holiday_type_id, weekday_id, day_Of_Month)
-VALUES
-(22, 3, 3, NULL),  -- 第1週水曜日
-(22, 3, 5, NULL);  -- 第1週金曜日
-
--- 複数の週でいずれかの曜日一日が休みの店舗
--- "うどん工房 さくら"：第1週火曜日、第2週水曜日
-INSERT IGNORE  INTO restaurant_holidays (restaurant_id, holiday_type_id, weekday_id, day_Of_Month)
-VALUES
-(33, 3, 2, NULL),  -- 第1週火曜日
-(33, 4, 3, NULL);  -- 第2週水曜日
-
--- "スイーツ工房 フルール"：第2週木曜日、第3週金曜日
-INSERT IGNORE  INTO restaurant_holidays (restaurant_id, holiday_type_id, weekday_id, day_Of_Month)
-VALUES
-(35, 4, 4, NULL),  -- 第2週木曜日
-(35, 5, 5, NULL);  -- 第3週金曜日
-
--- 複数の週で複数の曜日が休みの店舗
--- "東海割烹"：第1週月曜日、第2週木曜日、第3週水曜日
-INSERT  IGNORE INTO restaurant_holidays (restaurant_id, holiday_type_id, weekday_id, day_Of_Month)
-VALUES
-(8, 3, 1, NULL),  -- 第1週月曜日
-(8, 4, 4, NULL),  -- 第2週木曜日
-(8, 5, 3, NULL);  -- 第3週水曜日
-
--- "ラーメン道場 風神"：第1週月曜日、第3週火曜日、第2週金曜日
-INSERT IGNORE INTO restaurant_holidays (restaurant_id, holiday_type_id, weekday_id, day_Of_Month)
-VALUES
-(32, 3, 1, NULL),  -- 第1週月曜日
-(32, 5, 2, NULL),  -- 第3週火曜日
-(32, 4, 5, NULL);  -- 第2週金曜日
-
-INSERT IGNORE INTO restaurant_holidays (restaurant_id, holiday_type_id, weekday_id, day_Of_Month)
-VALUES
-(41, 1, NULL, 15);
