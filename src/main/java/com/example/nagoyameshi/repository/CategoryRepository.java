@@ -17,6 +17,4 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
     List<Category> findByNameContaining(String name); // nameの部分一致検索
 
     Page<Category> findByNameLike(String string, Pageable pageable);
-
-    void deleteByRestaurantId(Integer restaurantId);
 }
