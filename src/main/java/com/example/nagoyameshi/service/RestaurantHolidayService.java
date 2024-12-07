@@ -20,4 +20,8 @@ public class RestaurantHolidayService {
     public List<RestaurantHoliday> findByRestaurantId(Integer restaurantId) {
         return restaurantHolidayRepository.findByRestaurantId(restaurantId);
     }
+
+    public void update(List<Integer> holidayIdList) {
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    }
 }

@@ -67,4 +67,7 @@ public class CategoryService {
     public void update(CategoryEditForm categoryEditForm) {
         categoryRepository.save(new Category(categoryEditForm));
     }
+
+    public void update(List<Integer> categoryIdList) {
+    }
 }

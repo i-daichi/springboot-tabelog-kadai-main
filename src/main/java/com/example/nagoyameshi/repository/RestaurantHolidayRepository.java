@@ -10,4 +10,5 @@ import com.example.nagoyameshi.entity.RestaurantHoliday;
 @Repository
 public interface RestaurantHolidayRepository extends JpaRepository<RestaurantHoliday, Integer> {
     List<RestaurantHoliday> findByRestaurantId(Integer restaurantId);
+    void deleteByRestaurantId(Integer restaurantId);
 }
