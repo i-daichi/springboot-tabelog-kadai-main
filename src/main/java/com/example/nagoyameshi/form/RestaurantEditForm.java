@@ -44,9 +44,6 @@ public class RestaurantEditForm {
 	@NotBlank(message = "電話番号を入力してください。")
 	private String phoneNumber;
 
-	@NotBlank(message = "営業時間を入力してください。")
-	private String businessHours;
-
 	@NotNull(message = "開店時間を入力してください。")
 	private HourMinute openTime;
 

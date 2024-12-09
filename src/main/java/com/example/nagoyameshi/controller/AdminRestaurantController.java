@@ -42,7 +42,7 @@ public class AdminRestaurantController {
 	private final RestaurantHolidayService restaurantHolidayService;
 
 	public AdminRestaurantController(RestaurantRepository restaurantRepository, RestaurantService restaurantService,
-			CategoryService categoryService,  WeekdayService weekdayService,
+			CategoryService categoryService, WeekdayService weekdayService,
 			RestaurantHolidayService restaurantHolidayService) {
 		this.restaurantRepository = restaurantRepository;
 		this.restaurantService = restaurantService;
@@ -103,10 +103,9 @@ public class AdminRestaurantController {
 		var restaurantEditForm = new RestaurantEditForm(restaurant);
 
 		var helper = new AdminRestaurantHelper(
-			categoryService,
-			weekdayService,
-			restaurantHolidayService
-		);
+				categoryService,
+				weekdayService,
+				restaurantHolidayService);
 		helper.prepareEditPage(id, model, restaurantEditForm);
 		helper.addCategoryData(model);
 		helper.addHolidayData(model);
@@ -117,9 +116,20 @@ public class AdminRestaurantController {
 	}
 
 	@PostMapping("/{id}/update")
-	public String update(@ModelAttribute @Validated RestaurantEditForm restaurantEditForm, BindingResult bindingResult,
+	public String update(@ModelAttribute @Validated RestaurantEditForm restaurantEditForm,
+			Model model, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes) {
+
 		if (bindingResult.hasErrors()) {
+			var helper = new AdminRestaurantHelper(
+					categoryService,
+					weekdayService,
+					restaurantHolidayService);
+			helper.prepareEditPage(restaurantEditForm.getId(), model, restaurantEditForm);
+			helper.addCategoryData(model);
+			helper.addHolidayData(model);
+			helper.addTimeData(model);
+			helper.addMinuteIntervals(model);
 			return "admin/restaurants/edit";
 		}
 
