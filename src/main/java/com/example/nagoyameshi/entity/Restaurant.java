@@ -129,4 +129,20 @@ public class Restaurant {
     public void removeHoliday(RestaurantHoliday holiday) {
         holidays.remove(holiday);
     }
+
+	public List<Category> getCategories(){
+		return this.categories;
+	}
+
+	public void setCategories(List<Category> categories){
+		this.categories = categories;
+	}
+
+	public void addCategory(Category category){
+		categories.add(category);
+	}
+
+	public void removeCategory(Category category){
+		categories.remove(category);
+	}
 }
