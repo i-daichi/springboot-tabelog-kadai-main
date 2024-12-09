@@ -19,10 +19,10 @@ public class RestaurantCategory {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "restaurant_id", insertable = false, updatable = false)
+    @Column(name = "id",insertable = false, updatable = false)
     private Integer restaurantId;
     @ManyToOne
-    @JoinColumn(name = "restaurant_id")
+    @JoinColumn(referencedColumnName = "id")
     private Restaurant restaurant;
 
     @Column(name = "category_id", insertable = false, updatable = false)
