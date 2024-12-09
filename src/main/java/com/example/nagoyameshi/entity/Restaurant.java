@@ -14,9 +14,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -27,7 +24,7 @@ import lombok.Data;
 public class Restaurant {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "restaurant_id")
 	private Integer id;
 
 	@Column(name = "name")
@@ -57,13 +54,13 @@ public class Restaurant {
 	@Column(name = "category")
 	private String category;
 
-    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "restaurant_id", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RestaurantCategory> categories;
 
 	@Column(name = "regular_holiday")
 	private String regularHoliday;
 
-	@OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "restaurant_id", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RestaurantHoliday> holidays = new ArrayList<>();
 
 	@Column(name = "business_hours")

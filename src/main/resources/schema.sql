@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `weekdays` (
 );
 
 CREATE TABLE IF NOT EXISTS `restaurants` (
-   `id` int NOT NULL AUTO_INCREMENT,
+   `restaurant_id` int NOT NULL AUTO_INCREMENT,
    `name` varchar(50) NOT NULL,
    `image_name` varchar(255) DEFAULT NULL,
    `description` varchar(255) NOT NULL,
@@ -25,14 +25,14 @@ CREATE TABLE IF NOT EXISTS `restaurants` (
    `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
    `opening_time` time DEFAULT NULL,
    `closing_time` time DEFAULT NULL,
-   PRIMARY KEY (`id`)
+   PRIMARY KEY (`restaurant_id`)
 );
 
 CREATE TABLE IF NOT EXISTS `restaurant_holidays` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `restaurant_id` INT NOT NULL,  -- レストランのID（外部キー）
     `weekday_id` INT NOT NULL,     -- 曜日のID（外部キー）
-    FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`),
+    FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`restaurant_id`),
     FOREIGN KEY (`weekday_id`) REFERENCES `weekdays` (`id`),
     CONSTRAINT `unique_restaurant_weekday` UNIQUE (`restaurant_id`, `weekday_id`)  -- 同じ曜日の重複挿入を防ぐ
 );
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS reservations (
    reservation_date DATE NOT NULL,
    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-   FOREIGN KEY (restaurant_id) REFERENCES restaurants (id),
+   FOREIGN KEY (restaurant_id) REFERENCES restaurants (restaurant_id),
    FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS reviews (
    content TEXT NOT NULL,
    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-   FOREIGN KEY (restaurant_id) REFERENCES restaurants (id),
+   FOREIGN KEY (restaurant_id) REFERENCES restaurants (restaurant_id),
    FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
@@ -118,6 +118,6 @@ CREATE TABLE IF NOT EXISTS favorites (
    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
    UNIQUE (restaurant_id, user_id),
-   FOREIGN KEY (restaurant_id) REFERENCES restaurants (id),
+   FOREIGN KEY (restaurant_id) REFERENCES restaurants (restaurant_id),
    FOREIGN KEY (user_id) REFERENCES users (id)
 );
