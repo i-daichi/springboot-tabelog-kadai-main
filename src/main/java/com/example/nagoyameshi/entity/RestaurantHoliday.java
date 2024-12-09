@@ -30,12 +30,19 @@ public class RestaurantHoliday {
     @JoinColumn(name = "weekday_id")
     private Weekday weekday;
 
-    public RestaurantHoliday(){
+    public RestaurantHoliday() {
 
     }
 
     public RestaurantHoliday(Integer restaurant_id, Integer weekday_id) {
         this.restaurant_id = restaurant_id;
         this.weekday_id = weekday_id;
+    }
+
+    public RestaurantHoliday(Integer restaurant_id, Restaurant restaurant, Integer weekday_id, Weekday weekday) {
+        this.restaurant_id = restaurant_id;
+        this.weekday_id = weekday_id;
+        this.restaurant = restaurant;
+        this.weekday = weekday;
     }
 }

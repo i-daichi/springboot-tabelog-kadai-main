@@ -17,6 +17,10 @@ public class WeekdayService {
         this.weekdayRepository = weekdayRepository;
     }
 
+    public List<Weekday> findAllById(List<Integer> idList){
+        return weekdayRepository.findAllById(idList);
+    }
+
     public List<Weekday> findAll() {
         return weekdayRepository.findAll();
     }

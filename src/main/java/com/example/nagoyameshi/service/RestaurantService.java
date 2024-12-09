@@ -3,7 +3,10 @@ package com.example.nagoyameshi.service;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.hibernate.query.sqm.mutation.internal.temptable.RestrictedDeleteExecutionDelegate;
 import org.springframework.stereotype.Service;
@@ -11,16 +14,27 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.nagoyameshi.entity.Restaurant;
+import com.example.nagoyameshi.entity.RestaurantCategory;
+import com.example.nagoyameshi.entity.RestaurantHoliday;
+import com.example.nagoyameshi.entity.Weekday;
 import com.example.nagoyameshi.form.RestaurantEditForm;
 import com.example.nagoyameshi.form.RestaurantRegisterForm;
+import com.example.nagoyameshi.repository.RestaurantCategoryRepository;
+import com.example.nagoyameshi.repository.RestaurantHolidayRepository;
 import com.example.nagoyameshi.repository.RestaurantRepository;
 
 @Service
 public class RestaurantService {
 	private final RestaurantRepository restaurantRepository;
+	private final RestaurantCategoryRepository restaurantCategoryRepository;
+	private final RestaurantHolidayRepository restaurantHolidayRepository;
 
-	public RestaurantService(RestaurantRepository restaurantRepository) {
+	public RestaurantService(RestaurantRepository restaurantRepository,
+			RestaurantCategoryRepository restaurantCategoryRepository,
+			RestaurantHolidayRepository restaurantHolidayRepository) {
 		this.restaurantRepository = restaurantRepository;
+		this.restaurantCategoryRepository = restaurantCategoryRepository;
+		this.restaurantHolidayRepository = restaurantHolidayRepository;
 	}
 
 	@Transactional
@@ -28,7 +42,7 @@ public class RestaurantService {
 		MultipartFile imageFile = restaurantRegisterForm.getImageFile();
 
 		String hashedImageName = "";
-		String imageName="";
+		String imageName = "";
 
 		if (!imageFile.isEmpty()) {
 			imageName = imageFile.getOriginalFilename();
@@ -43,7 +57,18 @@ public class RestaurantService {
 	@Transactional
 	public void update(RestaurantEditForm restaurantEditForm) {
 		Restaurant restaurant = restaurantRepository.getReferenceById(restaurantEditForm.getId());
-		updateFromForm(restaurant, restaurantEditForm);
+		updateRestaurantFromForm(restaurant, restaurantEditForm);
+
+		List<RestaurantHoliday> restaurantHolidayList = restaurantEditForm.getHolidays().stream()
+				.map(weekday -> new RestaurantHoliday(restaurant.getId(), weekday.getId()))
+				.collect(Collectors.toList());
+
+		List<RestaurantCategory> restaurantCategoryList = restaurantEditForm.getCategories().stream()
+				.map(category -> new RestaurantCategory(restaurantEditForm.getId(),category.getId()))
+				.collect(Collectors.toList());
+
+		restaurant.setHolidays(restaurantHolidayList);
+		restaurant.setCategories(restaurantCategoryList);
 
 		restaurantRepository.save(restaurant);
 	}
@@ -68,9 +93,8 @@ public class RestaurantService {
 	}
 
 	// レストランの情報をUpdateする
-	public void updateFromForm(Restaurant restaurant,RestaurantEditForm form) {
-
-    	// フォームのフィールドをレストランエンティティにセット
+	public void updateRestaurantFromForm(Restaurant restaurant, RestaurantEditForm form) {
+		// フォームのフィールドをレストランエンティティにセット
 		restaurant.setName(form.getName());
 		restaurant.setDescription(form.getDescription());
 		restaurant.setPrice(form.getPrice());
@@ -78,19 +102,15 @@ public class RestaurantService {
 		restaurant.setAddress(form.getAddress());
 		restaurant.setPhoneNumber(form.getPhoneNumber());
 		restaurant.setSeats(form.getSeats());
-		restaurant.setOpeningTime(form.getOpenTime().toLocalTime());   // HourMinute -> LocalTime変換
-		restaurant.setClosingTime(form.getCloseTime().toLocalTime());  // HourMinute -> LocalTime変換
+		restaurant.setOpeningTime(form.getOpenTime().toLocalTime()); // HourMinute -> LocalTime変換
+		restaurant.setClosingTime(form.getCloseTime().toLocalTime()); // HourMinute -> LocalTime変換
 		restaurant.setImageName(getImageFile(form));
-
-
-		// ここでカテゴリと休日は処理しない
 	}
 
 	private String getImageFile(RestaurantEditForm restaurantEditForm) {
 		String hashedImageName = "";
-		String imageName="";
+		String imageName = "";
 		MultipartFile imageFile = restaurantEditForm.getImageFile();
-
 
 		if (!imageFile.isEmpty()) {
 			imageName = imageFile.getOriginalFilename();

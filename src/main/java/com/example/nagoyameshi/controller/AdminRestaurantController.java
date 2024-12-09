@@ -133,8 +133,10 @@ public class AdminRestaurantController {
 			return "admin/restaurants/edit";
 		}
 
+		restaurantEditForm.setCategories(categoryService.findAllById(restaurantEditForm.getCategoryIdList()));
+		restaurantEditForm.setHolidays(weekdayService.findAllById(restaurantEditForm.getHolidayIdList()));
+
 		restaurantService.update(restaurantEditForm);
-		restaurantHolidayService.insert(restaurantEditForm);
 
 		redirectAttributes.addFlashAttribute("successMessage", "店舗情報を編集しました。");
 

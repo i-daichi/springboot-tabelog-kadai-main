@@ -57,13 +57,8 @@ public class Restaurant {
 	@Column(name = "category")
 	private String category;
 
-	@ManyToMany
-    @JoinTable(
-        name = "restaurant_categories",
-        joinColumns = @JoinColumn(name = "restaurant_id"),
-        inverseJoinColumns = @JoinColumn(name = "category_id")
-    )
-    private List<Category> categories;
+	@OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<RestaurantCategory> restaurantCategories;
 
 	@Column(name = "regular_holiday")
 	private String regularHoliday;
@@ -130,19 +125,19 @@ public class Restaurant {
         holidays.remove(holiday);
     }
 
-	public List<Category> getCategories(){
-		return this.categories;
+	public List<RestaurantCategory> getCategories(){
+		return this.restaurantCategories;
 	}
 
-	public void setCategories(List<Category> categories){
-		this.categories = categories;
+	public void setCategories(List<RestaurantCategory> categories){
+		this.restaurantCategories = categories;
 	}
 
-	public void addCategory(Category category){
-		categories.add(category);
+	public void addCategory(RestaurantCategory category){
+		restaurantCategories.add(category);
 	}
 
-	public void removeCategory(Category category){
-		categories.remove(category);
+	public void removeCategory(RestaurantCategory category){
+		restaurantCategories.remove(category);
 	}
 }

@@ -36,6 +36,10 @@ public class CategoryService {
         return categoryRepository.findByNameContaining(name);
     }
 
+    public List<Category> findAllById(List<Integer> idList){
+        return categoryRepository.findAllById(idList);
+    }
+
     // カテゴリの登録
     @Transactional
     public Category createCategory(String name) {

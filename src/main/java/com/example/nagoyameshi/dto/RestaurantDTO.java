@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import com.example.nagoyameshi.entity.Category;
 import com.example.nagoyameshi.entity.Restaurant;
+import com.example.nagoyameshi.entity.RestaurantCategory;
 import com.example.nagoyameshi.entity.RestaurantHoliday;
 import com.example.nagoyameshi.valueObject.HourMinute;
 
@@ -35,7 +36,7 @@ public class RestaurantDTO {
     private Timestamp updatedAt;
     private HourMinute openingTime;
     private HourMinute closingTime;
-    private List<Category> categories = new ArrayList<>();;
+    private List<RestaurantCategory> categories = new ArrayList<>();;
     private List<RestaurantHoliday> holidays = new ArrayList<>();
 
     public RestaurantDTO(Integer id, String name, String imageName, String description, Integer price, Integer seats,
@@ -209,11 +210,11 @@ public class RestaurantDTO {
         this.closingTime = closingTime;
     }
 
-    public void setCategories(List<Category> categories) {
+    public void setCategories(List<RestaurantCategory> categories) {
         this.categories = categories;
     }
 
-    public List<Category> getCategories() {
+    public List<RestaurantCategory> getCategories() {
         return categories;
     }
 

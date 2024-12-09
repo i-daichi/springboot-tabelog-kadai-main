@@ -19,8 +19,11 @@ public class RestaurantCategoryService {
         this.restaurantCategoryRepository = restaurantCategoryRepository;
     }
 
+    public void deleteByRestaurantId(Integer id){
+        restaurantCategoryRepository.deleteByRestaurantId(id);
+    }
+
     public void insert(RestaurantEditForm restaurantEditForm) {
-        restaurantCategoryRepository.deleteByRestaurantId(restaurantEditForm.getId());
         List<RestaurantCategory> categoryList = restaurantEditForm.getCategoryIdList().stream()
                 .map(categoryID -> new RestaurantCategory(restaurantEditForm.getId(), categoryID))
                 .collect(Collectors.toList());

@@ -8,7 +8,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.nagoyameshi.dto.RestaurantHolidayDto;
 import com.example.nagoyameshi.entity.Category;
 import com.example.nagoyameshi.entity.Restaurant;
+import com.example.nagoyameshi.entity.RestaurantCategory;
 import com.example.nagoyameshi.entity.RestaurantHoliday;
+import com.example.nagoyameshi.entity.Weekday;
 import com.example.nagoyameshi.valueObject.HourMinute;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -58,6 +60,9 @@ public class RestaurantEditForm {
 
 	private List<Integer> holidayIdList;
 
+	private List<Category> categories;
+    private List<Weekday> holidays;
+
 	public RestaurantEditForm(){
 
 	}
@@ -74,7 +79,7 @@ public class RestaurantEditForm {
 		this.closeTime = new HourMinute(restaurant.getClosingTime());
 		this.seats = restaurant.getSeats();
 		this.categoryIdList = restaurant.getCategories().stream()
-				.map(Category::getId)
+				.map(RestaurantCategory::getId)
 				.collect(Collectors.toList());
 		this.holidayIdList = restaurant.getHolidays().stream()
 				.map(RestaurantHoliday::getWeekday_id)
