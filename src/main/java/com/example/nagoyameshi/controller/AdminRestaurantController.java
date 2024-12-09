@@ -99,7 +99,7 @@ public class AdminRestaurantController {
 
 	@GetMapping("/{id}/edit")
 	public String edit(@PathVariable Integer id, Model model) {
-		Restaurant restaurant = restaurantRepository.getReferenceById(id);
+		Restaurant restaurant = restaurantService.getReferenceById(id);
 		var restaurantEditForm = new RestaurantEditForm(restaurant);
 
 		var helper = new AdminRestaurantHelper(

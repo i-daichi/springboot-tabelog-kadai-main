@@ -37,6 +37,10 @@ public class RestaurantService {
 		this.restaurantHolidayRepository = restaurantHolidayRepository;
 	}
 
+	public Restaurant getReferenceById(Integer id){
+		return restaurantRepository.getReferenceById(id);
+	}
+
 	@Transactional
 	public void create(RestaurantRegisterForm restaurantRegisterForm) {
 		MultipartFile imageFile = restaurantRegisterForm.getImageFile();
