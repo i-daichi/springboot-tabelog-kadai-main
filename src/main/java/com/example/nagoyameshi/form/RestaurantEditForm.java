@@ -79,7 +79,7 @@ public class RestaurantEditForm {
 		this.closeTime = new HourMinute(restaurant.getClosingTime());
 		this.seats = restaurant.getSeats();
 		this.categoryIdList = restaurant.getCategories().stream()
-				.map(RestaurantCategory::getId)
+				.map(Category::getId)
 				.collect(Collectors.toList());
 		this.holidayIdList = restaurant.getHolidays().stream()
 				.map(RestaurantHoliday::getWeekday_id)

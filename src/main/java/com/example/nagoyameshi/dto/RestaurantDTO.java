@@ -36,7 +36,7 @@ public class RestaurantDTO {
     private Timestamp updatedAt;
     private HourMinute openingTime;
     private HourMinute closingTime;
-    private List<RestaurantCategory> categories = new ArrayList<>();;
+    private List<Category> categories = new ArrayList<>();;
     private List<RestaurantHoliday> holidays = new ArrayList<>();
 
     public RestaurantDTO(Integer id, String name, String imageName, String description, Integer price, Integer seats,
@@ -210,11 +210,11 @@ public class RestaurantDTO {
         this.closingTime = closingTime;
     }
 
-    public void setCategories(List<RestaurantCategory> categories) {
+    public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
 
-    public List<RestaurantCategory> getCategories() {
+    public List<Category> getCategories() {
         return categories;
     }
 

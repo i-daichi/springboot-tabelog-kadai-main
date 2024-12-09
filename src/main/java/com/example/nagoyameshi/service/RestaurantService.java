@@ -67,12 +67,7 @@ public class RestaurantService {
 				.map(weekday -> new RestaurantHoliday(restaurant.getId(), weekday.getId()))
 				.collect(Collectors.toList());
 
-		List<RestaurantCategory> restaurantCategoryList = restaurantEditForm.getCategories().stream()
-				.map(category -> new RestaurantCategory(restaurantEditForm.getId(),category.getId()))
-				.collect(Collectors.toList());
-
 		restaurant.setHolidays(restaurantHolidayList);
-		restaurant.setCategories(restaurantCategoryList);
 
 		restaurantRepository.save(restaurant);
 	}
