@@ -16,6 +16,7 @@ import lombok.Data;
 public class RestaurantHoliday {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "restaurant_holiday_id", insertable = false, updatable = false)
     private Integer id;
 
     @Column(name = "restaurant_id", insertable = false, updatable = false)

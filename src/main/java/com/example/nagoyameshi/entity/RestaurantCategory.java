@@ -11,12 +11,12 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "restaurants")
+@Table(name = "restaurant_categories")
 @Data
 public class RestaurantCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "restaurant_category_id")
     private Integer id;
 
     @Column(name = "restaurant_id",insertable = false, updatable = false)
@@ -30,6 +30,10 @@ public class RestaurantCategory {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    public RestaurantCategory(){
+
+    }
 
     public RestaurantCategory(Integer restaurantId, Integer categoryId) {
         this.restaurantId = restaurantId;

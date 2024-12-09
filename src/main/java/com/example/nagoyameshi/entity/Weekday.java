@@ -13,9 +13,10 @@ import lombok.Data;
 @Data
 public class Weekday {
     @Id
+    @Column(name = "weekday_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 }

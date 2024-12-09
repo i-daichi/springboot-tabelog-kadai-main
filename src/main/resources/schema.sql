@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS roles (
 );
 
 CREATE TABLE IF NOT EXISTS `weekdays` (
-   `id` INT AUTO_INCREMENT PRIMARY KEY,
+   `weekday_id` INT AUTO_INCREMENT PRIMARY KEY,
    `name` VARCHAR(255) NOT NULL
 );
 
@@ -29,37 +29,37 @@ CREATE TABLE IF NOT EXISTS `restaurants` (
 );
 
 CREATE TABLE IF NOT EXISTS `restaurant_holidays` (
-    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `restaurant_holiday_id` INT AUTO_INCREMENT PRIMARY KEY,
     `restaurant_id` INT NOT NULL,  -- レストランのID（外部キー）
     `weekday_id` INT NOT NULL,     -- 曜日のID（外部キー）
     FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`restaurant_id`),
-    FOREIGN KEY (`weekday_id`) REFERENCES `weekdays` (`id`),
+    FOREIGN KEY (`weekday_id`) REFERENCES `weekdays` (`weekday_id`),
     CONSTRAINT `unique_restaurant_weekday` UNIQUE (`restaurant_id`, `weekday_id`)  -- 同じ曜日の重複挿入を防ぐ
 );
 
 CREATE TABLE IF NOT EXISTS `genre` (
-   `id` int NOT NULL,
+   `genre_id` int NOT NULL,
    `name` varchar(50) NOT NULL DEFAULT '',
-   PRIMARY KEY (`id`)
+   PRIMARY KEY (`genre_id`)
 );
 
 CREATE TABLE IF NOT EXISTS `categories` (
-   `id` int NOT NULL AUTO_INCREMENT,
+   `category_id` int NOT NULL AUTO_INCREMENT,
    `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
    `genre_id` int NOT NULL,
-   PRIMARY KEY (`id`) USING BTREE,
+   PRIMARY KEY (`category_id`) USING BTREE,
    KEY `FK_categories_genre` (`genre_id`),
-   CONSTRAINT `FK_categories_genre` FOREIGN KEY (`genre_id`) REFERENCES `genre` (`id`)
+   CONSTRAINT `FK_categories_genre` FOREIGN KEY (`genre_id`) REFERENCES `genre` (`genre_id`)
 );
 
 CREATE TABLE IF NOT EXISTS `restaurant_categories` (
-   `id` INT NULL DEFAULT NULL,
+   `restaurant_category_id` INT NULL DEFAULT NULL,
    `restaurant_id` INT NULL DEFAULT NULL,
    `category_id` INT NULL DEFAULT NULL,
    UNIQUE INDEX `uq_restaurant_category` (`restaurant_id`, `category_id`) USING BTREE,
    INDEX `fk_category` (`category_id`) USING BTREE,
-   CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE,
-   CONSTRAINT `fk_restaurant` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
+   CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`) ON UPDATE NO ACTION ON DELETE CASCADE,
+   CONSTRAINT `fk_restaurant` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`restaurant_id`) ON UPDATE NO ACTION ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS users (

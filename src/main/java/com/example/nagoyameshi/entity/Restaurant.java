@@ -54,13 +54,13 @@ public class Restaurant {
 	@Column(name = "category")
 	private String category;
 
-    @OneToMany(mappedBy = "restaurant_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RestaurantCategory> categories;
 
 	@Column(name = "regular_holiday")
 	private String regularHoliday;
 
-	@OneToMany(mappedBy = "restaurant_id", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RestaurantHoliday> holidays = new ArrayList<>();
 
 	@Column(name = "business_hours")
