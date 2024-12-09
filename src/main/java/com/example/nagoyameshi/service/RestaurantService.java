@@ -43,19 +43,9 @@ public class RestaurantService {
 	@Transactional
 	public void update(RestaurantEditForm restaurantEditForm) {
 		Restaurant restaurant = restaurantRepository.getReferenceById(restaurantEditForm.getId());
-		MultipartFile imageFile = restaurantEditForm.getImageFile();
+		updateFromForm(restaurant, restaurantEditForm);
 
-		String hashedImageName = "";
-		String imageName="";
-
-		if (!imageFile.isEmpty()) {
-			imageName = imageFile.getOriginalFilename();
-			hashedImageName = generateNewFileName(imageName);
-			Path filePath = Path.of("src/main/resources/static/storage/" + hashedImageName);
-			copyImageFile(imageFile, filePath);
-		}
-
-		restaurantRepository.save(new Restaurant(restaurantEditForm,hashedImageName));
+		restaurantRepository.save(restaurant);
 	}
 
 	// UUIDを使って生成したファイル名を返す
@@ -75,5 +65,40 @@ public class RestaurantService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	// レストランの情報をUpdateする
+	public void updateFromForm(Restaurant restaurant,RestaurantEditForm form) {
+
+    	// フォームのフィールドをレストランエンティティにセット
+		restaurant.setName(form.getName());
+		restaurant.setDescription(form.getDescription());
+		restaurant.setPrice(form.getPrice());
+		restaurant.setPostalCode(form.getPostalCode());
+		restaurant.setAddress(form.getAddress());
+		restaurant.setPhoneNumber(form.getPhoneNumber());
+		restaurant.setSeats(form.getSeats());
+		restaurant.setOpeningTime(form.getOpenTime().toLocalTime());   // HourMinute -> LocalTime変換
+		restaurant.setClosingTime(form.getCloseTime().toLocalTime());  // HourMinute -> LocalTime変換
+		restaurant.setImageName(getImageFile(form));
+
+
+		// ここでカテゴリと休日は処理しない
+	}
+
+	private String getImageFile(RestaurantEditForm restaurantEditForm) {
+		String hashedImageName = "";
+		String imageName="";
+		MultipartFile imageFile = restaurantEditForm.getImageFile();
+
+
+		if (!imageFile.isEmpty()) {
+			imageName = imageFile.getOriginalFilename();
+			hashedImageName = generateNewFileName(imageName);
+			Path filePath = Path.of("src/main/resources/static/storage/" + hashedImageName);
+			copyImageFile(imageFile, filePath);
+		}
+
+		return hashedImageName;
 	}
 }
