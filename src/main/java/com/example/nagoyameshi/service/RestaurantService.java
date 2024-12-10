@@ -38,7 +38,7 @@ public class RestaurantService {
 		this.restaurantHolidayRepository = restaurantHolidayRepository;
 	}
 
-	public Restaurant getReferenceById(Integer id){
+	public Restaurant getReferenceById(Integer id) {
 		return restaurantRepository.getReferenceById(id);
 	}
 
@@ -64,12 +64,21 @@ public class RestaurantService {
 		Restaurant restaurant = restaurantRepository.getReferenceById(restaurantEditForm.getId());
 		updateRestaurantFromForm(restaurant, restaurantEditForm);
 
+		System.out.println("Holiday ID List: " + restaurantEditForm.getHolidayIdList());
+		System.out.println("Category ID List: " + restaurantEditForm.getCategoryIdList());
+		System.out.println("RestaurantID:" + restaurant.getId());
+
 		List<RestaurantHoliday> restaurantHolidayList = restaurantEditForm.getHolidayIdList().stream()
 				.map(weekday -> new RestaurantHoliday(restaurant.getId(), weekday))
 				.collect(Collectors.toList());
 		List<RestaurantCategory> restaurantCategoryList = restaurantEditForm.getCategoryIdList().stream()
-				.map(category -> new RestaurantCategory(restaurant.getId(),category))
+				.map(category -> new RestaurantCategory(restaurant.getId(), category))
 				.collect(Collectors.toList());
+
+		for (RestaurantHoliday holiday : restaurantHolidayList) {
+			System.out.println("Holiday ID : " + holiday.getRestaurant_id());
+			System.out.println("R ID :"+holiday.getRestaurant_id());
+		}
 
 		restaurant.setHolidays(restaurantHolidayList);
 		restaurant.setCategories(restaurantCategoryList);
