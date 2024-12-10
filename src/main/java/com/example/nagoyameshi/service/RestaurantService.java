@@ -37,23 +37,29 @@ public class RestaurantService {
 		return restaurantRepository.getReferenceById(id);
 	}
 
-	public Page<Restaurant> getRestaurants(String keyword, String category, Integer price, String order, Pageable pageable) {
+	public Page<RestaurantDTO> getRestaurants(String keyword, String category, Integer price, String order,
+			Pageable pageable) {
+		Page<Restaurant> page;
 		if (keyword != null && !keyword.isEmpty()) {
-			return findByKeyword(keyword, order, pageable);
+			page = findByKeyword(keyword, order, pageable);
 		} else if (category != null && !category.isEmpty()) {
-			return findByCategory(category, order, pageable);
+			page =  findByCategory(category, order, pageable);
 		} else if (price != null) {
-			return findByPrice(price, order, pageable);
+			page =  findByPrice(price, order, pageable);
 		} else {
-			return findAll(order, pageable);
+			page =  findAll(order, pageable);
 		}
+
+		return page.map(restaurant -> new RestaurantDTO(restaurant));
 	}
 
 	private Page<Restaurant> findByKeyword(String keyword, String order, Pageable pageable) {
 		if ("priceAsc".equals(order)) {
-			return restaurantRepository.findByNameLikeOrAddressLikeOrderByPriceAsc("%" + keyword + "%", "%" + keyword + "%", pageable);
+			return restaurantRepository.findByNameLikeOrAddressLikeOrderByPriceAsc("%" + keyword + "%",
+					"%" + keyword + "%", pageable);
 		} else {
-			return restaurantRepository.findByNameLikeOrAddressLikeOrderByCreatedAtDesc("%" + keyword + "%", "%" + keyword + "%", pageable);
+			return restaurantRepository.findByNameLikeOrAddressLikeOrderByCreatedAtDesc("%" + keyword + "%",
+					"%" + keyword + "%", pageable);
 		}
 	}
 

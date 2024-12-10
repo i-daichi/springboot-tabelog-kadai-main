@@ -55,7 +55,7 @@ public class RestaurantController {
 			@RequestParam(required = false) String order,
 			@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable pageable,
 			Model model) {
-		Page<Restaurant>  restaurantPage = restaurantService.getRestaurants(keyword, category, price, order, pageable);
+		var restaurantPage = restaurantService.getRestaurants(keyword, category, price, order, pageable);
 		Map<String, List<String>> genreCategoryMap = genreService.getGenreCategoryMap();
 
 		model.addAttribute("genreCategoryMap", genreCategoryMap);
