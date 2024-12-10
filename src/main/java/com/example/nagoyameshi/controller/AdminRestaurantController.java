@@ -59,16 +59,12 @@ public class AdminRestaurantController {
 	}
 
 	@GetMapping
-	public String index(Model model,
+	public String index(
+			Model model,
 			@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable pageable,
 			@RequestParam(required = false) String keyword) {
-		Page<Restaurant> restaurantPage;
 
-		if (keyword != null && !keyword.isEmpty()) {
-			restaurantPage = restaurantRepository.findByNameLike("%" + keyword + "%", pageable);
-		} else {
-			restaurantPage = restaurantRepository.findAll(pageable);
-		}
+		Page<Restaurant> restaurantPage = restaurantService.getRestaurants(pageable, keyword);
 
 		model.addAttribute("restaurantPage", restaurantPage);
 		model.addAttribute("keyword", keyword);
@@ -78,7 +74,7 @@ public class AdminRestaurantController {
 
 	@GetMapping("/{id}")
 	public String show(@PathVariable Integer id, Model model) {
-		Restaurant restaurant = restaurantRepository.getReferenceById(id);
+		Restaurant restaurant = restaurantService.getReferenceById(id);
 
 		model.addAttribute("restaurant", restaurant);
 
@@ -145,11 +141,11 @@ public class AdminRestaurantController {
 		restaurantEditForm.setCategories(categoryService.findAllById(restaurantEditForm.getCategoryIdList()));
 		restaurantEditForm.setHolidays(weekdayService.findAllById(restaurantEditForm.getHolidayIdList()));
 
-		//関連情報の削除
+		// 関連情報の削除
 		restaurantCategoryService.deleteByRestaurantId(restaurantEditForm.getId());
 		restaurantHolidayService.deleteByRestaurantId(restaurantEditForm.getId());
 
-		//レストラン情報の更新
+		// レストラン情報の更新
 		restaurantService.update(restaurantEditForm);
 
 		redirectAttributes.addFlashAttribute("successMessage", "店舗情報を編集しました。");

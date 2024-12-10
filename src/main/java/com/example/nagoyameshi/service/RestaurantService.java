@@ -10,6 +10,8 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.hibernate.query.sqm.mutation.internal.temptable.RestrictedDeleteExecutionDelegate;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,6 +42,17 @@ public class RestaurantService {
 
 	public Restaurant getReferenceById(Integer id) {
 		return restaurantRepository.getReferenceById(id);
+	}
+
+	public Page<Restaurant> getRestaurants(Pageable pageable, String keyword) {
+		Page<Restaurant> restaurantPage;
+		if (keyword != null && !keyword.isEmpty()) {
+			restaurantPage = restaurantRepository.findByNameLike("%" + keyword + "%", pageable);
+		} else {
+			restaurantPage = restaurantRepository.findAll(pageable);
+		}
+
+		return restaurantPage;
 	}
 
 	@Transactional
