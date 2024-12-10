@@ -89,12 +89,13 @@ public class Restaurant {
 		this.postalCode = form.getPostalCode();
 		this.address = form.getAddress();
 		this.phoneNumber = form.getPhoneNumber();
+		this.openingTime = form.getOpenTime().toLocalTime();
+		this.closingTime = form.getCloseTime().toLocalTime();
 	}
 
-	public Restaurant(RestaurantEditForm form,String hashedImageName) {
+	public Restaurant(RestaurantEditForm form) {
 		this.id = form.getId();
 		this.name = form.getName();
-		this.imageName = hashedImageName;
 		this.description = form.getDescription();
 		this.price = form.getPrice();
 		this.seats = form.getSeats();

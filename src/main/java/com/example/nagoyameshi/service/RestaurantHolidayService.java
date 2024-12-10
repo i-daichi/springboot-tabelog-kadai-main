@@ -12,6 +12,7 @@ import com.example.nagoyameshi.entity.Restaurant;
 import com.example.nagoyameshi.entity.RestaurantCategory;
 import com.example.nagoyameshi.entity.RestaurantHoliday;
 import com.example.nagoyameshi.form.RestaurantEditForm;
+import com.example.nagoyameshi.form.RestaurantRegisterForm;
 import com.example.nagoyameshi.repository.RestaurantHolidayRepository;
 import com.example.nagoyameshi.repository.RestaurantRepository;
 
@@ -22,8 +23,8 @@ public class RestaurantHolidayService {
 
     @Autowired
     public RestaurantHolidayService(
-        RestaurantHolidayRepository restaurantHolidayRepository,
-        RestaurantRepository restaurantRepository) {
+            RestaurantHolidayRepository restaurantHolidayRepository,
+            RestaurantRepository restaurantRepository) {
         this.restaurantHolidayRepository = restaurantHolidayRepository;
         this.restaurantRepository = restaurantRepository;
     }
@@ -32,22 +33,29 @@ public class RestaurantHolidayService {
         return restaurantHolidayRepository.findByRestaurantId(restaurantId);
     }
 
-    public List<RestaurantHoliday> findAllById(List<Integer> idList){
+    public List<RestaurantHoliday> findAllById(List<Integer> idList) {
         return restaurantHolidayRepository.findAllById(idList);
     }
 
     @Transactional
-    public void deleteByRestaurantId(Integer id){
+    public void deleteByRestaurantId(Integer id) {
         Restaurant restaurant = restaurantRepository.getReferenceById(id);
         restaurantHolidayRepository.deleteByRestaurantId(id);
-		restaurant.setCategories(new ArrayList<RestaurantCategory>());
+        restaurant.setCategories(new ArrayList<RestaurantCategory>());
 
         restaurantRepository.save(restaurant);
     }
 
-    public void insert(RestaurantEditForm restaurantEditForm) {
-        List<RestaurantHoliday> holidays = restaurantEditForm.getHolidayIdList().stream()
-                .map(weekdayId -> new RestaurantHoliday(restaurantEditForm.getId(), weekdayId))
+    @Transactional
+    public void insert(Restaurant restaurant, RestaurantRegisterForm form) {
+        List<RestaurantHoliday> holidays = form.getHolidays().stream()
+                .map(weekday ->
+                    new RestaurantHoliday(
+                        restaurant.getId(),
+                        restaurant,
+                        weekday.getId(),
+                        weekday)
+                )
                 .collect(Collectors.toList());
 
         restaurantHolidayRepository.saveAll(holidays);

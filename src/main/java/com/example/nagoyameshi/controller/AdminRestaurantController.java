@@ -97,7 +97,15 @@ public class AdminRestaurantController {
 			return "admin/restaurants/register";
 		}
 
-		restaurantService.create(restaurantRegisterForm);
+		restaurantRegisterForm.setCategories(categoryService.findAllById(restaurantRegisterForm.getCategoryIdList()));
+		restaurantRegisterForm.setHolidays(weekdayService.findAllById(restaurantRegisterForm.getHolidayIdList()));
+
+		var restaurant = restaurantService.create(restaurantRegisterForm);
+
+		// 関連情報の挿入
+		restaurantCategoryService.insert(restaurant, restaurantRegisterForm);
+		restaurantHolidayService.insert(restaurant, restaurantRegisterForm);
+
 		redirectAttributes.addFlashAttribute("successMessage", "店舗を登録しました。");
 
 		return "redirect:/admin/restaurants";

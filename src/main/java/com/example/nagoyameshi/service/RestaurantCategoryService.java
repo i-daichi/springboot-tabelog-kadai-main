@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.nagoyameshi.entity.Restaurant;
 import com.example.nagoyameshi.entity.RestaurantCategory;
 import com.example.nagoyameshi.form.RestaurantEditForm;
+import com.example.nagoyameshi.form.RestaurantRegisterForm;
 import com.example.nagoyameshi.repository.RestaurantCategoryRepository;
 import com.example.nagoyameshi.repository.RestaurantRepository;
 
@@ -21,24 +22,31 @@ public class RestaurantCategoryService {
 
     @Autowired
     public RestaurantCategoryService(
-        RestaurantCategoryRepository restaurantCategoryRepository,
-        RestaurantRepository restaurantRepository) {
+            RestaurantCategoryRepository restaurantCategoryRepository,
+            RestaurantRepository restaurantRepository) {
         this.restaurantCategoryRepository = restaurantCategoryRepository;
         this.restaurantRepository = restaurantRepository;
     }
 
     @Transactional
-    public void deleteByRestaurantId(Integer id){
+    public void deleteByRestaurantId(Integer id) {
         Restaurant restaurant = restaurantRepository.getReferenceById(id);
-		restaurantCategoryRepository.deleteByRestaurantId(restaurant.getId());
-		restaurant.setCategories(new ArrayList<RestaurantCategory>());
+        restaurantCategoryRepository.deleteByRestaurantId(restaurant.getId());
+        restaurant.setCategories(new ArrayList<RestaurantCategory>());
 
         restaurantRepository.save(restaurant);
     }
 
-    public void insert(RestaurantEditForm restaurantEditForm) {
-        List<RestaurantCategory> categoryList = restaurantEditForm.getCategoryIdList().stream()
-                .map(categoryID -> new RestaurantCategory(restaurantEditForm.getId(), categoryID))
+    @Transactional
+    public void insert(Restaurant restaurant, RestaurantRegisterForm form) {
+        List<RestaurantCategory> categoryList = form.getCategories().stream()
+                .map(category ->
+                    new RestaurantCategory(
+                        restaurant.getId(),
+                        restaurant,
+                        category.getId(),
+                        category)
+                )
                 .collect(Collectors.toList());
 
         restaurantCategoryRepository.saveAll(categoryList);

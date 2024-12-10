@@ -99,11 +99,13 @@ public class RestaurantService {
 	}
 
 	@Transactional
-	public void create(RestaurantRegisterForm restaurantRegisterForm) {
+	public Restaurant create(RestaurantRegisterForm restaurantRegisterForm) {
 		Restaurant restaurant = new Restaurant(restaurantRegisterForm);
 		restaurant.setImageName(getImageFile(restaurantRegisterForm.getImageFile()));
 
 		restaurantRepository.save(restaurant);
+
+		return restaurant;
 	}
 
 	@Transactional
@@ -111,21 +113,12 @@ public class RestaurantService {
 		Restaurant restaurant = restaurantRepository.getReferenceById(restaurantEditForm.getId());
 		updateRestaurantFromForm(restaurant, restaurantEditForm);
 
-		System.out.println("Holiday ID List: " + restaurantEditForm.getHolidayIdList());
-		System.out.println("Category ID List: " + restaurantEditForm.getCategoryIdList());
-		System.out.println("RestaurantID:" + restaurant.getId());
-
 		List<RestaurantHoliday> restaurantHolidayList = restaurantEditForm.getHolidays().stream()
 				.map(weekday -> new RestaurantHoliday(restaurant.getId(), restaurant, weekday.getId(), weekday))
 				.collect(Collectors.toList());
 		List<RestaurantCategory> restaurantCategoryList = restaurantEditForm.getCategories().stream()
 				.map(category -> new RestaurantCategory(restaurant.getId(), restaurant, category.getId(), category))
 				.collect(Collectors.toList());
-
-		for (RestaurantHoliday holiday : restaurantHolidayList) {
-			System.out.println("Holiday ID : " + holiday.getRestaurant_id());
-			System.out.println("R ID :" + holiday.getRestaurant_id());
-		}
 
 		restaurant.setHolidays(restaurantHolidayList);
 		restaurant.setCategories(restaurantCategoryList);

@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `restaurants` (
    `postal_code` varchar(50) NOT NULL,
    `address` varchar(255) NOT NULL,
    `phone_number` varchar(50) NOT NULL,
-   `category` varchar(50) NOT NULL,
+   `category` varchar(50),
    `regular_holiday` varchar(50),
    `business_hours` varchar(50),
    `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
