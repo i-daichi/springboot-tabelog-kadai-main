@@ -45,15 +45,8 @@ public class AdminCategoryController {
     public String index(Model model,
             @PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable pageable,
             @RequestParam(required = false) String keyword) {
-        Page<Category> categoryPage;
 
-        if (keyword != null && !keyword.isEmpty()) {
-            categoryPage = categoryRepository.findByNameLike("%" + keyword + "%", pageable);
-        } else {
-            categoryPage = categoryRepository.findAll(pageable);
-        }
-
-        model.addAttribute("categoryPage", categoryPage);
+        model.addAttribute("categoryPage",categoryService.getCategoryPages(pageable, keyword));
         model.addAttribute("keyword", keyword);
 
         return "admin/categories/index"; // Thymeleaf テンプレート

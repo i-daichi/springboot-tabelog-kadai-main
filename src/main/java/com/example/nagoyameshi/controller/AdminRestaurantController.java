@@ -58,10 +58,7 @@ public class AdminRestaurantController {
 			Model model,
 			@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable pageable,
 			@RequestParam(required = false) String keyword) {
-
-		Page<RestaurantDTO> restaurantPage = restaurantService.getRestaurants(pageable, keyword);
-
-		model.addAttribute("restaurantPage", restaurantPage);
+		model.addAttribute("restaurantPage", restaurantService.getRestaurants(pageable, keyword));
 		model.addAttribute("keyword", keyword);
 
 		return "admin/restaurants/index";

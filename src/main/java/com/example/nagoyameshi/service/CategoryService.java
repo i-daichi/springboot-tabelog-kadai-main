@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +37,16 @@ public class CategoryService {
 
     public List<Category> findAllById(List<Integer> idList){
         return categoryRepository.findAllById(idList);
+    }
+
+    public Page<Category> getCategoryPages(Pageable pageable, String keyword) {
+        Page<Category> categoryPage;
+        if (keyword != null && !keyword.isEmpty()) {
+            categoryPage = categoryRepository.findByNameLike("%" + keyword + "%", pageable);
+        } else {
+            categoryPage = categoryRepository.findAll(pageable);
+        }
+        return categoryPage;
     }
 
     // カテゴリの登録
