@@ -32,28 +32,6 @@ public class RestaurantDTO {
     private List<RestaurantCategory> categories = new ArrayList<>();;
     private List<RestaurantHoliday> holidays = new ArrayList<>();
 
-    public RestaurantDTO(Integer id, String name, String imageName, String description, Integer price, Integer seats,
-            String postalCode, String address, String phoneNumber, String category, String regularHoliday,
-            String businessHours, Timestamp createdAt, Timestamp updatedAt, LocalTime openingTime,
-            LocalTime closingTime) {
-        this.id = id;
-        this.name = name;
-        this.imageName = imageName;
-        this.description = description;
-        this.price = price;
-        this.seats = seats;
-        this.postalCode = postalCode;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.category = category;
-        this.regularHoliday = regularHoliday;
-        this.businessHours = businessHours;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.openingTime = new HourMinute(openingTime);
-        this.closingTime = new HourMinute(closingTime);
-    }
-
     public RestaurantDTO(Restaurant restaurant) {
         this.id = restaurant.getId();
         this.name = restaurant.getName();
@@ -224,15 +202,21 @@ public class RestaurantDTO {
         return openingTime.toString() + "~" + closingTime.toString();
     }
 
-    public static String categoriesToString(List<Category> categories) {
+    public  String categoriesToString() {
+        if (categories == null || categories.isEmpty()) {
+            return "なし";  // リストが空またはnullなら "なし" を返す
+        }
         return categories.stream()
-                .map(Category::getName)  // CategoryエンティティにgetName()がある前提
+                .map(category -> category.getCategory().getName())
                 .collect(Collectors.joining("、"));
     }
 
-    public static String holidaysToString(List<RestaurantHoliday> holidays) {
+    public String holidaysToString() {
+        if (holidays == null || holidays.isEmpty()) {
+            return "なし";  // リストが空またはnullなら "なし" を返す
+        }
         return holidays.stream()
-                .map(h -> h.getWeekday().getName())  // WeekdayエンティティにgetName()がある前提
+                .map(h -> h.getWeekday().getName())
                 .collect(Collectors.joining("、"));
     }
 }

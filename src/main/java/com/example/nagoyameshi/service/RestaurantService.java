@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.nagoyameshi.dto.RestaurantDTO;
 import com.example.nagoyameshi.entity.Restaurant;
 import com.example.nagoyameshi.entity.RestaurantCategory;
 import com.example.nagoyameshi.entity.RestaurantHoliday;
@@ -44,15 +45,15 @@ public class RestaurantService {
 		return restaurantRepository.getReferenceById(id);
 	}
 
-	public Page<Restaurant> getRestaurants(Pageable pageable, String keyword) {
-		Page<Restaurant> restaurantPage;
+	public Page<RestaurantDTO> getRestaurants(Pageable pageable, String keyword) {
+		Page<Restaurant> pages;
 		if (keyword != null && !keyword.isEmpty()) {
-			restaurantPage = restaurantRepository.findByNameLike("%" + keyword + "%", pageable);
+			pages = restaurantRepository.findByNameLike("%" + keyword + "%", pageable);
 		} else {
-			restaurantPage = restaurantRepository.findAll(pageable);
+			pages = restaurantRepository.findAll(pageable);
 		}
 
-		return restaurantPage;
+		return pages.map(restaurant -> new RestaurantDTO(restaurant));
 	}
 
 	@Transactional

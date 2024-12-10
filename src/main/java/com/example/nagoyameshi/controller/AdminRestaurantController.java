@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.nagoyameshi.dto.RestaurantDTO;
 import com.example.nagoyameshi.entity.Category;
 import com.example.nagoyameshi.entity.Restaurant;
 import com.example.nagoyameshi.form.RestaurantEditForm;
@@ -64,7 +65,7 @@ public class AdminRestaurantController {
 			@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable pageable,
 			@RequestParam(required = false) String keyword) {
 
-		Page<Restaurant> restaurantPage = restaurantService.getRestaurants(pageable, keyword);
+		Page<RestaurantDTO> restaurantPage = restaurantService.getRestaurants(pageable, keyword);
 
 		model.addAttribute("restaurantPage", restaurantPage);
 		model.addAttribute("keyword", keyword);
