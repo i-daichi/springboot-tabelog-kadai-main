@@ -41,6 +41,50 @@ public class RestaurantService {
 		return restaurantRepository.getReferenceById(id);
 	}
 
+	public Page<Restaurant> getRestaurants(String keyword, String category, Integer price, String order, Pageable pageable) {
+		if (keyword != null && !keyword.isEmpty()) {
+			return findByKeyword(keyword, order, pageable);
+		} else if (category != null && !category.isEmpty()) {
+			return findByCategory(category, order, pageable);
+		} else if (price != null) {
+			return findByPrice(price, order, pageable);
+		} else {
+			return findAll(order, pageable);
+		}
+	}
+
+	private Page<Restaurant> findByKeyword(String keyword, String order, Pageable pageable) {
+		if ("priceAsc".equals(order)) {
+			return restaurantRepository.findByNameLikeOrAddressLikeOrderByPriceAsc("%" + keyword + "%", "%" + keyword + "%", pageable);
+		} else {
+			return restaurantRepository.findByNameLikeOrAddressLikeOrderByCreatedAtDesc("%" + keyword + "%", "%" + keyword + "%", pageable);
+		}
+	}
+
+	private Page<Restaurant> findByCategory(String category, String order, Pageable pageable) {
+		if ("priceAsc".equals(order)) {
+			return restaurantRepository.findByCategoryLikeOrderByPriceAsc("%" + category + "%", pageable);
+		} else {
+			return restaurantRepository.findByCategoryLikeOrderByCreatedAtDesc("%" + category + "%", pageable);
+		}
+	}
+
+	private Page<Restaurant> findByPrice(Integer price, String order, Pageable pageable) {
+		if ("priceAsc".equals(order)) {
+			return restaurantRepository.findByPriceLessThanEqualOrderByPriceAsc(price, pageable);
+		} else {
+			return restaurantRepository.findByPriceLessThanEqualOrderByCreatedAtDesc(price, pageable);
+		}
+	}
+
+	private Page<Restaurant> findAll(String order, Pageable pageable) {
+		if ("priceAsc".equals(order)) {
+			return restaurantRepository.findAllByOrderByPriceAsc(pageable);
+		} else {
+			return restaurantRepository.findAllByOrderByCreatedAtDesc(pageable);
+		}
+	}
+
 	public Page<RestaurantDTO> getRestaurants(Pageable pageable, String keyword) {
 		Page<Restaurant> pages;
 		if (keyword != null && !keyword.isEmpty()) {

@@ -23,22 +23,26 @@ import com.example.nagoyameshi.repository.RestaurantRepository;
 import com.example.nagoyameshi.security.UserDetailsImpl;
 import com.example.nagoyameshi.service.FavoriteService;
 import com.example.nagoyameshi.service.GenreService;
+import com.example.nagoyameshi.service.RestaurantService;
 import com.example.nagoyameshi.service.ReviewService;
 
 @Controller
 @RequestMapping("/restaurants")
 public class RestaurantController {
 	private final RestaurantRepository restaurantRepository;
+	private final RestaurantService restaurantService;
 	private final ReviewService reviewService;
 	private final FavoriteService favoriteService;
 	private final GenreService genreService;
 
 	public RestaurantController(
 			RestaurantRepository restaurantRepository,
+			RestaurantService restaurantService,
 			ReviewService reviewService,
 			FavoriteService favoriteService,
 			GenreService genreService) {
 		this.restaurantRepository = restaurantRepository;
+		this.restaurantService = restaurantService;
 		this.reviewService = reviewService;
 		this.favoriteService = favoriteService;
 		this.genreService = genreService;
@@ -51,36 +55,7 @@ public class RestaurantController {
 			@RequestParam(required = false) String order,
 			@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable pageable,
 			Model model) {
-		Page<Restaurant> restaurantPage;
-
-		if (keyword != null && !keyword.isEmpty()) {
-			if (order != null && order.equals("priceAsc")) {
-				restaurantPage = restaurantRepository.findByNameLikeOrAddressLikeOrderByPriceAsc("%" + keyword + "%",
-						"%" + keyword + "%", pageable);
-			} else {
-				restaurantPage = restaurantRepository.findByNameLikeOrAddressLikeOrderByCreatedAtDesc(
-						"%" + keyword + "%", "%" + keyword + "%", pageable);
-			}
-		} else if (category != null && !category.isEmpty()) {
-			if (order != null && order.equals("priceAsc")) {
-				restaurantPage = restaurantRepository.findByCategoryLikeOrderByPriceAsc("%" + category + "%", pageable);
-			} else {
-				restaurantPage = restaurantRepository.findByCategoryLikeOrderByCreatedAtDesc("%" + category + "%",
-						pageable);
-			}
-		} else if (price != null) {
-			if (order != null && order.equals("priceAsc")) {
-				restaurantPage = restaurantRepository.findByPriceLessThanEqualOrderByPriceAsc(price, pageable);
-			} else {
-				restaurantPage = restaurantRepository.findByPriceLessThanEqualOrderByCreatedAtDesc(price, pageable);
-			}
-		} else {
-			if (order != null && order.equals("priceAsc")) {
-				restaurantPage = restaurantRepository.findAllByOrderByPriceAsc(pageable);
-			} else {
-				restaurantPage = restaurantRepository.findAllByOrderByCreatedAtDesc(pageable);
-			}
-		}
+		Page<Restaurant>  restaurantPage = restaurantService.getRestaurants(keyword, category, price, order, pageable);
 		Map<String, List<String>> genreCategoryMap = genreService.getGenreCategoryMap();
 		model.addAttribute("genreCategoryMap", genreCategoryMap);
 		model.addAttribute("restaurantPage", restaurantPage);
@@ -91,6 +66,8 @@ public class RestaurantController {
 
 		return "restaurants/index";
 	}
+
+
 
 	@GetMapping("/{id}")
 	public String show(@PathVariable Integer id, Model model,
