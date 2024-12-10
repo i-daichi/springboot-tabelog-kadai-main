@@ -1,12 +1,10 @@
 package com.example.nagoyameshi.dto;
 
 import java.sql.Timestamp;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.example.nagoyameshi.entity.Category;
 import com.example.nagoyameshi.entity.Restaurant;
 import com.example.nagoyameshi.entity.RestaurantCategory;
 import com.example.nagoyameshi.entity.RestaurantHoliday;
