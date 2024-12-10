@@ -57,6 +57,7 @@ public class RestaurantController {
 			Model model) {
 		Page<Restaurant>  restaurantPage = restaurantService.getRestaurants(keyword, category, price, order, pageable);
 		Map<String, List<String>> genreCategoryMap = genreService.getGenreCategoryMap();
+
 		model.addAttribute("genreCategoryMap", genreCategoryMap);
 		model.addAttribute("restaurantPage", restaurantPage);
 		model.addAttribute("keyword", keyword);
