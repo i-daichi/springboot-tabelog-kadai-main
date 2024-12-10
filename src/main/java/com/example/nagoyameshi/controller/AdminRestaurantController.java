@@ -28,6 +28,7 @@ import com.example.nagoyameshi.form.RestaurantRegisterForm;
 import com.example.nagoyameshi.helper.AdminRestaurantHelper;
 import com.example.nagoyameshi.repository.RestaurantRepository;
 import com.example.nagoyameshi.service.CategoryService;
+import com.example.nagoyameshi.service.RestaurantCategoryService;
 import com.example.nagoyameshi.service.RestaurantHolidayService;
 import com.example.nagoyameshi.service.RestaurantService;
 import com.example.nagoyameshi.service.WeekdayService;
@@ -40,15 +41,21 @@ public class AdminRestaurantController {
 	private final CategoryService categoryService;
 	private final WeekdayService weekdayService;
 	private final RestaurantHolidayService restaurantHolidayService;
+	private final RestaurantCategoryService restaurantCategoryService;
 
-	public AdminRestaurantController(RestaurantRepository restaurantRepository, RestaurantService restaurantService,
-			CategoryService categoryService, WeekdayService weekdayService,
-			RestaurantHolidayService restaurantHolidayService) {
+	public AdminRestaurantController(
+			RestaurantRepository restaurantRepository,
+			RestaurantService restaurantService,
+			CategoryService categoryService,
+			WeekdayService weekdayService,
+			RestaurantHolidayService restaurantHolidayService,
+			RestaurantCategoryService restaurantCategoryService) {
 		this.restaurantRepository = restaurantRepository;
 		this.restaurantService = restaurantService;
 		this.categoryService = categoryService;
 		this.weekdayService = weekdayService;
 		this.restaurantHolidayService = restaurantHolidayService;
+		this.restaurantCategoryService = restaurantCategoryService;
 	}
 
 	@GetMapping
@@ -137,6 +144,10 @@ public class AdminRestaurantController {
 
 		restaurantEditForm.setCategories(categoryService.findAllById(restaurantEditForm.getCategoryIdList()));
 		restaurantEditForm.setHolidays(weekdayService.findAllById(restaurantEditForm.getHolidayIdList()));
+
+		// 関連情報の削除
+		restaurantCategoryService.deleteByRestaurantId(restaurantEditForm.getId());
+		restaurantHolidayService.deleteByRestaurantId(restaurantEditForm.getId());
 
 		restaurantService.update(restaurantEditForm);
 

@@ -59,8 +59,8 @@ CREATE TABLE IF NOT EXISTS `restaurant_categories` (
    PRIMARY KEY (`restaurant_category_id`) USING BTREE,
    UNIQUE INDEX `uq_restaurant_category` (`restaurant_id`, `category_id`) USING BTREE,
    INDEX `fk_category` (`category_id`) USING BTREE,
-   CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`) ON UPDATE NO ACTION ON DELETE CASCADE,
-   CONSTRAINT `fk_restaurant` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`restaurant_id`) ON UPDATE NO ACTION ON DELETE CASCADE
+   CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)  ,
+   CONSTRAINT `fk_restaurant` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`restaurant_id`)
 );
 
 CREATE TABLE IF NOT EXISTS users (

@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.nagoyameshi.entity.RestaurantCategory;
 import com.example.nagoyameshi.form.RestaurantEditForm;
@@ -19,6 +20,7 @@ public class RestaurantCategoryService {
         this.restaurantCategoryRepository = restaurantCategoryRepository;
     }
 
+    @Transactional
     public void deleteByRestaurantId(Integer id){
         restaurantCategoryRepository.deleteByRestaurantId(id);
     }
