@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.hibernate.query.sqm.mutation.internal.temptable.RestrictedDeleteExecutionDelegate;
@@ -63,11 +64,15 @@ public class RestaurantService {
 		Restaurant restaurant = restaurantRepository.getReferenceById(restaurantEditForm.getId());
 		updateRestaurantFromForm(restaurant, restaurantEditForm);
 
-		List<RestaurantHoliday> restaurantHolidayList = restaurantEditForm.getHolidays().stream()
-				.map(weekday -> new RestaurantHoliday(restaurant.getId(), weekday.getId()))
+		List<RestaurantHoliday> restaurantHolidayList = restaurantEditForm.getHolidayIdList().stream()
+				.map(weekday -> new RestaurantHoliday(restaurant.getId(), weekday))
+				.collect(Collectors.toList());
+		List<RestaurantCategory> restaurantCategoryList = restaurantEditForm.getCategoryIdList().stream()
+				.map(category -> new RestaurantCategory(restaurant.getId(),category))
 				.collect(Collectors.toList());
 
 		restaurant.setHolidays(restaurantHolidayList);
+		restaurant.setCategories(restaurantCategoryList);
 
 		restaurantRepository.save(restaurant);
 	}

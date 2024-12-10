@@ -53,9 +53,10 @@ CREATE TABLE IF NOT EXISTS `categories` (
 );
 
 CREATE TABLE IF NOT EXISTS `restaurant_categories` (
-   `restaurant_category_id` INT NULL DEFAULT NULL,
+   `restaurant_category_id` INT NOT NULL AUTO_INCREMENT,
    `restaurant_id` INT NULL DEFAULT NULL,
    `category_id` INT NULL DEFAULT NULL,
+   PRIMARY KEY (`restaurant_category_id`) USING BTREE,
    UNIQUE INDEX `uq_restaurant_category` (`restaurant_id`, `category_id`) USING BTREE,
    INDEX `fk_category` (`category_id`) USING BTREE,
    CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`) ON UPDATE NO ACTION ON DELETE CASCADE,
