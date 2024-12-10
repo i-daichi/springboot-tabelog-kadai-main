@@ -85,8 +85,10 @@ public class AdminRestaurantController {
 	}
 
 	@PostMapping("/create")
-	public String create(@ModelAttribute @Validated RestaurantRegisterForm restaurantRegisterForm,
+	public String create(
+			@ModelAttribute @Validated RestaurantRegisterForm restaurantRegisterForm,
 			BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
 		if (bindingResult.hasErrors()) {
 			return "admin/restaurants/register";
 		}
