@@ -100,19 +100,10 @@ public class RestaurantService {
 
 	@Transactional
 	public void create(RestaurantRegisterForm restaurantRegisterForm) {
-		MultipartFile imageFile = restaurantRegisterForm.getImageFile();
+		Restaurant restaurant = new Restaurant(restaurantRegisterForm);
+		restaurant.setImageName(getImageFile(restaurantRegisterForm.getImageFile()));
 
-		String hashedImageName = "";
-		String imageName = "";
-
-		if (!imageFile.isEmpty()) {
-			imageName = imageFile.getOriginalFilename();
-			hashedImageName = generateNewFileName(imageName);
-			Path filePath = Path.of("src/main/resources/static/storage/" + hashedImageName);
-			copyImageFile(imageFile, filePath);
-		}
-
-		restaurantRepository.save(new Restaurant(restaurantRegisterForm));
+		restaurantRepository.save(restaurant);
 	}
 
 	@Transactional
@@ -173,13 +164,12 @@ public class RestaurantService {
 		restaurant.setSeats(form.getSeats());
 		restaurant.setOpeningTime(form.getOpenTime().toLocalTime()); // HourMinute -> LocalTime変換
 		restaurant.setClosingTime(form.getCloseTime().toLocalTime()); // HourMinute -> LocalTime変換
-		restaurant.setImageName(getImageFile(form));
+		restaurant.setImageName(getImageFile(form.getImageFile()));
 	}
 
-	private String getImageFile(RestaurantEditForm restaurantEditForm) {
+	private String getImageFile(MultipartFile imageFile) {
 		String hashedImageName = "";
 		String imageName = "";
-		MultipartFile imageFile = restaurantEditForm.getImageFile();
 
 		if (!imageFile.isEmpty()) {
 			imageName = imageFile.getOriginalFilename();

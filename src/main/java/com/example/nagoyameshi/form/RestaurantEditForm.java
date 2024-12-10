@@ -54,7 +54,7 @@ public class RestaurantEditForm {
 	@NotNull(message = "座席数を入力してください。")
 	private Integer seats;
 
-	@NotNull(message = "カテゴリを入力してください。")
+	@NotNull(message = "カテゴリを選択してください。")
 	private List<Integer> categoryIdList;
 
 	private List<Integer> holidayIdList;

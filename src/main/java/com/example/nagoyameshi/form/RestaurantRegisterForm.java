@@ -1,7 +1,11 @@
 package com.example.nagoyameshi.form;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.nagoyameshi.entity.Category;
+import com.example.nagoyameshi.entity.Weekday;
 import com.example.nagoyameshi.valueObject.HourMinute;
 
 import jakarta.validation.constraints.Min;
@@ -32,21 +36,24 @@ public class RestaurantRegisterForm {
 	@NotBlank(message = "電話番号を入力してください。")
 	private String phoneNumber;
 
-	@NotBlank(message = "営業時間を入力してください。")
-	private String businessHours;
+	@NotNull(message = "開店時間を選択してください。")
+	private HourMinute openTime;
 
-	@NotNull(message = "開店時間を入力してください。")
-	private HourMinute openingTime;
-
-	@NotNull(message = "閉店時間を入力してください。")
-	private HourMinute closingeHour;
-
-	@NotBlank(message = "定休日を入力してください。")
-	private String regularHoliday;
+	@NotNull(message = "閉店時間を選択してください。")
+	private HourMinute closeTime;
 
 	@NotNull(message = "座席数を入力してください。")
 	private Integer seats;
 
-	@NotBlank(message = "カテゴリを入力してください。")
-	private String category;
+	@NotNull(message = "カテゴリを選択してください。")
+	private List<Integer> categoryIdList;
+
+	private List<Integer> holidayIdList;
+
+	private List<Category> categories;
+    private List<Weekday> holidays;
+
+	public RestaurantRegisterForm(){
+
+	}
 }

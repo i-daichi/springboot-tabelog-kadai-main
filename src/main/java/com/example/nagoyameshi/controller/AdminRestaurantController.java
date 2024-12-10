@@ -75,6 +75,15 @@ public class AdminRestaurantController {
 
 	@GetMapping("/register")
 	public String register(Model model) {
+		var helper = new AdminRestaurantHelper(
+				categoryService,
+				weekdayService,
+				restaurantHolidayService);
+		helper.addCategoryData(model);
+		helper.addHolidayData(model);
+		helper.addTimeData(model);
+		helper.addMinuteIntervals(model);
+
 		model.addAttribute("restaurantRegisterForm", new RestaurantRegisterForm());
 		return "admin/restaurants/register";
 	}

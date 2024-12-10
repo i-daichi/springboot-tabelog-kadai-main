@@ -109,26 +109,67 @@
 									<input type="text" class="form-control" th:field="*{phoneNumber}">
 								</div>
 							</div>
-
 							<div class="form-group row mb-3">
 								<div class="col-md-4">
-									<label for="businessHours" class="col-form-label text-md-left fw-bold">営業時間</label>
+									<label for="openTime"
+										class="col-form-label text-md-left fw-bold">開店時間</label>
 								</div>
-								<div class="col-md-8">
-									<div th:if="${#fields.hasErrors('businessHours')}" class="text-danger small mb-2"
-										th:errors="*{businessHours}"></div>
-									<input type="text" class="form-control" th:field="*{businessHours}">
+								<div class="col-md-8 time-dropdown" name="time-dropdown">
+									<div th:if="${#fields.hasErrors('openTime')}"
+										class="text-danger small mb-2"
+										th:errors="*{openTime}"></div>
+									<!-- 開店時間 - 時間のドロップダウン -->
+									<select th:field="*{openTime.hour}" class="form-control hour">
+										<option th:each="h : ${hours}" th:value="${h}"
+											th:text="${h}"></option>
+									</select>
+									<span class="separator">:</span>
+									<!-- 開店時間 - 分のドロップダウン -->
+									<select th:field="*{openTime.minute}" class="form-control minute">
+										<option th:each="m : ${minutes}" th:value="${m}"
+											th:text="${m}"></option>
+									</select>
 								</div>
 							</div>
 
 							<div class="form-group row mb-3">
 								<div class="col-md-4">
-									<label for="regularHoliday" class="col-form-label text-md-left fw-bold">定休日</label>
+									<label for="closeTime"
+										class="col-form-label text-md-left fw-bold">閉店時間</label>
+								</div>
+								<div class="col-md-8 time-dropdown" name="time-dropdown">
+									<!-- 閉店時間のエラー表示 -->
+									<div th:if="${#fields.hasErrors('closeTime')}"
+										class="text-danger small mb-2"
+										th:errors="*{closeTime}"></div>
+									<!-- 閉店時間 (時) -->
+									<select th:field="*{closeTime.hour}" class="form-control hour">
+										<option th:each="h : ${hours}" th:value="${h}"
+											th:text="${h}"></option>
+									</select>
+									<span class="separator">:</span>
+									<!-- 閉店時間 (分) -->
+									<select th:field="*{closeTime.minute}" class="form-control  minute">
+										<option th:each="m : ${minutes}" th:value="${m}"
+											th:text="${m}"></option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group row mb-3">
+								<div class="col-md-4">
+									<label for="holidays"
+										class="col-form-label text-md-left fw-bold">定休日</label>
 								</div>
 								<div class="col-md-8">
-									<div th:if="${#fields.hasErrors('regularHoliday')}" class="text-danger small mb-2"
-										th:errors="*{regularHoliday}"></div>
-									<input type="text" class="form-control" th:field="*{regularHoliday}">
+									<div class="text-danger small mb-2"></div>
+									<!-- 曜日選択 -->
+									<select th:field="*{holidayIdList}" multiple class="form-control">
+										<option th:each="weekday : ${weekdays}"
+												th:value="${weekday.id}"
+												th:text="${weekday.name}">
+										</option>
+									</select>
 								</div>
 							</div>
 
@@ -145,12 +186,20 @@
 
 							<div class="form-group row mb-3">
 								<div class="col-md-4">
-									<label for="category" class="col-form-label text-md-left fw-bold">カテゴリ</label>
+									<label for="category"
+										class="col-form-label text-md-left fw-bold">カテゴリ</label>
 								</div>
 								<div class="col-md-8">
-									<div th:if="${#fields.hasErrors('category')}" class="text-danger small mb-2"
-										th:errors="*{category}"></div>
-									<input type="text" class="form-control" th:field="*{category}">
+									<div th:if="${#fields.hasErrors('categoryIdList')}"
+										class="text-danger small mb-2" th:errors="*{categoryIdList}"></div>
+									<!-- 複数選択可能なドロップダウンメニュー -->
+									<select id="categories" th:field="*{categoryIdList}" multiple
+										class="form-control">
+										<option th:each="category : ${categories}"
+											th:value="${category.id}"
+											th:text="${category.name}"></option>
+										</option>
+									</select>
 								</div>
 							</div>
 
