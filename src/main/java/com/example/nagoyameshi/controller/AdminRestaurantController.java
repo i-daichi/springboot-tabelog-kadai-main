@@ -145,10 +145,11 @@ public class AdminRestaurantController {
 		restaurantEditForm.setCategories(categoryService.findAllById(restaurantEditForm.getCategoryIdList()));
 		restaurantEditForm.setHolidays(weekdayService.findAllById(restaurantEditForm.getHolidayIdList()));
 
-		// 関連情報の削除
+		//関連情報の削除
 		restaurantCategoryService.deleteByRestaurantId(restaurantEditForm.getId());
 		restaurantHolidayService.deleteByRestaurantId(restaurantEditForm.getId());
 
+		//レストラン情報の更新
 		restaurantService.update(restaurantEditForm);
 
 		redirectAttributes.addFlashAttribute("successMessage", "店舗情報を編集しました。");
