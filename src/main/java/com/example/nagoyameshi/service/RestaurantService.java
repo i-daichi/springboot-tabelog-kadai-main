@@ -26,15 +26,11 @@ import com.example.nagoyameshi.repository.RestaurantRepository;
 @Service
 public class RestaurantService {
 	private final RestaurantRepository restaurantRepository;
-	private final RestaurantCategoryRepository restaurantCategoryRepository;
-	private final RestaurantHolidayRepository restaurantHolidayRepository;
 
 	public RestaurantService(RestaurantRepository restaurantRepository,
 			RestaurantCategoryRepository restaurantCategoryRepository,
 			RestaurantHolidayRepository restaurantHolidayRepository) {
 		this.restaurantRepository = restaurantRepository;
-		this.restaurantCategoryRepository = restaurantCategoryRepository;
-		this.restaurantHolidayRepository = restaurantHolidayRepository;
 	}
 
 	public Restaurant getReferenceById(Integer id) {
